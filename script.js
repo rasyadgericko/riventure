@@ -26,11 +26,17 @@ const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 
 
 if (!isTouchDevice && window.innerWidth > 768) {
   let cx = 0, cy = 0, tx = 0, ty = 0;
+  let isOnGrid = false;
   document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
 
   (function animateCursor() {
-    cx += (tx - cx) * 0.12;
-    cy += (ty - cy) * 0.12;
+    if (isOnGrid) {
+      // Snap to exact mouse position — no lag so cursor matches grid highlight speed
+      cx = tx; cy = ty;
+    } else {
+      cx += (tx - cx) * 0.12;
+      cy += (ty - cy) * 0.12;
+    }
     cursor.style.left = cx + 'px';
     cursor.style.top = cy + 'px';
     requestAnimationFrame(animateCursor);
@@ -40,6 +46,20 @@ if (!isTouchDevice && window.innerWidth > 768) {
     el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
   });
+
+  // Eye cursor on the animated grid
+  const aboutWrap = document.querySelector('.about-visual-wrap');
+  if (aboutWrap) {
+    aboutWrap.addEventListener('mouseenter', () => {
+      isOnGrid = true;
+      cursor.classList.remove('expand');
+      cursor.classList.add('on-grid');
+    });
+    aboutWrap.addEventListener('mouseleave', () => {
+      isOnGrid = false;
+      cursor.classList.remove('on-grid');
+    });
+  }
 } else {
   cursor.style.display = 'none';
   document.body.style.cursor = 'auto';
@@ -222,6 +242,192 @@ contactForm.addEventListener('submit', e => {
     }, 3000);
   }, 1000);
 });
+
+// ===== ABOUT VISUAL =====
+(function initAboutVisual() {
+  const canvas = document.getElementById('aboutVisual');
+  const wrap = canvas && canvas.closest('.about-visual-wrap');
+  if (!canvas || !wrap) return;
+
+  let width = 0, height = 0, ctx = null;
+  const CELL = 50;
+  let mouseX = -9999, mouseY = -9999;
+  let isHovering = false;
+  let animId = null;
+
+  // Animated squares — same concept as AnimatedGridPattern (random fade-in/out)
+  const NUM_SQUARES = 15;
+  const MAX_OPACITY = 0.13;
+  const FADE_DURATION = 2800; // ms per full fade-in → fade-out cycle
+  let squares = [];
+
+  function resize() {
+    const rect = wrap.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = rect.width;
+    height = rect.height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    initSquares(performance.now());
+  }
+
+  function randomPos() {
+    const maxCol = Math.max(1, Math.floor(width / CELL));
+    const maxRow = Math.max(1, Math.floor(height / CELL));
+    return [Math.floor(Math.random() * maxCol), Math.floor(Math.random() * maxRow)];
+  }
+
+  function initSquares(now) {
+    squares = Array.from({ length: NUM_SQUARES }, (_, i) => {
+      const [col, row] = randomPos();
+      return { id: i, col, row, startTime: now + Math.random() * FADE_DURATION };
+    });
+  }
+
+  function getColor() {
+    return document.documentElement.getAttribute('data-theme') === 'dark'
+      ? [241, 241, 241] : [22, 22, 22];
+  }
+
+  // Use canvas.getBoundingClientRect() for pixel-precise coords (avoids border offset)
+  wrap.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+    isHovering = true;
+  });
+  wrap.addEventListener('mouseleave', () => {
+    isHovering = false;
+    mouseX = -9999;
+    mouseY = -9999;
+  });
+
+  function draw(now) {
+    if (!ctx) { animId = requestAnimationFrame(draw); return; }
+    ctx.clearRect(0, 0, width, height);
+    const [ri, gi, bi] = getColor();
+    const rgb = `${ri},${gi},${bi}`;
+
+    const cols = Math.floor(width / CELL);
+    const rows = Math.floor(height / CELL);
+    const hCol = Math.floor(mouseX / CELL);
+    const hRow = Math.floor(mouseY / CELL);
+    const R = 2; // bounded cell-check radius around cursor
+
+    // --- Auto-animated squares (fade in → fade out → reposition, like AnimatedGridPattern) ---
+    for (const sq of squares) {
+      const elapsed = now - sq.startTime;
+      const half = FADE_DURATION / 2;
+      let opacity = 0;
+      if (elapsed >= 0 && elapsed < half) {
+        opacity = (elapsed / half) * MAX_OPACITY;
+      } else if (elapsed >= half && elapsed < FADE_DURATION) {
+        opacity = ((FADE_DURATION - elapsed) / half) * MAX_OPACITY;
+      } else if (elapsed >= FADE_DURATION) {
+        const [c, r] = randomPos();
+        sq.col = c; sq.row = r;
+        sq.startTime = now + Math.random() * 400;
+        opacity = 0;
+      }
+      if (opacity > 0.004) {
+        ctx.fillStyle = `rgba(${rgb},${opacity})`;
+        ctx.fillRect(sq.col * CELL + 1, sq.row * CELL + 1, CELL - 1, CELL - 1);
+      }
+    }
+
+    // --- Cursor proximity fills — only ±R cells around cursor, not entire grid ---
+    if (isHovering) {
+      for (let dc = -R; dc <= R; dc++) {
+        for (let dr = -R; dr <= R; dr++) {
+          const col = hCol + dc;
+          const row = hRow + dr;
+          if (col < 0 || row < 0 || col >= cols || row >= rows) continue;
+          const cx = col * CELL + CELL / 2;
+          const cy = row * CELL + CELL / 2;
+          const dist = Math.sqrt((cx - mouseX) ** 2 + (cy - mouseY) ** 2);
+          const influence = Math.max(0, 1 - dist / (CELL * 2.2));
+          if (influence > 0.01) {
+            ctx.fillStyle = `rgba(${rgb},${influence * 0.22})`;
+            ctx.fillRect(col * CELL + 1, row * CELL + 1, CELL - 1, CELL - 1);
+          }
+        }
+      }
+    }
+
+    // --- Grid lines with cursor column/row brightness ---
+    ctx.lineWidth = 1;
+    for (let col = 0; col <= cols; col++) {
+      const x = col * CELL;
+      let extra = 0;
+      if (isHovering) {
+        const t = Math.max(0, 1 - Math.abs(x - mouseX) / (CELL * 2));
+        extra = t * t * 0.45;
+      }
+      ctx.strokeStyle = `rgba(${rgb},${0.09 + extra})`;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
+      ctx.stroke();
+    }
+    for (let row = 0; row <= rows; row++) {
+      const y = row * CELL;
+      let extra = 0;
+      if (isHovering) {
+        const t = Math.max(0, 1 - Math.abs(y - mouseY) / (CELL * 2));
+        extra = t * t * 0.45;
+      }
+      ctx.strokeStyle = `rgba(${rgb},${0.09 + extra})`;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+      ctx.stroke();
+    }
+
+    // --- Intersection dots near cursor — bounded to ±R intersections ---
+    if (isHovering) {
+      for (let dc = -R; dc <= R + 1; dc++) {
+        for (let dr = -R; dr <= R + 1; dr++) {
+          const x = (hCol + dc) * CELL;
+          const y = (hRow + dr) * CELL;
+          const dist = Math.sqrt((x - mouseX) ** 2 + (y - mouseY) ** 2);
+          const influence = Math.max(0, 1 - dist / (CELL * 2));
+          if (influence > 0.01) {
+            ctx.beginPath();
+            ctx.arc(x, y, 2.5 * influence, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${rgb},${influence * 0.9})`;
+            ctx.fill();
+          }
+        }
+      }
+    }
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(resize);
+    ro.observe(wrap);
+  }
+  resize();
+
+  if (!prefersReducedMotion) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!animId) animId = requestAnimationFrame(draw);
+        } else {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      });
+    }, { threshold: 0.05 });
+    obs.observe(wrap);
+  }
+})();
 
 // ===== CTA GLOBE =====
 (function initGlobe() {
