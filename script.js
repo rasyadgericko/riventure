@@ -154,25 +154,20 @@ if (!prefersReducedMotion) {
   document.querySelectorAll('.reveal-text, .fade-up').forEach(el => el.classList.add('visible'));
 }
 
-// ===== COUNTERS =====
-const counterObserver = new IntersectionObserver(es => {
-  es.forEach(entry => {
-    if (!entry.isIntersecting || entry.target.dataset.counted) return;
-    entry.target.dataset.counted = 'true';
-    entry.target.querySelectorAll('.counter').forEach(c => {
-      const tgt = +c.dataset.target;
-      if (prefersReducedMotion) { c.textContent = tgt; return; }
-      const st = performance.now();
-      (function u(n) {
-        const p = Math.min((n - st) / 2000, 1);
-        c.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * tgt);
-        if (p < 1) requestAnimationFrame(u); else c.textContent = tgt;
-      })(st);
+
+// ===== LOGOS STRIP REVEAL =====
+const logosStrip = document.querySelector('.logos-strip');
+if (logosStrip) {
+  const logosObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        logosObs.unobserve(e.target);
+      }
     });
-    counterObserver.unobserve(entry.target);
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.hero-stats-row').forEach(el => counterObserver.observe(el));
+  }, { threshold: 0.2 });
+  logosObs.observe(logosStrip);
+}
 
 // ===== SPHERE PARALLAX (throttled with rAF) =====
 const sp = document.querySelector('.hero-sphere');
