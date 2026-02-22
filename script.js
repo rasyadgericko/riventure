@@ -223,22 +223,6 @@ contactForm.addEventListener('submit', e => {
   }, 1000);
 });
 
-// ===== CTA CURSOR SPOTLIGHT =====
-const ctaEl = document.querySelector('.cta');
-if (ctaEl) {
-  ctaEl.addEventListener('mousemove', (e) => {
-    const rect = ctaEl.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%';
-    const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1) + '%';
-    ctaEl.style.setProperty('--cta-x', x);
-    ctaEl.style.setProperty('--cta-y', y);
-  });
-  ctaEl.addEventListener('mouseleave', () => {
-    ctaEl.style.setProperty('--cta-x', '50%');
-    ctaEl.style.setProperty('--cta-y', '50%');
-  });
-}
-
 // ===== CTA GLOBE =====
 (function initGlobe() {
   const canvas = document.getElementById('ctaGlobe');
