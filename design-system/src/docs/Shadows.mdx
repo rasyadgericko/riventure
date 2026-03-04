@@ -1,0 +1,126 @@
+import { Meta } from '@storybook/blocks';
+import { MachineText } from '../blocks/MachineText';
+import { HumanOnly, MachineOnly } from '../context/ModeContext';
+import { shadowScale } from '../tokens/shadows';
+import { radiiScale } from '../tokens/radii';
+import React from 'react';
+
+<Meta title="Foundations/Shadows & Radii" />
+
+# Shadows & Radii
+
+Elevation and rounding tokens for layered interfaces. Shadows use `color-mix()` with `var(--fg)` so they adapt automatically to the active theme.
+
+---
+
+<HumanOnly>
+
+## Elevation Scale
+
+export const ShadowPreview = () => (
+  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 32, marginBottom: 48 }}>
+    {shadowScale.map(s => (
+      <div key={s.variable} style={{
+        padding: 24,
+        borderRadius: 'var(--radius-md)',
+        background: 'var(--bg-elevated)',
+        boxShadow: s.variable === '--shadow-xs' ? '0 1px 2px rgba(0,0,0,0.04)' :
+                    s.variable === '--shadow-sm' ? '0 2px 8px rgba(241,241,241,0.05)' :
+                    s.variable === '--shadow-md' ? '0 4px 16px rgba(241,241,241,0.07)' :
+                    s.variable === '--shadow-lg' ? '0 0 0 1px rgba(241,241,241,0.08), 0 4px 16px rgba(241,241,241,0.07), 0 12px 36px rgba(241,241,241,0.1)' :
+                    '0 28px 80px rgba(0,0,0,0.55)',
+        border: '1px solid var(--border)',
+      }}>
+        <div style={{ fontSize: 'var(--text-sm)', fontWeight: 600, marginBottom: 4 }}>{s.description}</div>
+        <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--fg-dim)' }}>{s.variable}</div>
+        <div style={{ fontSize: 'var(--text-xs)', color: 'var(--fg-muted)', marginTop: 8 }}>{s.usage}</div>
+      </div>
+    ))}
+  </div>
+);
+
+<ShadowPreview />
+
+## Border Radius Scale
+
+export const RadiiPreview = () => (
+  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'end', marginBottom: 48 }}>
+    {radiiScale.map(r => (
+      <div key={r.variable} style={{ textAlign: 'center' }}>
+        <div style={{
+          width: r.variable === '--radius-round' ? 64 : 80,
+          height: 64,
+          background: 'var(--accent)',
+          opacity: 0.15,
+          borderRadius: r.value,
+          border: '2px solid var(--accent)',
+          marginBottom: 8,
+        }} />
+        <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600 }}>{r.description}</div>
+        <div style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--fg-dim)' }}>{r.value}</div>
+      </div>
+    ))}
+  </div>
+);
+
+<RadiiPreview />
+
+### Guidelines
+
+- Cards use `--radius-md` (8px). Testimonial cards use `--radius-lg` (12px).
+- Buttons and tags always use `--radius-pill` (100px) for the pill shape.
+- Avatars and circular icons use `--radius-round` (50%).
+- Shadows scale with interaction: resting = `--shadow-sm`, hover = `--shadow-lg`.
+
+</HumanOnly>
+
+<MachineOnly>
+
+<MachineText>{`## Shadows & Radii
+
+### Shadow Scale
+| Token | Value | Use |
+|---|---|---|
+| --shadow-xs | 0 1px 2px rgba(0,0,0,0.04) | Subtle lift for small elements |
+| --shadow-sm | 0 2px 8px color-mix(in srgb, var(--fg) 5%, transparent) | Default card resting state |
+| --shadow-md | 0 4px 16px color-mix(in srgb, var(--fg) 7%, transparent) | Hovered cards, dropdowns |
+| --shadow-lg | multi-layer composite shadow | Elevated cards, service card hover |
+| --shadow-xl | 0 28px 80px rgba(0,0,0,0.55) | Browser mockups, hero elements |
+
+### Border Radius
+| Token | Value | Use |
+|---|---|---|
+| --radius-none | 0 | Sharp elements, dividers |
+| --radius-sm | 4px | Input fields, subtle rounding |
+| --radius-md | 8px | Cards, containers |
+| --radius-lg | 12px | Testimonial cards, modals |
+| --radius-pill | 100px | Buttons, tags, badges |
+| --radius-round | 50% | Avatars, circular icons |
+
+### Rules
+- Cards use --radius-md (8px). Testimonial cards use --radius-lg (12px).
+- Buttons and tags always use --radius-pill (100px).
+- Avatars and circular icons use --radius-round (50%).
+- Shadows scale with interaction: resting = --shadow-sm, hover = --shadow-lg.
+
+### CSS
+/* Shadows */
+--shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+--shadow-sm: 0 2px 8px color-mix(in srgb, var(--fg) 5%, transparent);
+--shadow-md: 0 4px 16px color-mix(in srgb, var(--fg) 7%, transparent);
+--shadow-lg:
+  0 0 0 1px color-mix(in srgb, var(--fg) 8%, transparent),
+  0 4px 16px color-mix(in srgb, var(--fg) 7%, transparent),
+  0 12px 36px color-mix(in srgb, var(--fg) 10%, transparent),
+  0 28px 72px color-mix(in srgb, var(--fg) 9%, transparent);
+--shadow-xl: 0 28px 80px rgba(0,0,0,0.55);
+
+/* Radii */
+--radius-none: 0;
+--radius-sm: 4px;
+--radius-md: 8px;
+--radius-lg: 12px;
+--radius-pill: 100px;
+--radius-round: 50%;`}</MachineText>
+
+</MachineOnly>

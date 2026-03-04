@@ -1,0 +1,124 @@
+import { Meta } from '@storybook/blocks';
+import { TypeScale, HeadingPreview } from '../blocks/TypeSpecimen';
+import { MachineText } from '../blocks/MachineText';
+import { HumanOnly, MachineOnly } from '../context/ModeContext';
+import { typeScale, fontFamilies, lineHeights, letterSpacings } from '../tokens/typography';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+RYC uses two typefaces: **Cabinet Grotesk** for display headings and **Inter** for body text. Both are self-hosted as WOFF2 for performance.
+
+---
+
+<HumanOnly>
+
+## Heading Hierarchy
+
+All headings use Cabinet Grotesk in uppercase with tight tracking. The scale is fluid — sizes respond to viewport width via `clamp()`.
+
+<HeadingPreview />
+
+## Type Scale
+
+Every heading and body style in the system, rendered at actual size.
+
+<TypeScale tokens={typeScale} />
+
+## Font Families
+
+| Role | Typeface | Weights | Usage |
+|------|----------|---------|-------|
+| Display | Cabinet Grotesk | 700, 900 | Hero headings, section titles |
+| Body | Inter | 400, 500, 600 | Body text, labels, UI elements |
+| Mono | System mono stack | 400 | Code snippets, token values |
+
+### Guidelines
+
+- **Headings** always use Cabinet Grotesk in uppercase with tight letter-spacing (`-0.05em`).
+- **Body text** uses Inter at `0.95rem` with relaxed line-height (`1.8`) for readability.
+- **Tags and eyebrows** use Inter at `0.7rem`, semibold, uppercase, with `0.08em` tracking.
+- Use `<em>` within headings for italic emphasis — this is a core brand pattern.
+
+</HumanOnly>
+
+<MachineOnly>
+
+<MachineText>{`## Typography
+
+### Font Families
+| Role | Stack | Weights |
+|---|---|---|
+| Display | 'Cabinet Grotesk', sans-serif | 700, 900 |
+| Body | 'Inter', -apple-system, BlinkMacSystemFont, sans-serif | 400, 500, 600 |
+| Mono | ui-monospace, 'SF Mono', Menlo, Consolas, monospace | 400 |
+
+### Type Scale
+| Token | Value | Use |
+|---|---|---|
+| --text-4xl | clamp(2.8rem, 8vw, 7rem) | Hero headings — Cabinet Grotesk 900, line-height 0.92, tracking -0.05em |
+| --text-3xl | clamp(1.8rem, 5vw, 4rem) | Section headings — Cabinet Grotesk 900, line-height 1.0, tracking -0.05em |
+| --text-2xl | clamp(1.3rem, 3vw, 1.8rem) | Subsection headings — Cabinet Grotesk 700, line-height 1.1, tracking -0.03em |
+| --text-xl | 1.2rem | Large body — Inter 600, line-height 1.3 |
+| --text-lg | 1.05rem | Lead paragraphs — Inter 400, line-height 1.8 |
+| --text-base | 0.95rem | Body text — Inter 400, line-height 1.8 |
+| --text-sm | 0.82rem | Labels, metadata — Inter 500, line-height 1.5 |
+| --text-xs | 0.7rem | Tags, eyebrows — Inter 600, uppercase, tracking 0.08em |
+
+### Heading CSS
+All headings: font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: -0.05em; line-height: 0.92;
+h1: font-size: clamp(2.8rem, 8vw, 7rem);
+h2: font-size: clamp(1.8rem, 5vw, 4rem);
+h3: font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1;
+h4: font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2;
+h5: font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3;
+h6: font-family: var(--font-body); font-size: 0.82rem; font-weight: 600; text-transform: none;
+
+### Line Heights
+| Token | Value | Use |
+|---|---|---|
+| --leading-tight | 0.92 | Display headings |
+| --leading-snug | 1.1 | Subheadings |
+| --leading-normal | 1.5 | Default body text |
+| --leading-relaxed | 1.8 | Long-form body text |
+
+### Letter Spacing
+| Token | Value | Use |
+|---|---|---|
+| --tracking-tight | -0.05em | Display headings |
+| --tracking-normal | 0 | Body text |
+| --tracking-wide | 0.08em | Uppercase labels |
+| --tracking-wider | 0.1em | Section eyebrows |
+
+### Rules
+- Headings always use Cabinet Grotesk in uppercase with tight letter-spacing (-0.05em).
+- Body text uses Inter at 0.95rem with relaxed line-height (1.8).
+- Tags and eyebrows use Inter at 0.7rem, semibold, uppercase, with 0.08em tracking.
+- Use <em> within headings for italic emphasis — this is a core brand pattern.
+
+### CSS
+--font-display: 'Cabinet Grotesk', sans-serif;
+--font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+--font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+--text-xs: 0.7rem;
+--text-sm: 0.82rem;
+--text-base: 0.95rem;
+--text-lg: 1.05rem;
+--text-xl: 1.2rem;
+--text-2xl: clamp(1.3rem, 3vw, 1.8rem);
+--text-3xl: clamp(1.8rem, 5vw, 4rem);
+--text-4xl: clamp(2.8rem, 8vw, 7rem);
+
+--leading-tight: 0.92;
+--leading-snug: 1.1;
+--leading-normal: 1.5;
+--leading-relaxed: 1.8;
+
+--tracking-tight: -0.05em;
+--tracking-normal: 0;
+--tracking-wide: 0.08em;
+--tracking-wider: 0.1em;`}</MachineText>
+
+</MachineOnly>

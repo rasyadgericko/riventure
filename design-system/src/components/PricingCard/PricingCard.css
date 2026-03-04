@@ -1,0 +1,137 @@
+.ryc-pricing-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2.8rem 2.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  position: relative;
+  transition: border-color 0.4s ease, transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+
+.ryc-pricing-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--fg) 28%, transparent);
+  box-shadow:
+    0 4px 16px color-mix(in srgb, var(--fg) 7%, transparent),
+    0 12px 36px color-mix(in srgb, var(--fg) 10%, transparent),
+    0 28px 72px color-mix(in srgb, var(--fg) 8%, transparent);
+}
+
+/* Featured */
+.ryc-pricing-card--featured {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+  transform: translateY(-6px);
+  box-shadow:
+    0 8px 32px color-mix(in srgb, var(--fg) 12%, transparent),
+    0 24px 64px color-mix(in srgb, var(--fg) 16%, transparent);
+}
+
+.ryc-pricing-card--featured .ryc-pricing-card__desc,
+.ryc-pricing-card--featured .ryc-pricing-card__from,
+.ryc-pricing-card--featured .ryc-pricing-card__delivery,
+.ryc-pricing-card--featured .ryc-pricing-card__list li {
+  color: color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+.ryc-pricing-card--featured .ryc-pricing-card__list li::before {
+  color: color-mix(in srgb, var(--bg) 35%, transparent);
+}
+
+.ryc-pricing-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.ryc-pricing-card__delivery {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.ryc-pricing-card__from {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--fg-dim);
+  margin-bottom: 0.2rem;
+}
+
+.ryc-pricing-card__price {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--fg);
+  margin-bottom: 1.5rem;
+}
+
+.ryc-pricing-card--featured .ryc-pricing-card__price {
+  color: var(--bg);
+}
+
+.ryc-pricing-card__desc {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.ryc-pricing-card__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  flex: 1;
+}
+
+.ryc-pricing-card__list li {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  line-height: 1.4;
+}
+
+.ryc-pricing-card__list li::before {
+  content: '\2014';
+  color: var(--fg-dim);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* Featured tag */
+.ryc-pricing-card--featured .ryc-tag {
+  border-color: color-mix(in srgb, var(--bg) 22%, transparent);
+  color: var(--bg);
+  background: transparent;
+}
+
+/* Featured CTA button */
+.ryc-pricing-card--featured .ryc-btn {
+  background: var(--bg);
+  border-color: var(--bg);
+  color: var(--fg);
+  width: 100%;
+  justify-content: center;
+}
+
+.ryc-pricing-card--featured .ryc-btn::before {
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+}
+
+/* CTA full-width */
+.ryc-pricing-card .ryc-btn {
+  width: 100%;
+  justify-content: center;
+}

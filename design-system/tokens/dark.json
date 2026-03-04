@@ -1,0 +1,88 @@
+{
+  "core": {
+    "bg": {
+      "value": "#0f0f0f",
+      "type": "color",
+      "description": "Page background — Primary background for all pages and sections"
+    },
+    "fg": {
+      "value": "#f1f1f1",
+      "type": "color",
+      "description": "Primary foreground — Main text, headings, icons"
+    },
+    "fg-muted": {
+      "value": "#aaa",
+      "type": "color",
+      "description": "Muted foreground — Secondary text, descriptions, subtitles"
+    },
+    "fg-dim": {
+      "value": "#777",
+      "type": "color",
+      "description": "Dim foreground — Tertiary text, decorative labels, counters"
+    },
+    "border": {
+      "value": "rgba(241,241,241,0.1)",
+      "type": "color",
+      "description": "Border color — Card borders, dividers, separators"
+    },
+    "bg-sub": {
+      "value": "#151515",
+      "type": "color",
+      "description": "Subtle background — Alternating rows, shaded cells, hover states"
+    },
+    "accent": {
+      "value": "#f1f1f1",
+      "type": "color",
+      "description": "Accent / interactive — Buttons, active states, focus rings"
+    },
+    "accent-glow": {
+      "value": "rgba(241,241,241,0.04)",
+      "type": "color",
+      "description": "Accent glow — Soft shadows, magnetic button aura"
+    }
+  },
+  "extended": {
+    "bg-elevated": {
+      "value": "#1a1a1a",
+      "type": "color",
+      "description": "Elevated surface — Cards, modals, popovers above background"
+    },
+    "bg-overlay": {
+      "value": "rgba(0,0,0,0.6)",
+      "type": "color",
+      "description": "Overlay — Modal backdrops, image overlays"
+    },
+    "accent-hover": {
+      "value": "#ddd",
+      "type": "color",
+      "description": "Accent hover — Interactive elements on hover"
+    },
+    "accent-active": {
+      "value": "#fff",
+      "type": "color",
+      "description": "Accent active — Interactive elements on press"
+    }
+  },
+  "semantic": {
+    "success": {
+      "value": "#22c55e",
+      "type": "color",
+      "description": "Success — Confirmation, availability, positive states"
+    },
+    "error": {
+      "value": "#ef4444",
+      "type": "color",
+      "description": "Error — Validation errors, destructive actions"
+    },
+    "warning": {
+      "value": "#f59e0b",
+      "type": "color",
+      "description": "Warning — Caution states, attention needed"
+    },
+    "info": {
+      "value": "#3b82f6",
+      "type": "color",
+      "description": "Info — Informational states, help text"
+    }
+  }
+}

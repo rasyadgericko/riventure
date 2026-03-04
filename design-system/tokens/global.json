@@ -1,0 +1,140 @@
+{
+  "space": {
+    "0": {
+      "value": "0",
+      "type": "spacing",
+      "description": "None"
+    },
+    "1": {
+      "value": "4px",
+      "type": "spacing",
+      "description": "Micro — icon gaps, inline spacing"
+    },
+    "2": {
+      "value": "8px",
+      "type": "spacing",
+      "description": "Tight — tag padding, compact gaps"
+    },
+    "3": {
+      "value": "12px",
+      "type": "spacing",
+      "description": "Small — card grid gaps, form gaps"
+    },
+    "4": {
+      "value": "16px",
+      "type": "spacing",
+      "description": "Base — default component spacing"
+    },
+    "5": {
+      "value": "20px",
+      "type": "spacing",
+      "description": "Medium — card padding compact"
+    },
+    "6": {
+      "value": "24px",
+      "type": "spacing",
+      "description": "Comfortable — form field gaps"
+    },
+    "8": {
+      "value": "32px",
+      "type": "spacing",
+      "description": "Large — section sub-spacing"
+    },
+    "10": {
+      "value": "40px",
+      "type": "spacing",
+      "description": "Extra large — layout gaps"
+    },
+    "12": {
+      "value": "48px",
+      "type": "spacing",
+      "description": "Section inner — card padding"
+    },
+    "16": {
+      "value": "64px",
+      "type": "spacing",
+      "description": "Section — desktop horizontal padding"
+    },
+    "20": {
+      "value": "80px",
+      "type": "spacing",
+      "description": "Section vertical — large sections"
+    },
+    "24": {
+      "value": "96px",
+      "type": "spacing",
+      "description": "Section max — hero spacing"
+    }
+  },
+  "radius": {
+    "none": {
+      "value": "0",
+      "type": "borderRadius",
+      "description": "None — Sharp elements, dividers"
+    },
+    "sm": {
+      "value": "4px",
+      "type": "borderRadius",
+      "description": "Small — Input fields, subtle rounding"
+    },
+    "md": {
+      "value": "8px",
+      "type": "borderRadius",
+      "description": "Medium — Cards, containers"
+    },
+    "lg": {
+      "value": "12px",
+      "type": "borderRadius",
+      "description": "Large — Testimonial cards, modals"
+    },
+    "pill": {
+      "value": "100px",
+      "type": "borderRadius",
+      "description": "Pill — Buttons, tags, badges"
+    }
+  },
+  "lineHeight": {
+    "tight": {
+      "value": "0.92",
+      "type": "lineHeights",
+      "description": "Display headings"
+    },
+    "snug": {
+      "value": "1.1",
+      "type": "lineHeights",
+      "description": "Subheadings"
+    },
+    "normal": {
+      "value": "1.5",
+      "type": "lineHeights",
+      "description": "Default body text"
+    },
+    "relaxed": {
+      "value": "1.8",
+      "type": "lineHeights",
+      "description": "Long-form body text"
+    }
+  },
+  "letterSpacing": {
+    "tight": {
+      "value": "-0.05em",
+      "type": "letterSpacing",
+      "description": "Display headings"
+    },
+    "normal": {
+      "value": "0",
+      "type": "letterSpacing",
+      "description": "Body text"
+    },
+    "wide": {
+      "value": "0.08em",
+      "type": "letterSpacing",
+      "description": "Uppercase labels"
+    },
+    "wider": {
+      "value": "0.1em",
+      "type": "letterSpacing",
+      "description": "Section eyebrows"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+import { Meta } from '@storybook/blocks';
+import { SpacingScale } from '../blocks/SpacingScale';
+import { MachineText } from '../blocks/MachineText';
+import { HumanOnly, MachineOnly } from '../context/ModeContext';
+import { spacingScale } from '../tokens/spacing';
+
+<Meta title="Foundations/Spacing" />
+
+# Spacing
+
+RYC uses a **4px base grid**. Every margin, padding, and gap snaps to this scale for visual consistency across components and layouts.
+
+---
+
+## Scale
+
+<SpacingScale tokens={spacingScale} />
+
+<HumanOnly>
+
+### Layout Patterns
+
+| Context | Token | Usage |
+|---------|-------|-------|
+| Section padding (desktop) | `--space-20` + `4vw` | Vertical + horizontal section spacing |
+| Section padding (mobile) | `--space-16` + `6vw` | Reduced on smaller screens |
+| Card padding | `--space-10` – `--space-12` | Internal card content spacing |
+| Card grid gap | `--space-3` | Space between card grid items |
+| Form field gap | `--space-6` | Vertical gap between form fields |
+| Two-column layout gap | `--space-12` – `--space-16` | About section, contact split |
+| Button padding | `--space-5` (v) × `--space-10` (h) | Primary button internal spacing |
+| Tag padding | `--space-1` (v) × `--space-3` (h) | Pill-shaped tags and badges |
+
+### Guidelines
+
+- Always use spacing tokens instead of arbitrary pixel values.
+- For responsive adjustments, drop one or two steps rather than halving values.
+- `--space-3` (12px) is the default gap for dense grids; `--space-6` (24px) for relaxed layouts.
+
+</HumanOnly>
+
+<MachineOnly>
+
+<MachineText>{`## Spacing
+
+4px base grid. Every margin, padding, and gap snaps to this scale.
+
+### Scale
+| Token | Value | Use |
+|---|---|---|
+| --space-0 | 0 | None |
+| --space-1 | 4px | Micro — icon gaps, inline spacing |
+| --space-2 | 8px | Tight — tag padding, compact gaps |
+| --space-3 | 12px | Small — card grid gaps, form gaps |
+| --space-4 | 16px | Base — default component spacing |
+| --space-5 | 20px | Medium — card padding compact |
+| --space-6 | 24px | Comfortable — form field gaps |
+| --space-8 | 32px | Large — section sub-spacing |
+| --space-10 | 40px | Extra large — layout gaps |
+| --space-12 | 48px | Section inner — card padding |
+| --space-16 | 64px | Section — desktop horizontal padding |
+| --space-20 | 80px | Section vertical — large sections |
+| --space-24 | 96px | Section max — hero spacing |
+
+### Layout Patterns
+- Section padding (desktop): --space-20 + 4vw (vertical + horizontal)
+- Section padding (mobile): --space-16 + 6vw
+- Card padding: --space-10 to --space-12
+- Card grid gap: --space-3
+- Form field gap: --space-6
+- Button padding: --space-5 (v) × --space-10 (h)
+- Tag padding: --space-1 (v) × --space-3 (h)
+
+### CSS
+--space-0: 0;
+--space-1: 4px;
+--space-2: 8px;
+--space-3: 12px;
+--space-4: 16px;
+--space-5: 20px;
+--space-6: 24px;
+--space-8: 32px;
+--space-10: 40px;
+--space-12: 48px;
+--space-16: 64px;
+--space-20: 80px;
+--space-24: 96px;`}</MachineText>
+
+</MachineOnly>

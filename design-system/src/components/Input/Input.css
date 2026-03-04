@@ -1,0 +1,55 @@
+.ryc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ryc-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
+.ryc-label-optional {
+  font-weight: 400;
+  color: var(--fg-dim);
+  font-size: 0.65rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.ryc-input {
+  width: 100%;
+  padding: 0.8rem 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--fg);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.ryc-input::placeholder {
+  color: var(--fg-dim);
+}
+
+.ryc-input:focus {
+  border-bottom-color: var(--fg);
+}
+
+/* Error */
+.ryc-input--error {
+  border-bottom-color: var(--error);
+}
+
+.ryc-field-error {
+  font-size: 0.75rem;
+  color: var(--error);
+}

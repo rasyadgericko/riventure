@@ -1,5 +1,6 @@
 // ===== REDUCED MOTION CHECK =====
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
 // ===== LOADER =====
 const loaderEl = document.getElementById('loader');
@@ -18,57 +19,6 @@ if (prefersReducedMotion) {
       setTimeout(() => { loaderEl.style.display = 'none'; }, 1600);
     }
   }, 50);
-}
-
-// ===== CURSOR =====
-const cursor = document.getElementById('cursor');
-const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-if (!isTouchDevice && window.innerWidth > 768) {
-  let cx = 0, cy = 0, tx = 0, ty = 0;
-  let isOnGrid = false;
-  let lastCX = -1, lastCY = -1;
-  document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
-
-  (function animateCursor() {
-    if (isOnGrid) {
-      // Snap to exact mouse position — no lag so cursor matches grid highlight speed
-      cx = tx; cy = ty;
-    } else {
-      cx += (tx - cx) * 0.12;
-      cy += (ty - cy) * 0.12;
-    }
-    // Only write to DOM when position has meaningfully changed — avoids redundant style recalcs
-    const rx = cx | 0, ry = cy | 0;
-    if (rx !== lastCX || ry !== lastCY) {
-      cursor.style.left = rx + 'px';
-      cursor.style.top = ry + 'px';
-      lastCX = rx; lastCY = ry;
-    }
-    requestAnimationFrame(animateCursor);
-  })();
-
-  document.querySelectorAll('a, button, .service-card, .test-card, input, textarea, .faq-q').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
-    el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
-  });
-
-  // Eye cursor on the animated grid
-  const aboutWrap = document.querySelector('.about-visual-wrap');
-  if (aboutWrap) {
-    aboutWrap.addEventListener('mouseenter', () => {
-      isOnGrid = true;
-      cursor.classList.remove('expand');
-      cursor.classList.add('on-grid');
-    });
-    aboutWrap.addEventListener('mouseleave', () => {
-      isOnGrid = false;
-      cursor.classList.remove('on-grid');
-    });
-  }
-} else {
-  cursor.style.display = 'none';
-  document.body.style.cursor = 'auto';
 }
 
 // ===== THEME =====
@@ -158,6 +108,17 @@ if (!prefersReducedMotion) {
   document.querySelectorAll('.reveal-text, .fade-up').forEach(el => el.classList.add('visible'));
 }
 
+// ===== HOW-IT-WORKS ILLUSTRATION ANIMATIONS =====
+if (!prefersReducedMotion) {
+  const hwwObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in-view'); hwwObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.hwwu-illus').forEach(el => hwwObs.observe(el));
+} else {
+  document.querySelectorAll('.hwwu-illus').forEach(el => el.classList.add('in-view'));
+}
 
 // ===== LOGOS STRIP REVEAL =====
 const logosStrip = document.querySelector('.logos-strip');
@@ -1217,19 +1178,4 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     vaTilt.style.transform  = 'rotateY(0deg) rotateX(0deg)';
   });
 
-  /* ── Cursor expand on rows + browser (desktop only) ──────────── */
-  if (typeof isTouchDevice !== 'undefined' && !isTouchDevice) {
-    vaList.addEventListener('mouseover', e => {
-      if (e.target.closest('.work-va-row')) cursor.classList.add('expand');
-    });
-    vaList.addEventListener('mouseout', e => {
-      if (e.target.closest('.work-va-row')) cursor.classList.remove('expand');
-    });
-    vaTilt.addEventListener('mouseover', e => {
-      if (e.target.closest('.work-browser')) cursor.classList.add('expand');
-    });
-    vaTilt.addEventListener('mouseout', e => {
-      if (e.target.closest('.work-browser')) cursor.classList.remove('expand');
-    });
-  }
 })();

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: #333;
+    padding: 16px;
+    background: #fff;
+  }
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    color: #999;
+    margin-bottom: 16px;
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #18a0fb;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button:hover { background: #0d8de5; }
+  button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  .status {
+    display: none;
+    margin-top: 12px;
+  }
+  .progress {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  .log {
+    background: #f5f5f5;
+    border-radius: 4px;
+    padding: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-family: 'SF Mono', SFMono-Regular, Menlo, Monaco, monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #666;
+  }
+  .log div { white-space: nowrap; }
+  .warning {
+    display: none;
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #8d6e00;
+    line-height: 1.4;
+  }
+  .error {
+    display: none;
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: #ffebee;
+    border: 1px solid #ef9a9a;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #c62828;
+    line-height: 1.4;
+    word-break: break-all;
+  }
+</style>
+</head>
+<body>
+  <h2>RYC Design Tokens</h2>
+  <p class="subtitle">Import your design tokens as Figma Variables.</p>
+
+  <button id="import-btn">Import Variables</button>
+
+  <div class="status" id="status">
+    <div class="progress" id="progress"></div>
+    <div class="log" id="log"></div>
+  </div>
+
+  <div class="warning" id="warning"></div>
+  <div class="error" id="error"></div>
+
+  <script>
+    var btn = document.getElementById('import-btn');
+    var status = document.getElementById('status');
+    var progress = document.getElementById('progress');
+    var log = document.getElementById('log');
+    var warning = document.getElementById('warning');
+    var error = document.getElementById('error');
+
+    btn.addEventListener('click', function() {
+      btn.disabled = true;
+      btn.textContent = 'Importing...';
+      status.style.display = 'block';
+      log.innerHTML = '';
+      warning.style.display = 'none';
+      error.style.display = 'none';
+      parent.postMessage({ pluginMessage: { type: 'import' } }, '*');
+    });
+
+    window.onmessage = function(event) {
+      var msg = event.data.pluginMessage;
+      if (!msg) return;
+
+      if (msg.type === 'progress') {
+        progress.textContent = msg.text;
+      }
+      if (msg.type === 'log') {
+        var line = document.createElement('div');
+        line.textContent = msg.text;
+        log.appendChild(line);
+        log.scrollTop = log.scrollHeight;
+      }
+      if (msg.type === 'warning') {
+        warning.style.display = 'block';
+        warning.textContent = msg.text;
+      }
+      if (msg.type === 'error') {
+        error.style.display = 'block';
+        error.textContent = msg.text;
+      }
+      if (msg.type === 'done') {
+        btn.disabled = false;
+        btn.textContent = 'Done!';
+      }
+    };
+  </script>
+</body>
+</html>

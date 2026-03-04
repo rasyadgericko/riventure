@@ -1,0 +1,106 @@
+.ryc-faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.ryc-faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+  padding: 2rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--fg);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.3s;
+}
+
+.ryc-faq-q:hover {
+  color: var(--fg-muted);
+}
+
+.ryc-faq-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-round);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.4s var(--ease);
+}
+
+.ryc-faq-icon::before,
+.ryc-faq-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--fg);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s var(--ease), background 0.3s;
+}
+
+.ryc-faq-icon::before {
+  width: 11px;
+  height: 1px;
+}
+
+.ryc-faq-icon::after {
+  width: 1px;
+  height: 11px;
+}
+
+/* Expanded: fill icon, rotate the vertical bar */
+.ryc-faq-item--open .ryc-faq-icon {
+  background: var(--fg);
+  border-color: var(--fg);
+}
+
+.ryc-faq-item--open .ryc-faq-icon::before,
+.ryc-faq-item--open .ryc-faq-icon::after {
+  background: var(--bg);
+}
+
+.ryc-faq-item--open .ryc-faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.ryc-faq-a {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: all 0.45s var(--ease);
+}
+
+.ryc-faq-item--open .ryc-faq-a {
+  grid-template-rows: 1fr;
+  padding-top: 2rem;
+}
+
+.ryc-faq-a-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.ryc-faq-a p {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  font-size: 0.92rem;
+  color: var(--fg-muted);
+  line-height: 1.85;
+  padding: 0 0 2rem;
+}
+
+.ryc-faq-item--open .ryc-faq-a p {
+  opacity: 1;
+  transition: opacity 0.35s ease 0.15s;
+}

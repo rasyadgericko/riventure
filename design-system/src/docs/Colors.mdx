@@ -1,0 +1,124 @@
+import { Meta } from '@storybook/blocks';
+import { ColorGrid, TextColorPreview } from '../blocks/ColorSwatch';
+import { MachineText } from '../blocks/MachineText';
+import { HumanOnly, MachineOnly } from '../context/ModeContext';
+import { coreColors, extendedColors, semanticColors } from '../tokens/colors';
+
+<Meta title="Foundations/Colors" />
+
+# Colors
+
+RYC uses a monochromatic palette that inverts cleanly between light and dark themes. Every color is defined as a CSS custom property and adapts automatically via `data-theme`.
+
+---
+
+<HumanOnly>
+
+## Text Colors
+
+White text on dark, dark text on light — the system inverts automatically.
+
+<TextColorPreview />
+
+## Core Palette
+
+The foundation of every surface, text, and border in the system.
+
+<ColorGrid tokens={coreColors} title="Core" />
+
+## Extended Palette
+
+Additional tokens for layered surfaces and interactive states.
+
+<ColorGrid tokens={extendedColors} title="Extended" />
+
+## Semantic Colors
+
+Functional colors for status, feedback, and system states.
+
+<ColorGrid tokens={semanticColors} title="Semantic" />
+
+### Usage Guidelines
+
+- **Never hardcode hex values** — always use `var(--token-name)`.
+- `--fg` and `--bg` carry the theme. Everything else derives from these.
+- Use `--fg-muted` for secondary text, `--fg-dim` for decorative/tertiary.
+- `--border` uses alpha transparency so it works on any background.
+- Semantic colors (`--success`, `--error`, etc.) are theme-agnostic — same value in both modes.
+
+</HumanOnly>
+
+<MachineOnly>
+
+<MachineText>{`## Colors
+
+### Core Palette
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| --bg | #f1f1f1 | #0f0f0f | Page background |
+| --fg | #161616 | #f1f1f1 | Primary text, headings, icons |
+| --fg-muted | #555 | #aaa | Secondary text, descriptions |
+| --fg-dim | #777 | #777 | Tertiary text, decorative labels |
+| --border | rgba(22,22,22,0.12) | rgba(241,241,241,0.1) | Card borders, dividers |
+| --bg-sub | #e8e8e8 | #151515 | Alternating rows, hover states |
+| --accent | #161616 | #f1f1f1 | Buttons, active states, focus rings |
+| --accent-glow | rgba(22,22,22,0.06) | rgba(241,241,241,0.04) | Soft shadows, magnetic button aura |
+
+### Extended Palette
+| Token | Light | Dark | Use |
+|---|---|---|---|
+| --bg-elevated | #ffffff | #1a1a1a | Cards, modals, popovers |
+| --bg-overlay | rgba(0,0,0,0.4) | rgba(0,0,0,0.6) | Modal backdrops, image overlays |
+| --accent-hover | #333 | #ddd | Interactive elements on hover |
+| --accent-active | #000 | #fff | Interactive elements on press |
+
+### Semantic Colors (same in both themes)
+| Token | Hex | Use |
+|---|---|---|
+| --success | #22c55e | Confirmation, positive states |
+| --error | #ef4444 | Validation errors, destructive actions |
+| --warning | #f59e0b | Caution states, attention needed |
+| --info | #3b82f6 | Informational states, help text |
+
+### Rules
+- NEVER hardcode hex values — always use var(--token-name).
+- --fg and --bg carry the theme. Everything else derives from these.
+- --border uses alpha transparency so it works on any background.
+- Semantic colors are theme-agnostic — same value in both modes.
+
+### CSS
+:root {
+  --bg: #f1f1f1;
+  --fg: #161616;
+  --fg-muted: #555;
+  --fg-dim: #777;
+  --border: rgba(22, 22, 22, 0.12);
+  --bg-sub: #e8e8e8;
+  --accent: #161616;
+  --accent-glow: rgba(22, 22, 22, 0.06);
+  --bg-elevated: #ffffff;
+  --bg-overlay: rgba(0, 0, 0, 0.4);
+  --accent-hover: #333;
+  --accent-active: #000;
+  --success: #22c55e;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f0f;
+  --fg: #f1f1f1;
+  --fg-muted: #aaa;
+  --fg-dim: #777;
+  --border: rgba(241, 241, 241, 0.1);
+  --bg-sub: #151515;
+  --accent: #f1f1f1;
+  --accent-glow: rgba(241, 241, 241, 0.04);
+  --bg-elevated: #1a1a1a;
+  --bg-overlay: rgba(0, 0, 0, 0.6);
+  --accent-hover: #ddd;
+  --accent-active: #fff;
+}`}</MachineText>
+
+</MachineOnly>
