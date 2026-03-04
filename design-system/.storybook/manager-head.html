@@ -1,0 +1,12 @@
+<style>
+  /* Fix: selected sidebar item has white bg (#f1f1f1) from colorSecondary but Storybook
+     applies white text on top — invisible. Override to a subtle dark pill + white text. */
+  .sidebar-item[data-selected="true"] {
+    background: rgba(241, 241, 241, 0.1) !important;
+    border-radius: 4px;
+  }
+  .sidebar-item[data-selected="true"] a,
+  .sidebar-item[data-selected="true"] {
+    color: #f1f1f1 !important;
+  }
+</style>
