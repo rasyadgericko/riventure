@@ -1116,6 +1116,64 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     <rect x="364" y="227" width="44" height="5" rx="2" fill="#9ca3af"/>
   </svg>`;
 
+  /* Soulflow Yoga — warm wellness platform */
+  MOCK['soulflow-yoga'] = `<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+    <rect width="480" height="300" fill="#faf7f2"/>
+    <rect width="480" height="44" fill="#faf7f2"/>
+    <rect x="0" y="43" width="480" height="1" fill="#e8dfd4"/>
+    <rect x="24" y="14" width="90" height="14" rx="2" fill="#8b6f4e"/>
+    <rect x="190" y="20" width="32" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="234" y="20" width="32" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="278" y="20" width="32" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="420" y="14" width="40" height="20" rx="10" fill="#8b6f4e"/>
+    <rect x="0" y="44" width="480" height="156" fill="#e8dfd4"/>
+    <circle cx="360" cy="130" r="60" fill="#d4c4a8" opacity="0.4"/>
+    <circle cx="380" cy="110" r="40" fill="#c4b49a" opacity="0.3"/>
+    <rect x="36" y="78" width="200" height="18" rx="2" fill="#5c4a32" opacity="0.85"/>
+    <rect x="36" y="104" width="260" height="10" rx="2" fill="#5c4a32" opacity="0.5"/>
+    <rect x="36" y="122" width="180" height="10" rx="2" fill="#5c4a32" opacity="0.35"/>
+    <rect x="36" y="148" width="100" height="28" rx="14" fill="#8b6f4e"/>
+    <rect x="16" y="210" width="140" height="78" rx="8" fill="#fff"/>
+    <rect x="28" y="222" width="60" height="8" rx="2" fill="#8b6f4e"/>
+    <rect x="28" y="238" width="100" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="28" y="252" width="80" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="28" y="268" width="60" height="12" rx="6" fill="#e8dfd4"/>
+    <rect x="168" y="210" width="140" height="78" rx="8" fill="#fff"/>
+    <rect x="180" y="222" width="60" height="8" rx="2" fill="#8b6f4e"/>
+    <rect x="180" y="238" width="100" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="180" y="252" width="80" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="180" y="268" width="60" height="12" rx="6" fill="#e8dfd4"/>
+    <rect x="320" y="210" width="140" height="78" rx="8" fill="#fff"/>
+    <rect x="332" y="222" width="60" height="8" rx="2" fill="#8b6f4e"/>
+    <rect x="332" y="238" width="100" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="332" y="252" width="80" height="6" rx="2" fill="#c4b49a"/>
+    <rect x="332" y="268" width="60" height="12" rx="6" fill="#e8dfd4"/>
+  </svg>`;
+
+  /* Atelier Studio — bold dark creative agency */
+  MOCK['atelier-studio'] = `<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg">
+    <rect width="480" height="300" fill="#0a0a0a"/>
+    <rect width="480" height="40" fill="#0a0a0a"/>
+    <rect x="0" y="39" width="480" height="1" fill="#222"/>
+    <rect x="24" y="14" width="72" height="12" rx="2" fill="#fff"/>
+    <rect x="340" y="16" width="28" height="6" rx="2" fill="#666"/>
+    <rect x="380" y="16" width="28" height="6" rx="2" fill="#666"/>
+    <rect x="420" y="16" width="28" height="6" rx="2" fill="#666"/>
+    <rect x="24" y="64" width="432" height="36" rx="2" fill="#fff" opacity="0.95"/>
+    <rect x="24" y="108" width="380" height="28" rx="2" fill="#fff" opacity="0.85"/>
+    <rect x="24" y="148" width="200" height="8" rx="2" fill="#666"/>
+    <rect x="24" y="164" width="160" height="8" rx="2" fill="#444"/>
+    <rect x="24" y="188" width="90" height="26" rx="13" fill="#ff4d2d"/>
+    <rect x="0" y="230" width="240" height="70" rx="0" fill="#161616"/>
+    <rect x="12" y="242" width="100" height="10" rx="2" fill="#fff" opacity="0.8"/>
+    <rect x="12" y="260" width="140" height="6" rx="2" fill="#666"/>
+    <rect x="12" y="274" width="60" height="6" rx="2" fill="#ff4d2d" opacity="0.7"/>
+    <rect x="240" y="230" width="240" height="70" rx="0" fill="#1a1a1a"/>
+    <rect x="252" y="242" width="100" height="10" rx="2" fill="#fff" opacity="0.8"/>
+    <rect x="252" y="260" width="140" height="6" rx="2" fill="#666"/>
+    <rect x="252" y="274" width="60" height="6" rx="2" fill="#ff4d2d" opacity="0.7"/>
+  </svg>`;
+
   /* ── Helpers ──────────────────────────────────────────────────── */
   function mkWorkBrowser(work) {
     const slug   = toSlug(work.title);
