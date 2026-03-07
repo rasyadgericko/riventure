@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soulflow Yoga — Find Your Balance</title>
+<meta name="description" content="Soulflow Yoga offers mindful classes, expert instructors, and a welcoming space to deepen your practice. Book your first class free.">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #faf8f5;
+  --fg: #2c2420;
+  --fg-muted: #7a6e64;
+  --fg-dim: #a89e94;
+  --accent: #b8956a;
+  --accent-light: #e8d5bf;
+  --accent-dark: #96744d;
+  --sage: #8a9a7e;
+  --sage-light: #dce5d7;
+  --card: #ffffff;
+  --border: rgba(44, 36, 32, 0.08);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== UTILITIES ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 100px 0; }
+.section-sm { padding: 72px 0; }
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.heading-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.12;
+  color: var(--fg);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.heading-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  color: var(--fg);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.text-muted { color: var(--fg-muted); }
+.text-dim { color: var(--fg-dim); }
+.text-center { text-align: center; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 0;
+  background: rgba(250, 248, 245, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.4s var(--ease);
+}
+
+nav.scrolled { padding: 12px 0; }
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--fg); }
+
+.nav-cta {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--card);
+  background: var(--fg);
+  padding: 10px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.nav-cta:hover { opacity: 0.85; }
+
+.nav-mobile { display: none; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #f5ede4 0%, #e8ddd0 30%, #dce5d7 70%, #f0ebe4 100%);
+  z-index: 0;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 30%, rgba(184, 149, 106, 0.12) 0%, transparent 60%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-text { max-width: 520px; }
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 28px;
+}
+
+.hero-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sage);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+  line-height: 1.08;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--fg);
+  margin-bottom: 24px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fg-muted);
+  margin-bottom: 40px;
+  max-width: 420px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--card);
+  background: var(--fg);
+  padding: 14px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,36,32,0.15); }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--fg);
+  background: transparent;
+  padding: 14px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  border: 1px solid rgba(44,36,32,0.15);
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+}
+
+.btn-outline:hover { background: rgba(44,36,32,0.04); }
+
+.hero-visual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  position: relative;
+}
+
+.hero-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.hero-card:nth-child(2) { margin-top: 40px; }
+.hero-card:nth-child(3) { margin-top: -24px; }
+
+.hero-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+
+.hero-card-icon.sage { background: var(--sage-light); }
+.hero-card-icon.warm { background: var(--accent-light); }
+.hero-card-icon.neutral { background: #f0ebe4; }
+
+.hero-card h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.hero-card p {
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+
+/* ===== STATS ===== */
+.stats {
+  background: var(--fg);
+  padding: 48px 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-style: italic;
+  color: var(--card);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ===== CLASSES ===== */
+.classes-header {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 56px;
+}
+
+.classes-header p {
+  margin-top: 16px;
+  color: var(--fg-muted);
+  font-size: 1rem;
+}
+
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.class-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  border: 1px solid var(--border);
+  transition: all 0.4s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.class-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(44,36,32,0.08);
+  border-color: var(--accent-light);
+}
+
+.class-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.class-tag.beginner { background: var(--sage-light); color: var(--sage); }
+.class-tag.intermediate { background: var(--accent-light); color: var(--accent-dark); }
+.class-tag.advanced { background: #f0ebe4; color: var(--fg-muted); }
+
+.class-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.class-card p {
+  font-size: 0.88rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.class-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 0.78rem;
+  color: var(--fg-dim);
+}
+
+.class-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ===== SCHEDULE ===== */
+.schedule { background: var(--card); }
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.schedule-header p {
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+  margin-top: 12px;
+}
+
+.schedule-days {
+  display: flex;
+  gap: 8px;
+}
+
+.schedule-day {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: transparent;
+  color: var(--fg-muted);
+}
+
+.schedule-day.active {
+  background: var(--fg);
+  color: var(--card);
+  border-color: var(--fg);
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schedule-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.schedule-table td {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.schedule-table tr:last-child td { border-bottom: none; }
+
+.schedule-class-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.schedule-instructor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.schedule-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--sage-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--sage);
+}
+
+.schedule-spots {
+  font-size: 0.82rem;
+  color: var(--sage);
+  font-weight: 500;
+}
+
+.schedule-book {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--fg);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 8px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.schedule-book:hover {
+  background: var(--fg);
+  color: var(--card);
+}
+
+/* ===== INSTRUCTORS ===== */
+.instructors-header {
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto 56px;
+}
+
+.instructors-header p {
+  margin-top: 16px;
+  color: var(--fg-muted);
+}
+
+.instructors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.instructor-card {
+  text-align: center;
+  padding: 40px 24px;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  transition: all 0.4s var(--ease);
+}
+
+.instructor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(44,36,32,0.06);
+}
+
+.instructor-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--card);
+}
+
+.instructor-photo.a { background: linear-gradient(135deg, var(--sage), #6b7a60); }
+.instructor-photo.b { background: linear-gradient(135deg, var(--accent), #a07a52); }
+.instructor-photo.c { background: linear-gradient(135deg, #8a7e9a, #6b6078); }
+
+.instructor-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.instructor-role {
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.instructor-card > p {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+
+/* ===== PRICING ===== */
+.pricing { background: var(--card); }
+
+.pricing-header {
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto 56px;
+}
+
+.pricing-header p {
+  margin-top: 16px;
+  color: var(--fg-muted);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.price-card {
+  padding: 40px 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  transition: all 0.4s var(--ease);
+  position: relative;
+}
+
+.price-card.featured {
+  background: var(--fg);
+  color: var(--card);
+  border-color: var(--fg);
+  transform: scale(1.04);
+}
+
+.price-card:not(.featured):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(44,36,32,0.06);
+}
+
+.price-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--card);
+  padding: 4px 16px;
+  border-radius: 100px;
+}
+
+.price-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 16px;
+}
+
+.price-card.featured .price-name { color: rgba(255,255,255,0.5); }
+
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.price-period {
+  font-size: 0.82rem;
+  color: var(--fg-dim);
+  margin-bottom: 28px;
+}
+
+.price-card.featured .price-period { color: rgba(255,255,255,0.45); }
+
+.price-features {
+  list-style: none;
+  margin-bottom: 32px;
+}
+
+.price-features li {
+  font-size: 0.88rem;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-card.featured .price-features li { border-color: rgba(255,255,255,0.1); }
+
+.price-features li::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--sage-light);
+  flex-shrink: 0;
+}
+
+.price-card.featured .price-features li::before { background: rgba(255,255,255,0.15); }
+
+.price-features li:last-child { border-bottom: none; }
+
+.price-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  border-radius: 100px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  border: none;
+}
+
+.price-btn.dark {
+  background: var(--fg);
+  color: var(--card);
+}
+
+.price-btn.light {
+  background: var(--card);
+  color: var(--fg);
+}
+
+.price-btn.outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg);
+}
+
+.price-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* ===== CTA ===== */
+.cta-section {
+  background: linear-gradient(160deg, #e8ddd0 0%, #dce5d7 50%, #f0ebe4 100%);
+  text-align: center;
+  padding: 100px 24px;
+}
+
+.cta-section .heading-lg { margin-bottom: 16px; }
+.cta-section p { color: var(--fg-muted); margin-bottom: 36px; font-size: 1.05rem; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--fg);
+  color: rgba(255,255,255,0.5);
+  padding: 64px 0 32px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--card);
+  margin-bottom: 12px;
+}
+
+.footer-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+footer h4 {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 16px;
+}
+
+footer ul { list-style: none; }
+
+footer ul li { margin-bottom: 10px; }
+
+footer a {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer a:hover { color: var(--card); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 24px;
+  font-size: 0.78rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { max-width: 480px; }
+  .classes-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 72px 0; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-mobile { display: block; }
+  .hero { min-height: auto; padding: 120px 0 72px; }
+  .hero-visual { display: none; }
+  .classes-grid { grid-template-columns: 1fr; }
+  .instructors-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .price-card.featured { transform: none; }
+  .schedule-days { overflow-x: auto; padding-bottom: 8px; }
+  .schedule-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2.2rem; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Soulflow</a>
+    <ul class="nav-links">
+      <li><a href="#classes">Classes</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#instructors">Instructors</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a href="#pricing" class="nav-cta">Start Free</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-text fade-in">
+      <div class="hero-tag">Now accepting new members</div>
+      <h1>Find your <em>balance,</em> move with intention</h1>
+      <p class="hero-sub">Guided yoga classes for every level. Build strength, restore calm, and connect with a community that moves together.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary">Book your first class free</a>
+        <a href="#schedule" class="btn-outline">View schedule</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-in">
+      <div class="hero-card">
+        <div class="hero-card-icon sage">&#x1f9d8;</div>
+        <h3>Morning Flow</h3>
+        <p>Start your day centered. 60-min Vinyasa every weekday at 6:30am.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon warm">&#x2728;</div>
+        <h3>Restorative</h3>
+        <p>Deep stretches, gentle holds, complete recovery. Perfect for rest days.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon neutral">&#x1f525;</div>
+        <h3>Power Yoga</h3>
+        <p>Build heat and strength. An athletic flow for experienced practitioners.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon sage">&#x1f343;</div>
+        <h3>Meditation</h3>
+        <p>Guided breathwork and mindfulness sessions. No experience needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="fade-in">
+        <div class="stat-num">2,400+</div>
+        <div class="stat-label">Active Members</div>
+      </div>
+      <div class="fade-in">
+        <div class="stat-num">35</div>
+        <div class="stat-label">Weekly Classes</div>
+      </div>
+      <div class="fade-in">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Expert Instructors</div>
+      </div>
+      <div class="fade-in">
+        <div class="stat-num">4.9</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Classes -->
+<section id="classes" class="section">
+  <div class="container">
+    <div class="classes-header fade-in">
+      <div class="eyebrow">Our Classes</div>
+      <h2 class="heading-lg">A practice for <em>every body</em></h2>
+      <p>From gentle restorative flows to challenging power sequences, find the class that meets you where you are.</p>
+    </div>
+    <div class="classes-grid">
+      <div class="class-card fade-in">
+        <span class="class-tag beginner">Beginner</span>
+        <h3>Foundations Flow</h3>
+        <p>Learn essential poses, alignment cues, and breathing techniques in a supportive, no-pressure environment.</p>
+        <div class="class-meta">
+          <span>60 min</span>
+          <span>Low intensity</span>
+        </div>
+      </div>
+      <div class="class-card fade-in">
+        <span class="class-tag intermediate">Intermediate</span>
+        <h3>Vinyasa Flow</h3>
+        <p>Dynamic, breath-linked movement that builds strength, flexibility, and focus. Our most popular class.</p>
+        <div class="class-meta">
+          <span>75 min</span>
+          <span>Moderate</span>
+        </div>
+      </div>
+      <div class="class-card fade-in">
+        <span class="class-tag advanced">Advanced</span>
+        <h3>Power Yoga</h3>
+        <p>An athletic, sweat-driven flow that challenges your edge. Arm balances, inversions, and deep backbends.</p>
+        <div class="class-meta">
+          <span>75 min</span>
+          <span>High intensity</span>
+        </div>
+      </div>
+      <div class="class-card fade-in">
+        <span class="class-tag beginner">All Levels</span>
+        <h3>Yin & Restore</h3>
+        <p>Long-held, floor-based poses that release deep tension. Perfect complement to active training.</p>
+        <div class="class-meta">
+          <span>60 min</span>
+          <span>Low intensity</span>
+        </div>
+      </div>
+      <div class="class-card fade-in">
+        <span class="class-tag intermediate">Intermediate</span>
+        <h3>Sculpt & Flow</h3>
+        <p>Yoga meets bodyweight training. Flowing sequences with targeted holds that tone and define.</p>
+        <div class="class-meta">
+          <span>60 min</span>
+          <span>Moderate-High</span>
+        </div>
+      </div>
+      <div class="class-card fade-in">
+        <span class="class-tag beginner">All Levels</span>
+        <h3>Guided Meditation</h3>
+        <p>Breathwork, visualization, and mindfulness practices to quiet the mind and deepen awareness.</p>
+        <div class="class-meta">
+          <span>30 min</span>
+          <span>Calm</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Schedule -->
+<section id="schedule" class="section schedule">
+  <div class="container">
+    <div class="schedule-header fade-in">
+      <div>
+        <div class="eyebrow">Weekly Schedule</div>
+        <h2 class="heading-md">This week at the studio</h2>
+        <p>Drop in to any class. No booking required for unlimited members.</p>
+      </div>
+      <div class="schedule-days">
+        <button class="schedule-day active">Mon</button>
+        <button class="schedule-day">Tue</button>
+        <button class="schedule-day">Wed</button>
+        <button class="schedule-day">Thu</button>
+        <button class="schedule-day">Fri</button>
+        <button class="schedule-day">Sat</button>
+        <button class="schedule-day">Sun</button>
+      </div>
+    </div>
+    <table class="schedule-table fade-in">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Class</th>
+          <th>Instructor</th>
+          <th>Duration</th>
+          <th>Spots</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>6:30 AM</td>
+          <td><span class="schedule-class-name">Morning Vinyasa</span></td>
+          <td><div class="schedule-instructor"><div class="schedule-avatar">AS</div> Ava Sinclair</div></td>
+          <td>75 min</td>
+          <td><span class="schedule-spots">4 spots left</span></td>
+          <td><button class="schedule-book">Book</button></td>
+        </tr>
+        <tr>
+          <td>9:00 AM</td>
+          <td><span class="schedule-class-name">Foundations Flow</span></td>
+          <td><div class="schedule-instructor"><div class="schedule-avatar">LM</div> Luca Moretti</div></td>
+          <td>60 min</td>
+          <td><span class="schedule-spots">8 spots left</span></td>
+          <td><button class="schedule-book">Book</button></td>
+        </tr>
+        <tr>
+          <td>12:00 PM</td>
+          <td><span class="schedule-class-name">Power Yoga</span></td>
+          <td><div class="schedule-instructor"><div class="schedule-avatar">AS</div> Ava Sinclair</div></td>
+          <td>75 min</td>
+          <td><span class="schedule-spots">6 spots left</span></td>
+          <td><button class="schedule-book">Book</button></td>
+        </tr>
+        <tr>
+          <td>5:30 PM</td>
+          <td><span class="schedule-class-name">Sculpt & Flow</span></td>
+          <td><div class="schedule-instructor"><div class="schedule-avatar">MK</div> Maya Kapoor</div></td>
+          <td>60 min</td>
+          <td><span class="schedule-spots">3 spots left</span></td>
+          <td><button class="schedule-book">Book</button></td>
+        </tr>
+        <tr>
+          <td>7:30 PM</td>
+          <td><span class="schedule-class-name">Yin & Restore</span></td>
+          <td><div class="schedule-instructor"><div class="schedule-avatar">LM</div> Luca Moretti</div></td>
+          <td>60 min</td>
+          <td><span class="schedule-spots">12 spots left</span></td>
+          <td><button class="schedule-book">Book</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Instructors -->
+<section id="instructors" class="section">
+  <div class="container">
+    <div class="instructors-header fade-in">
+      <div class="eyebrow">Our Instructors</div>
+      <h2 class="heading-lg">Guided by the <em>best</em></h2>
+      <p>Certified, experienced, and deeply passionate about helping you grow on and off the mat.</p>
+    </div>
+    <div class="instructors-grid">
+      <div class="instructor-card fade-in">
+        <div class="instructor-photo a">A</div>
+        <h3>Ava Sinclair</h3>
+        <div class="instructor-role">Lead Instructor, Vinyasa</div>
+        <p>E-RYT 500 certified with 12 years of teaching. Specializes in alignment-focused flows and breathwork integration.</p>
+      </div>
+      <div class="instructor-card fade-in">
+        <div class="instructor-photo b">L</div>
+        <h3>Luca Moretti</h3>
+        <div class="instructor-role">Yin & Restorative Lead</div>
+        <p>Former physical therapist turned yoga teacher. His classes blend therapeutic movement with traditional Yin holds.</p>
+      </div>
+      <div class="instructor-card fade-in">
+        <div class="instructor-photo c">M</div>
+        <h3>Maya Kapoor</h3>
+        <div class="instructor-role">Power & Sculpt Specialist</div>
+        <p>A former competitive athlete, Maya brings intensity and precision. Her power classes are the studio's best-rated.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" class="section pricing">
+  <div class="container">
+    <div class="pricing-header fade-in">
+      <div class="eyebrow">Membership</div>
+      <h2 class="heading-lg">Simple, flexible <em>pricing</em></h2>
+      <p>No contracts. No hidden fees. Cancel or pause anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card fade-in">
+        <div class="price-name">Drop-In</div>
+        <div class="price-amount">$25</div>
+        <div class="price-period">per class</div>
+        <ul class="price-features">
+          <li>Access to any single class</li>
+          <li>Mat and props included</li>
+          <li>Shower facilities</li>
+        </ul>
+        <button class="price-btn outline">Book a Class</button>
+      </div>
+      <div class="price-card featured fade-in">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-name">Unlimited</div>
+        <div class="price-amount">$129</div>
+        <div class="price-period">per month</div>
+        <ul class="price-features">
+          <li>Unlimited classes</li>
+          <li>Priority booking</li>
+          <li>Free guest passes (2/mo)</li>
+          <li>Workshop discounts</li>
+        </ul>
+        <button class="price-btn light">Start Free Trial</button>
+      </div>
+      <div class="price-card fade-in">
+        <div class="price-name">10-Pack</div>
+        <div class="price-amount">$199</div>
+        <div class="price-period">10 classes</div>
+        <ul class="price-features">
+          <li>10 classes, use anytime</li>
+          <li>Valid for 3 months</li>
+          <li>Mat and props included</li>
+          <li>Shareable with a friend</li>
+        </ul>
+        <button class="price-btn outline">Get Started</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container fade-in">
+    <div class="eyebrow">Your first class is free</div>
+    <h2 class="heading-lg">Ready to start your <em>practice?</em></h2>
+    <p>Join 2,400+ members who chose to move with intention. No commitment, no pressure.</p>
+    <a href="#pricing" class="btn-primary">Book your free class</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Soulflow</div>
+        <p class="footer-desc">A yoga studio built for real people. All levels, all bodies, all welcome. Find us in the heart of the city.</p>
+      </div>
+      <div>
+        <h4>Classes</h4>
+        <ul>
+          <li><a href="#classes">Vinyasa Flow</a></li>
+          <li><a href="#classes">Power Yoga</a></li>
+          <li><a href="#classes">Yin & Restore</a></li>
+          <li><a href="#classes">Meditation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#instructors">Instructors</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#">Workshops</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">YouTube</a></li>
+          <li><a href="#">hello@soulflow.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Soulflow Yoga. All rights reserved.</span>
+      <span>Designed with intention.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// Fade-in observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Schedule day toggle
+document.querySelectorAll('.schedule-day').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.schedule-day').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

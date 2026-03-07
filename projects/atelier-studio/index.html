@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier Studio — Design That Demands Attention</title>
+<meta name="description" content="Atelier Studio is a creative agency crafting bold digital experiences. Branding, web design, and art direction for brands that refuse to blend in.">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --fg: #f0f0f0;
+  --fg-muted: #888;
+  --fg-dim: #555;
+  --accent: #ff4d2d;
+  --card: #141414;
+  --border: rgba(255,255,255,0.08);
+  --radius: 12px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ===== UTILITIES ===== */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 120px 0; }
+
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 0;
+  mix-blend-mode: difference;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.nav-logo {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--fg);
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.nav-links a:hover { opacity: 1; }
+
+.nav-cta {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--fg);
+  padding: 10px 24px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+}
+
+.nav-cta:hover { background: var(--accent); color: var(--fg); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 32px 80px;
+  position: relative;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 60% 20%, rgba(255,77,45,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(255,77,45,0.04) 0%, transparent 50%);
+}
+
+.hero-content {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero h1 {
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.hero h1 .outline {
+  -webkit-text-stroke: 1.5px var(--fg);
+  color: transparent;
+}
+
+.hero h1 .accent { color: var(--accent); }
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.hero-desc {
+  max-width: 420px;
+  font-size: 1rem;
+  color: var(--fg-muted);
+  line-height: 1.7;
+}
+
+.hero-scroll {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--fg-dim), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.4; transform: scaleY(0.6); }
+}
+
+/* ===== MARQUEE ===== */
+.marquee {
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: marqueeScroll 20s linear infinite;
+}
+
+.marquee-item {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  flex-shrink: 0;
+}
+
+.marquee-item .dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-left: 48px;
+  vertical-align: middle;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== WORK ===== */
+.work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.work-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  group: true;
+}
+
+.work-item-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s var(--ease);
+}
+
+.work-item:hover .work-item-bg { transform: scale(1.05); }
+
+.work-item-bg.brand { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+.work-item-bg.editorial { background: linear-gradient(135deg, #2d1b15 0%, #3d2b1f 50%, #1a1510 100%); }
+.work-item-bg.product { background: linear-gradient(135deg, #0d1a0d 0%, #1a2e1a 50%, #0f200f 100%); }
+.work-item-bg.identity { background: linear-gradient(135deg, #1a1020 0%, #2e1a30 50%, #1a0f20 100%); }
+
+.work-item-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px;
+  z-index: 1;
+}
+
+.work-item-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.work-item-info { transform: translateY(12px); opacity: 0; transition: all 0.4s var(--ease); }
+.work-item:hover .work-item-info { transform: translateY(0); opacity: 1; }
+
+.work-item h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.work-item p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+}
+
+.work-item-num {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.04);
+  letter-spacing: -0.04em;
+}
+
+.work-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+}
+
+.work-header h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.work-header h2 em {
+  font-style: normal;
+  -webkit-text-stroke: 1px var(--fg);
+  color: transparent;
+}
+
+.work-count {
+  font-size: 0.78rem;
+  color: var(--fg-dim);
+}
+
+/* ===== ABOUT ===== */
+.about { border-top: 1px solid var(--border); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+
+.about h2 .accent { color: var(--accent); }
+
+.about-text {
+  font-size: 1rem;
+  color: var(--fg-muted);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.about-stat-num {
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.about-stat-label {
+  font-size: 0.75rem;
+  color: var(--fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.about-visual {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: var(--card);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-visual-inner {
+  position: absolute;
+  inset: 40px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-visual-text {
+  font-size: 4rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  text-align: center;
+}
+
+.about-visual-accent {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.08;
+  top: 20%;
+  right: 15%;
+  filter: blur(40px);
+}
+
+/* ===== SERVICES ===== */
+.services { border-top: 1px solid var(--border); }
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+}
+
+.services-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.services-header p {
+  max-width: 360px;
+  color: var(--fg-muted);
+  font-size: 0.92rem;
+  text-align: right;
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 32px;
+  align-items: center;
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s var(--ease);
+  cursor: default;
+}
+
+.service-row:first-child { border-top: 1px solid var(--border); }
+
+.service-row:hover { padding-left: 16px; }
+
+.service-num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--fg-dim);
+  letter-spacing: 0.05em;
+  width: 32px;
+}
+
+.service-name {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.service-row:hover .service-name { color: var(--accent); }
+
+.service-desc {
+  font-size: 0.85rem;
+  color: var(--fg-dim);
+  max-width: 280px;
+  text-align: right;
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials { border-top: 1px solid var(--border); }
+
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.testimonials-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.testimonial-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 40px;
+  border: 1px solid var(--border);
+}
+
+.testimonial-quote {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fg-muted);
+  margin-bottom: 28px;
+}
+
+.testimonial-quote::before {
+  content: '"';
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 0;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.testimonial-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.testimonial-role {
+  font-size: 0.78rem;
+  color: var(--fg-dim);
+}
+
+/* ===== CTA ===== */
+.cta {
+  padding: 120px 0;
+  text-align: center;
+  position: relative;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.03;
+  filter: blur(80px);
+}
+
+.cta h2 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.cta h2 .accent { color: var(--accent); }
+
+.cta p {
+  color: var(--fg-muted);
+  font-size: 1rem;
+  margin-bottom: 40px;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--fg);
+  background: transparent;
+  border: 1px solid var(--fg);
+  padding: 18px 40px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  position: relative;
+}
+
+.cta-btn:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 48px 0;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.footer-brand {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  color: var(--fg-dim);
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.footer-links a {
+  font-size: 0.82rem;
+  color: var(--fg-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover { color: var(--fg); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-visual { max-width: 480px; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 80px 0; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .hero { padding-bottom: 48px; }
+  .hero h1 { font-size: 3rem; }
+  .hero-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
+  .hero-scroll { display: none; }
+  .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .services-header p { text-align: left; }
+  .service-row { grid-template-columns: auto 1fr; }
+  .service-desc { display: none; }
+  .work-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .footer-inner { flex-direction: column; gap: 20px; }
+  .about-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .hero h1 { font-size: 2.4rem; }
+  .about-stats { grid-template-columns: 1fr; }
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-delay { transition-delay: 0.15s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  .marquee-track { animation: none; }
+  .hero-scroll-line { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Atelier</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Start a Project</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1 class="fade-in">
+      Design that<br>
+      <span class="outline">demands</span><br>
+      <span class="accent">attention.</span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc fade-in fade-in-delay">We're a creative studio crafting bold digital experiences. Branding, web design, and art direction for brands that refuse to blend in.</p>
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Brand Identity <span class="dot"></span></span>
+    <span class="marquee-item">Web Design <span class="dot"></span></span>
+    <span class="marquee-item">Art Direction <span class="dot"></span></span>
+    <span class="marquee-item">Motion Graphics <span class="dot"></span></span>
+    <span class="marquee-item">Digital Strategy <span class="dot"></span></span>
+    <span class="marquee-item">UI/UX Design <span class="dot"></span></span>
+    <span class="marquee-item">Brand Identity <span class="dot"></span></span>
+    <span class="marquee-item">Web Design <span class="dot"></span></span>
+    <span class="marquee-item">Art Direction <span class="dot"></span></span>
+    <span class="marquee-item">Motion Graphics <span class="dot"></span></span>
+    <span class="marquee-item">Digital Strategy <span class="dot"></span></span>
+    <span class="marquee-item">UI/UX Design <span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- Work -->
+<section id="work" class="section">
+  <div class="container">
+    <div class="work-header fade-in">
+      <h2>Selected <em>Work</em></h2>
+      <span class="work-count">4 Projects / 2024-2026</span>
+    </div>
+    <div class="work-grid">
+      <div class="work-item fade-in">
+        <div class="work-item-bg brand"></div>
+        <div class="work-item-num">01</div>
+        <div class="work-item-inner">
+          <span class="work-item-tag">Brand Identity</span>
+          <div class="work-item-info">
+            <h3>Neon Protocol</h3>
+            <p>Fintech brand system & product design</p>
+          </div>
+        </div>
+      </div>
+      <div class="work-item fade-in">
+        <div class="work-item-bg editorial"></div>
+        <div class="work-item-num">02</div>
+        <div class="work-item-inner">
+          <span class="work-item-tag">Editorial Design</span>
+          <div class="work-item-info">
+            <h3>Wanderlust Mag</h3>
+            <p>Digital magazine redesign & content system</p>
+          </div>
+        </div>
+      </div>
+      <div class="work-item fade-in">
+        <div class="work-item-bg product"></div>
+        <div class="work-item-num">03</div>
+        <div class="work-item-inner">
+          <span class="work-item-tag">Product Design</span>
+          <div class="work-item-info">
+            <h3>Grove Botanicals</h3>
+            <p>E-commerce experience & packaging</p>
+          </div>
+        </div>
+      </div>
+      <div class="work-item fade-in">
+        <div class="work-item-bg identity"></div>
+        <div class="work-item-num">04</div>
+        <div class="work-item-inner">
+          <span class="work-item-tag">Art Direction</span>
+          <div class="work-item-info">
+            <h3>Phantom Records</h3>
+            <p>Music label identity & campaign visuals</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-in">
+        <div class="eyebrow">About Us</div>
+        <h2>We make brands <span class="accent">impossible</span> to ignore</h2>
+        <p class="about-text">Atelier is a small, focused team of designers, art directors, and strategists. We work with ambitious brands that want to lead, not follow.</p>
+        <p class="about-text">Every project starts with a question: what would make someone stop scrolling? Then we build that.</p>
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-num">48</div>
+            <div class="about-stat-label">Projects</div>
+          </div>
+          <div>
+            <div class="about-stat-num">6</div>
+            <div class="about-stat-label">Years</div>
+          </div>
+          <div>
+            <div class="about-stat-num">12</div>
+            <div class="about-stat-label">Awards</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual fade-in">
+        <div class="about-visual-accent"></div>
+        <div class="about-visual-inner">
+          <div class="about-visual-text">Think<br>Bold</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="section services">
+  <div class="container">
+    <div class="services-header fade-in">
+      <div>
+        <div class="eyebrow">What We Do</div>
+        <h2>Services</h2>
+      </div>
+      <p>End-to-end creative for digital-first brands. Strategy through execution.</p>
+    </div>
+    <div class="fade-in">
+      <div class="service-row">
+        <span class="service-num">01</span>
+        <span class="service-name">Brand Identity</span>
+        <span class="service-desc">Logo, type, color, guidelines. The visual DNA of your brand.</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">02</span>
+        <span class="service-name">Web Design</span>
+        <span class="service-desc">High-impact sites that convert. From landing pages to full platforms.</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">03</span>
+        <span class="service-name">Art Direction</span>
+        <span class="service-desc">Visual storytelling across campaigns, social, and editorial.</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">04</span>
+        <span class="service-name">Motion & Video</span>
+        <span class="service-desc">Brand films, UI animations, social reels. Moving images that move people.</span>
+      </div>
+      <div class="service-row">
+        <span class="service-num">05</span>
+        <span class="service-name">Digital Strategy</span>
+        <span class="service-desc">Positioning, content planning, and launch strategy that drives results.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials">
+  <div class="container">
+    <div class="testimonials-header fade-in">
+      <div class="eyebrow">Clients Say</div>
+      <h2>Words from our collaborators</h2>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-quote">Atelier didn't just redesign our brand — they gave us a visual language that our entire team rallies behind. Every touchpoint feels intentional and bold.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JS</div>
+          <div>
+            <div class="testimonial-name">James Sutherland</div>
+            <div class="testimonial-role">CEO, Neon Protocol</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-quote">Working with Atelier felt effortless. They understood our vision immediately and elevated it beyond what we imagined. The results speak for themselves.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RM</div>
+          <div>
+            <div class="testimonial-name">Rachel Monteiro</div>
+            <div class="testimonial-role">Founder, Grove Botanicals</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta">
+  <div class="container fade-in">
+    <h2>Let's make<br>something <span class="accent">bold</span></h2>
+    <p>We take on 4 projects per quarter. Tell us about yours.</p>
+    <a href="mailto:hello@atelierstudio.com" class="cta-btn">hello@atelierstudio.com &rarr;</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <span class="footer-brand">Atelier</span>
+        <span class="footer-copy">&copy; 2026. All rights reserved.</span>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Dribbble</a></li>
+        <li><a href="#">Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Fade-in observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
