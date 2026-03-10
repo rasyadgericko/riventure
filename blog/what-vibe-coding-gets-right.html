@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Vibe-Coding Gets Right (and Dangerously Wrong) — RYC Insights</title>
+<meta name="description" content="The 'just ship it with AI' movement has produced some genuinely impressive products. It's also shipped some spectacular failures. The difference isn't the tool.">
+<link rel="canonical" href="https://www.rycworks.com/blog/what-vibe-coding-gets-right">
+<link rel="icon" type="image/png" href="../assets/favicon.ico">
+<link rel="preload" href="../assets/fonts/Inter_18pt-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Inter_18pt-Medium.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Inter_18pt-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/CabinetGrotesk-Black.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/CabinetGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: 'Inter'; src: url('../assets/fonts/Inter_18pt-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('../assets/fonts/Inter_18pt-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Inter'; src: url('../assets/fonts/Inter_18pt-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Cabinet Grotesk'; src: url('../assets/fonts/CabinetGrotesk-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'Cabinet Grotesk'; src: url('../assets/fonts/CabinetGrotesk-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg: #f1f1f1; --fg: #161616; --fg-muted: #555; --fg-dim: #777; --border: rgba(22,22,22,0.12); --bg-sub: #e8e8e8; --radius: 100px; --ease: cubic-bezier(0.16,1,0.3,1); }
+[data-theme="dark"] { --bg: #0f0f0f; --fg: #f1f1f1; --fg-muted: #aaa; --fg-dim: #777; --border: rgba(241,241,241,0.1); --bg-sub: #151515; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--fg); overflow-x: hidden; -webkit-font-smoothing: antialiased; transition: background 0.6s ease, color 0.6s ease; }
+body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9998; opacity: 0.4; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; }
+.skip-link { position: absolute; left: -9999px; top: 1rem; z-index: 10001; background: var(--fg); color: var(--bg); padding: 0.8rem 1.5rem; font-size: 0.85rem; font-weight: 600; border-radius: var(--radius); text-decoration: none; }
+.skip-link:focus { left: 2rem; }
+nav[role="navigation"] { position: fixed; top: 0; left: 0; right: 0; padding: 1.5rem 4vw; display: flex; align-items: center; justify-content: space-between; z-index: 1000; mix-blend-mode: difference; }
+.nav-logo { font-family: 'Cabinet Grotesk', sans-serif; font-size: 1.3rem; font-weight: 900; color: #f1f1f1; text-decoration: none; letter-spacing: -0.03em; text-transform: uppercase; }
+.nav-right { display: flex; align-items: center; gap: 3rem; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { color: #f1f1f1; text-decoration: none; font-size: 0.82rem; font-weight: 400; opacity: 0.5; transition: opacity 0.3s; }
+.nav-links a:hover, .nav-links a.active { opacity: 1; }
+.theme-toggle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(241,241,241,0.2); background: transparent; color: #f1f1f1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; font-size: 0.9rem; }
+.theme-toggle:hover { border-color: #f1f1f1; }
+.nav-mobile-actions { display: none; align-items: center; gap: 1rem; }
+.nav-toggle { cursor: pointer; width: 30px; height: 20px; display: flex; flex-direction: column; justify-content: space-between; background: none; border: none; padding: 0; z-index: 1001; }
+.nav-toggle span { width: 100%; height: 1.5px; background: #f1f1f1; transition: 0.4s var(--ease); display: block; transform-origin: center; }
+.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px,6px); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px,-7px); }
+.mobile-menu { position: fixed; inset: 0; background: var(--bg); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; opacity: 0; visibility: hidden; transition: opacity 0.5s var(--ease), visibility 0.5s; }
+.mobile-menu.open { opacity: 1; visibility: visible; }
+.mobile-menu a { font-family: 'Cabinet Grotesk', sans-serif; font-size: clamp(2rem,6vw,3rem); font-weight: 700; color: var(--fg); text-decoration: none; text-transform: uppercase; letter-spacing: -0.02em; transform: translateY(30px); opacity: 0; transition: opacity 0.4s ease, transform 0.5s var(--ease); }
+.mobile-menu.open a { opacity: 1; transform: translateY(0); }
+.mobile-menu.open a:nth-child(1) { transition-delay: 0.1s; } .mobile-menu.open a:nth-child(2) { transition-delay: 0.15s; } .mobile-menu.open a:nth-child(3) { transition-delay: 0.2s; } .mobile-menu.open a:nth-child(4) { transition-delay: 0.25s; } .mobile-menu.open a:nth-child(5) { transition-delay: 0.3s; }
+.mobile-menu a:hover { opacity: 0.5; }
+/* layout moved to .article-outer */
+.article-back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: var(--fg-dim); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3rem; transition: color 0.25s, gap 0.25s var(--ease); }
+.article-back:hover { color: var(--fg); gap: 0.8rem; }
+.article-back svg { transform: rotate(180deg); }
+.article-header { margin-bottom: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+.article-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
+.article-tag { display: inline-flex; padding: 0.3rem 0.85rem; border-radius: var(--radius); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+[data-theme="light"] .article-tag { color: #16a34a; border-color: rgba(22,163,74,0.3); }
+.article-date, .article-readtime { font-size: 0.72rem; color: var(--fg-dim); }
+.article-title { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 900; font-size: clamp(2rem,5vw,3.4rem); line-height: 0.95; letter-spacing: -0.05em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.article-excerpt { font-size: 1.05rem; color: var(--fg-muted); line-height: 1.8; }
+.prose { font-size: 1rem; line-height: 1.85; color: var(--fg-muted); }
+.prose p { margin-bottom: 1.6rem; }
+.prose h2 { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 900; font-size: 1.5rem; letter-spacing: -0.04em; text-transform: uppercase; line-height: 1; color: var(--fg); margin: 3rem 0 1.2rem; scroll-margin-top: 100px; }
+.prose blockquote { border-left: 2px solid var(--fg); padding-left: 1.5rem; margin: 2.5rem 0; color: var(--fg); font-size: 1.15rem; line-height: 1.6; font-style: italic; }
+.prose strong { color: var(--fg); font-weight: 600; }
+.prose ul { margin-bottom: 1.6rem; padding-left: 1.4rem; }
+.prose li { margin-bottom: 0.5rem; }
+.prose hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; margin: 2rem 0; }
+.two-col-cell { background: var(--bg); padding: 1.5rem; }
+.two-col-cell h4 { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 900; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 0.8rem; }
+.two-col-cell ul { padding-left: 1.2rem; margin: 0; }
+.two-col-cell li { font-size: 0.88rem; color: var(--fg-muted); margin-bottom: 0.45rem; line-height: 1.5; }
+.more-articles { margin-top: 6rem; padding-top: 4rem; border-top: 1px solid var(--border); }
+.more-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 2rem; }
+.more-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+.more-card { border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.6rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 0.8rem; transition: transform 0.3s var(--ease), border-color 0.3s; }
+.more-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--fg) 30%, transparent); }
+.more-card-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-dim); }
+.more-card-title { font-family: 'Cabinet Grotesk', sans-serif; font-weight: 900; font-size: 1rem; letter-spacing: -0.03em; text-transform: uppercase; line-height: 1.05; color: var(--fg); }
+.more-card-read { font-size: 0.75rem; font-weight: 600; color: var(--fg-dim); display: inline-flex; align-items: center; gap: 0.3rem; margin-top: auto; transition: gap 0.25s var(--ease), color 0.25s; }
+.more-card:hover .more-card-read { gap: 0.6rem; color: var(--fg); }
+footer { padding: 4rem 4vw; border-top: 1px solid var(--border); }
+.footer-grid { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4rem; flex-wrap: wrap; gap: 3rem; }
+.footer-brand { max-width: 300px; }
+.footer-brand-logo { display: inline-block; margin-bottom: 1rem; color: var(--fg); font-family: 'Cabinet Grotesk', sans-serif; font-size: 1.3rem; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; text-decoration: none; }
+.footer-brand p { font-size: 0.82rem; color: var(--fg-muted); line-height: 1.7; }
+.footer-cols { display: flex; gap: 5rem; }
+.footer-col h3 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 1.2rem; font-family: 'Cabinet Grotesk', sans-serif; }
+.footer-col a { display: block; color: var(--fg-muted); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.6rem; transition: color 0.3s; }
+.footer-col a:hover { color: var(--fg); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem; }
+.footer-bottom p { font-size: 0.75rem; color: var(--fg-dim); }
+.footer-socials { display: flex; gap: 0.8rem; }
+.footer-socials a { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--fg-dim); text-decoration: none; font-size: 0.72rem; font-weight: 600; transition: all 0.3s; }
+.footer-socials a:hover { border-color: var(--fg); color: var(--fg); }
+.fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.9s var(--ease); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fd1 { transition-delay: 0.1s; } .fd2 { transition-delay: 0.2s; }
+@media (prefers-reduced-motion: reduce) { .fade-up { transition: none; transform: none; opacity: 1; } }
+@media (max-width: 1024px) { .nav-right { display: none; } .nav-mobile-actions { display: flex; } }
+@media (max-width: 768px) { .article-wrap { padding: 9rem 5vw 6rem; } .more-grid { grid-template-columns: 1fr; } .two-col { grid-template-columns: 1fr; } .footer-grid { flex-direction: column; } .footer-cols { flex-direction: column; gap: 2rem; } .footer-bottom { flex-direction: column; text-align: center; } }
+
+/* ===== ARTICLE LAYOUT WITH SIDEBAR ===== */
+.article-outer { max-width: 1060px; margin: 0 auto; padding: 10rem 4vw 8rem; }
+.article-back { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; font-weight: 600; color: var(--fg-dim); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3rem; transition: color 0.25s, gap 0.25s var(--ease); }
+.article-back:hover { color: var(--fg); gap: 0.8rem; }
+.article-back svg { transform: rotate(180deg); }
+.article-header { margin-bottom: 3.5rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); max-width: 720px; }
+.article-body-layout { display: grid; grid-template-columns: 1fr 220px; gap: 5rem; align-items: start; }
+.article-sidebar { position: sticky; top: 120px; display: flex; flex-direction: column; gap: 1.5rem; }
+.sidebar-box { border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.2rem 1.4rem; }
+.sidebar-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-dim); margin-bottom: 1rem; }
+.toc-nav { display: flex; flex-direction: column; gap: 0.1rem; }
+.toc-link { font-size: 0.78rem; color: var(--fg-muted); text-decoration: none; line-height: 1.4; padding: 0.3rem 0; border-left: 2px solid transparent; padding-left: 0.7rem; margin-left: -0.7rem; transition: color 0.2s, border-color 0.2s; }
+.toc-link:hover { color: var(--fg); }
+.toc-link.active { color: var(--fg); border-left-color: var(--fg); font-weight: 500; }
+.share-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.share-links .share-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--fg-muted); cursor: pointer; display: flex !important; align-items: center; justify-content: center; text-decoration: none; transition: all 0.25s; font-family: inherit; }
+.share-links .share-btn:hover { border-color: var(--fg); color: var(--fg); }
+#copyLink { position: relative; } #copyLink::after { content: attr(data-tooltip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--fg); color: var(--bg); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; padding: 0.3rem 0.65rem; border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; } #copyLink.copied::after { opacity: 1; }
+.more-articles { margin-top: 4rem; padding-top: 4rem; border-top: 1px solid var(--border); max-width: 720px; }
+@media (max-width: 1024px) {
+  .nav-right { display: none; } .nav-mobile-actions { display: flex; }
+  .article-body-layout { grid-template-columns: 1fr; }
+  .article-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
+  .sidebar-box { flex: 1; min-width: 200px; }
+}
+@media (max-width: 768px) {
+  .article-outer { padding: 9rem 5vw 6rem; }
+  .article-sidebar { flex-direction: column; }
+  .more-grid { grid-template-columns: 1fr; }
+  .footer-grid { flex-direction: column; }
+  .footer-cols { flex-direction: column; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (max-width: 480px) { .article-outer { padding: 8rem 6vw 5rem; } .footer-cols { gap: 1.5rem; } }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav role="navigation" aria-label="Main navigation">
+  <a href="/" class="nav-logo">RYC</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="/#work">Work</a></li><li><a href="/#services">Services</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/blog.html" class="active">Blog</a></li><li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">&#9680;</button>
+  </div>
+  <div class="nav-mobile-actions">
+    <button class="theme-toggle" id="themeToggleMobile" aria-label="Switch to light theme">&#9680;</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
+  <a href="/#work">Work</a><a href="/#services">Services</a><a href="/#pricing">Pricing</a><a href="/blog.html">Blog</a><a href="/#contact">Contact</a>
+</div>
+
+<main id="main-content">
+  <div class="article-outer">
+    <a href="/blog.html" class="article-back fade-up">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      All Blogs
+    </a>
+    <header class="article-header fade-up fd1">
+      <div class="article-meta">
+        <span class="article-tag">AI</span>
+        <span class="article-date">December 2025</span>
+        <span class="article-readtime">5 min read</span>
+      </div>
+      <h1 class="article-title">What Vibe-Coding Gets Right (and Dangerously Wrong)</h1>
+      <p class="article-excerpt">The "just ship it with AI" movement has produced some genuinely impressive products. It's also shipped some spectacular failures into production. The difference isn't the tool — it's understanding what AI handles well and what it silently gets wrong.</p>
+    </header>
+
+    <div class="article-body-layout">
+    <article class="prose">
+
+      <p>"Vibe coding" — the practice of building products primarily through natural language prompts to AI, often without deeply reading the output — has become the dominant way a certain class of founder builds software. The results are genuinely mixed in ways that aren't being discussed honestly.</p>
+
+      <p>The successes are real: products that would have taken a team months built by one person in a weekend. Demos that land investment. MVPs that find product-market fit faster because they shipped before the money ran out. The speed argument is not a lie.</p>
+
+      <p>But the failures are also real, and they're less visible because they often don't announce themselves with a dramatic crash. They accumulate quietly: in security vulnerabilities nobody audited, in performance debt that compounds into user churn, in codebases that become unmaintainable after the first three months.</p>
+
+      <h2>What AI Gets Right</h2>
+
+      <p>AI code generation is genuinely excellent at certain things — and understanding what they are is how you use it responsibly:</p>
+
+      <ul>
+        <li><strong>Boilerplate and scaffolding</strong> — Setting up project structure, configuration files, standard CRUD operations, form validation logic. Fast, reliable, and low-risk to accept without deep review.</li>
+        <li><strong>Known patterns in well-represented frameworks</strong> — If you're building something in React, Next.js, or Rails that resembles things that already exist on the internet, AI will generate competent code that usually works.</li>
+        <li><strong>Explaining and documenting existing code</strong> — AI is often better at reading code than writing it. Use it to generate documentation, write test descriptions, or understand an unfamiliar codebase.</li>
+        <li><strong>Iteration speed on UI</strong> — Going from "make this look more premium" to a working implementation in minutes. This is where vibe coding genuinely shines.</li>
+      </ul>
+
+      <h2>What AI Gets Silently Wrong</h2>
+
+      <div class="two-col">
+        <div class="two-col-cell">
+          <h4>High-risk areas</h4>
+          <ul>
+            <li>Authentication & session management</li>
+            <li>Payment processing & webhooks</li>
+            <li>File upload & storage handling</li>
+            <li>Database query construction</li>
+            <li>API key & secret handling</li>
+            <li>Rate limiting & abuse prevention</li>
+          </ul>
+        </div>
+        <div class="two-col-cell">
+          <h4>Why they're dangerous</h4>
+          <ul>
+            <li>Looks correct, fails under edge cases</li>
+            <li>Missing signature verification</li>
+            <li>Path traversal vulnerabilities</li>
+            <li>SQL injection in dynamic queries</li>
+            <li>Keys exposed in client bundles</li>
+            <li>Easy to DDoS without protection</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>The pattern in all of these: <strong>AI generates code that works for the happy path, but misses the adversarial paths</strong>. A signup form that creates an account perfectly but doesn't handle duplicate emails, expired tokens, or concurrent requests. A file upload that works for JPGs but allows arbitrary script execution via a crafted filename.</p>
+
+      <blockquote>The danger of vibe coding isn't that AI writes bad code. It's that AI writes plausible-looking code that a non-expert can't identify as bad. The bugs hide in confidence.</blockquote>
+
+      <h2>The Standard We Hold Ourselves To</h2>
+
+      <p>At RYC, we use AI heavily in our development workflow. We're not apologetic about it — it's why we can deliver in weeks instead of months. But we have a non-negotiable layer of senior review that vibe coding skips.</p>
+
+      <p>The rule is: AI drafts, humans own. Every security-relevant code path is read line by line by a developer who understands what it's doing and why. Every database interaction is reviewed for injection risk. Every authentication flow is tested against a threat model, not just a happy-path demo.</p>
+
+      <p>This adds time compared to pure vibe coding. It adds significantly less time than the alternative, which is discovering a security incident six months after launch.</p>
+
+      <h2>Who Should Vibe-Code (and Who Shouldn't)</h2>
+
+      <p>Pure vibe coding is appropriate for: demos, internal tools, prototypes that will be rebuilt before they scale, and products where the data is low-sensitivity and the user base is small enough that a breach isn't catastrophic.</p>
+
+      <p>It's not appropriate for: anything handling payment data, health data, or personal information. Anything that will scale to real user volumes. Anything where a security vulnerability could cause serious harm to users or the business.</p>
+
+      <p>The honest version of the vibe coding conversation is this: it's an extraordinary tool for exploration and speed, and it requires a senior layer of judgment to be used safely in production. Both things are true. Pretending only one is true is how products get shipped with vulnerabilities that shouldn't have made it past review.</p>
+
+    </article>
+    <aside class="article-sidebar" aria-label="Article navigation">
+      <div class="sidebar-box toc-box" id="tocBox">
+        <div class="sidebar-label">Contents</div>
+        <nav class="toc-nav" id="tocNav" aria-label="Table of contents"></nav>
+      </div>
+      <div class="sidebar-box share-box">
+        <div class="sidebar-label">Share</div>
+        <div class="share-links">
+          <a href="#" class="share-btn" id="shareTwitter" target="_blank" rel="noopener noreferrer" aria-label="Share on X / Twitter">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.258 5.635 5.906-5.635zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="share-btn" id="shareLinkedIn" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="share-btn" id="shareFacebook" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <button class="share-btn" id="copyLink" aria-label="Copy link" data-tooltip="Link copied!">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+    </div>
+
+    <section class="more-articles" aria-label="More articles">
+      <div class="more-label">More to read</div>
+      <div class="more-grid">
+        <a href="/blog/why-ai-wont-replace-designers.html" class="more-card">
+          <span class="more-card-tag">AI</span>
+          <span class="more-card-title">Why AI Won't Replace Designers — It'll Replace Agencies</span>
+          <span class="more-card-read">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+        </a>
+        <a href="/blog/how-we-built-a-wellness-platform-in-3-weeks.html" class="more-card">
+          <span class="more-card-tag">Process</span>
+          <span class="more-card-title">How We Built a Wellness Platform in 3 Weeks</span>
+          <span class="more-card-read">Read <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand"><a href="/" class="footer-brand-logo">RYC</a><p>We help businesses turn their goals into scalable digital growth — through high-quality websites and products, built fast with AI-native workflows and human craft.</p></div>
+    <div class="footer-cols">
+      <div class="footer-col"><h3>Company</h3><a href="/#about">About</a><a href="/#work">Work</a><a href="/#pricing">Pricing</a><a href="/blog.html">Blog</a><a href="/#contact">Contact</a></div>
+      <div class="footer-col"><h3>Connect</h3><a href="https://x.com/rycworks" target="_blank" rel="noopener noreferrer">Twitter / X</a><a href="https://www.linkedin.com/company/rycworks" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://instagram.com/rycworks" target="_blank" rel="noopener noreferrer">Instagram</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 RYC. All rights reserved.</p><div class="footer-socials"><a href="https://x.com/rycworks" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">X</a><a href="https://www.linkedin.com/company/rycworks" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a><a href="https://instagram.com/rycworks" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a></div></div>
+</footer>
+<script>
+(function(){const root=document.documentElement;const toggles=[document.getElementById('themeToggle'),document.getElementById('themeToggleMobile')].filter(Boolean);function apply(t){root.setAttribute('data-theme',t);const d=t==='dark';toggles.forEach(b=>{b.innerHTML=d?'&#9680;':'&#9681;';b.setAttribute('aria-label',d?'Switch to light theme':'Switch to dark theme');});localStorage.setItem('ryc-theme',t);}apply(localStorage.getItem('ryc-theme')||'dark');toggles.forEach(b=>b.addEventListener('click',()=>apply(root.getAttribute('data-theme')==='dark'?'light':'dark')));const nt=document.getElementById('navToggle'),mm=document.getElementById('mobileMenu');let open=false;if(nt&&mm){nt.addEventListener('click',()=>{open=!open;nt.classList.toggle('active',open);nt.setAttribute('aria-expanded',String(open));mm.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';});mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{open=false;nt.classList.remove('active');nt.setAttribute('aria-expanded','false');mm.classList.remove('open');document.body.style.overflow='';}));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&open){open=false;nt.classList.remove('active');nt.setAttribute('aria-expanded','false');mm.classList.remove('open');document.body.style.overflow='';nt.focus();}});}if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}}),{threshold:0.1});document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));}else{document.querySelectorAll('.fade-up').forEach(el=>el.classList.add('visible'));}
+  // ===== TABLE OF CONTENTS =====
+  const prose = document.querySelector('.prose');
+  const tocNav = document.getElementById('tocNav');
+  if (prose && tocNav) {
+    const headings = prose.querySelectorAll('h2');
+    headings.forEach((h, i) => {
+      if (!h.id) h.id = 'section-' + i;
+      const a = document.createElement('a');
+      a.className = 'toc-link';
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      tocNav.appendChild(a);
+    });
+    if (headings.length === 0 && tocNav.closest('.toc-box')) {
+      tocNav.closest('.toc-box').style.display = 'none';
+    }
+    const tocLinks = tocNav.querySelectorAll('.toc-link');
+    const headingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const active = tocNav.querySelector('[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -40% 0px' });
+    headings.forEach(h => headingObserver.observe(h));
+  }
+
+  // ===== SHARE =====
+  const pageUrl = encodeURIComponent(window.location.href);
+  const pageTitle = encodeURIComponent(document.title.replace(' — RYC Insights', ''));
+  const tw = document.getElementById('shareTwitter');
+  const li = document.getElementById('shareLinkedIn');
+  const fb = document.getElementById('shareFacebook');
+  const cp = document.getElementById('copyLink');
+  
+  if (tw) tw.href = 'https://twitter.com/intent/tweet?text=' + pageTitle + '&url=' + pageUrl + '&via=rycworks';
+  if (li) li.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + pageUrl;
+  if (fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + pageUrl;
+  if (cp) cp.addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      cp.classList.add('copied'); setTimeout(() => { cp.classList.remove('copied'); }, 2000);
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -308,6 +308,16 @@ if (logosStrip) {
   }
 })();
 
+// ===== GLOW BUTTONS =====
+document.querySelectorAll('.glow-btn').forEach(btn => {
+  const content = btn.innerHTML;
+  btn.innerHTML =
+    '<span class="gb-l1" aria-hidden="true"><span class="gb-s"></span></span>' +
+    '<span class="gb-l2" aria-hidden="true"><span class="gb-s"></span></span>' +
+    '<span class="gb-l3" aria-hidden="true"><span class="gb-s"></span></span>' +
+    '<span class="gb-c">' + content + '</span>';
+});
+
 // ===== MAGNETIC BUTTONS =====
 if (!isTouchDevice && !prefersReducedMotion) {
   document.querySelectorAll('.mag-btn').forEach(b => {
@@ -349,10 +359,48 @@ if (budgetSlider && budgetDisplay) {
   updateSlider();
 }
 
+// ===== FORM PROGRESSIVE DISCLOSURE =====
+const formDetailsToggle = document.getElementById('formDetailsToggle');
+const formDetailsPanel = document.getElementById('formDetails');
+if (formDetailsToggle && formDetailsPanel) {
+  formDetailsToggle.addEventListener('click', () => {
+    const expanded = formDetailsToggle.getAttribute('aria-expanded') === 'true';
+    formDetailsToggle.setAttribute('aria-expanded', !expanded);
+    formDetailsPanel.classList.toggle('open');
+    formDetailsToggle.querySelector('span:first-child').textContent = expanded ? 'Add project details' : 'Hide project details';
+  });
+}
+
 // ===== CONTACT FORM =====
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 const formStatus = document.getElementById('formStatus');
+
+function showFormSuccess() {
+  const successEl = document.getElementById('formSuccess');
+  successEl.classList.add('is-visible');
+  contactForm.style.opacity = '0';
+  contactForm.style.pointerEvents = 'none';
+
+  setTimeout(() => {
+    successEl.classList.remove('is-visible');
+    contactForm.reset();
+    contactForm.style.opacity = '';
+    contactForm.style.pointerEvents = '';
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send Message &#8594;';
+    formStatus.textContent = '';
+
+    // Collapse optional details if open
+    const formDetails = document.getElementById('formDetails');
+    const toggle = document.getElementById('formDetailsToggle');
+    if (formDetails && formDetails.classList.contains('is-open')) {
+      formDetails.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.querySelector('span:first-child').textContent = 'Add project details';
+    }
+  }, 4000);
+}
 
 contactForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -374,14 +422,7 @@ contactForm.addEventListener('submit', e => {
   })
   .then(res => {
     if (res.ok) {
-      submitBtn.textContent = 'Sent \u2713';
-      formStatus.textContent = 'Thank you! We\'ll be in touch within 24 hours.';
-      setTimeout(() => {
-        contactForm.reset();
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Send Message &#8594;';
-        formStatus.textContent = '';
-      }, 3000);
+      showFormSuccess();
     } else {
       return res.json().then(data => {
         formStatus.textContent = data.errors
@@ -582,6 +623,26 @@ contactForm.addEventListener('submit', e => {
       });
     }, { threshold: 0.05 });
     obs.observe(wrap);
+  }
+
+  // ===== Evervault spotlight overlay =====
+  const evOverlay  = document.getElementById('evOverlay');
+  const evGradient = document.getElementById('evGradient');
+
+  if (evOverlay && evGradient && !prefersReducedMotion && !isTouchDevice) {
+    wrap.addEventListener('mousemove', e => {
+      const rect = wrap.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const mask = `radial-gradient(250px at ${x}px ${y}px, white, transparent)`;
+      evGradient.style.maskImage       = mask;
+      evGradient.style.webkitMaskImage = mask;
+      evOverlay.classList.add('active');
+    });
+
+    wrap.addEventListener('mouseleave', () => {
+      evOverlay.classList.remove('active');
+    });
   }
 })();
 

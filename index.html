@@ -213,6 +213,21 @@
 </head>
 <body>
 
+<!-- Glow Button SVG Filters -->
+<svg class="glow-defs" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <filter id="glow-f1" width="300%" x="-100%" height="300%" y="-100%">
+      <feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 9 0"/>
+    </filter>
+    <filter id="glow-f2" width="300%" x="-100%" height="300%" y="-100%">
+      <feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 3 0"/>
+    </filter>
+    <filter id="glow-f3" width="300%" x="-100%" height="300%" y="-100%">
+      <feColorMatrix values="1 0 0 0.2 0 0 1 0 0.2 0 0 0 1 0.2 0 0 0 0 2 0"/>
+    </filter>
+  </defs>
+</svg>
+
 <!-- Skip Link -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
@@ -230,7 +245,7 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="/blog.html">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark theme">&#9680;</button>
@@ -246,7 +261,7 @@
   <a href="#work">Work</a>
   <a href="#services">Services</a>
   <a href="#pricing">Pricing</a>
-  <a href="#about">About</a>
+  <a href="/blog.html">Blog</a>
   <a href="#contact">Contact</a>
 </div>
 
@@ -266,7 +281,7 @@
       <span>2 project slots open — March 2026</span>
     </div>
     <div class="hero-cta-row fade-up fd4">
-      <a href="#contact" class="mag-btn">
+      <a href="#contact" class="glow-btn">
         <span>Start a Project</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
@@ -363,7 +378,7 @@
         <span class="service-num" aria-hidden="true">01</span>
       </div>
       <div class="service-name">Web Development</div>
-      <p class="service-desc">Production-grade websites built with Claude AI and reviewed by humans. Ship in weeks with 90+ Lighthouse scores out of the box.</p>
+      <p class="service-desc">Claude writes the first draft. Our engineers refine every line. The result: production code with 90+ Lighthouse scores, semantic HTML, and zero accessibility flags — shipped in weeks, not quarters.</p>
     </div>
 
     <div class="service-card fade-up fd1" role="listitem" tabindex="0">
@@ -372,7 +387,7 @@
         <span class="service-num" aria-hidden="true">02</span>
       </div>
       <div class="service-name">UI/UX Design</div>
-      <p class="service-desc">Interfaces that make investors say yes and users come back. Conversion-tested design with 3× more iterations than a traditional timeline allows.</p>
+      <p class="service-desc">We prototype 10–15 layout variants per screen where most agencies do 2–3. AI generates the options; our designers pick the winners and polish every detail until it clicks.</p>
     </div>
 
     <div class="service-card fade-up fd2" role="listitem" tabindex="0">
@@ -381,7 +396,7 @@
         <span class="service-num" aria-hidden="true">03</span>
       </div>
       <div class="service-name">Brand Identity</div>
-      <p class="service-desc">From name to full visual system — a brand that looks established from day one. Logo, type, color, and guidelines delivered together.</p>
+      <p class="service-desc">Logo, type system, color palette, and a living style guide — delivered as a single package. Your brand looks like it's been around for years, even if you launched last month.</p>
     </div>
 
     <div class="service-card fade-up fd3" role="listitem" tabindex="0">
@@ -390,7 +405,7 @@
         <span class="service-num" aria-hidden="true">04</span>
       </div>
       <div class="service-name">SEO & Performance</div>
-      <p class="service-desc">Technical SEO and Core Web Vitals baked in from the start — not bolted on after launch. Your site ranks because it's built right.</p>
+      <p class="service-desc">Structured data, semantic markup, sub-second LCP, and clean URL architecture — built into the codebase from commit one. Not an afterthought. Not an add-on.</p>
     </div>
 
     <div class="service-card fade-up fd4" role="listitem" tabindex="0">
@@ -399,7 +414,7 @@
         <span class="service-num" aria-hidden="true">05</span>
       </div>
       <div class="service-name">Custom Development</div>
-      <p class="service-desc">SaaS dashboards, internal tools, and API integrations. Clean architecture that your next hire can actually maintain.</p>
+      <p class="service-desc">SaaS dashboards, admin panels, and third-party integrations with documented, test-covered code. Built so your next developer can onboard in a day, not a month.</p>
     </div>
 
     <div class="service-card fade-up fd5" role="listitem" tabindex="0">
@@ -408,7 +423,7 @@
         <span class="service-num" aria-hidden="true">06</span>
       </div>
       <div class="service-name">Growth & Analytics</div>
-      <p class="service-desc">Post-launch analytics, conversion tracking, and data-driven iteration. We don't disappear after deploy — we help you grow.</p>
+      <p class="service-desc">Heatmaps, funnel tracking, and monthly performance reports with actionable recommendations. We review real user data every 30 days and ship improvements that move the numbers.</p>
     </div>
 
   </div>
@@ -419,8 +434,8 @@
 
   <div class="hwwu-header">
     <p class="hwwu-eyebrow fade-up">How It Works</p>
-    <h2 class="hwwu-title fade-up fd1" id="process-heading">Simple steps to your <em>next launch.</em></h2>
-    <p class="hwwu-sub fade-up fd2">From first call to live site — a clear, collaborative process powered by AI and guided by humans every step of the way.</p>
+    <h2 class="hwwu-title fade-up fd1" id="process-heading">How AI makes us <em>3× faster.</em></h2>
+    <p class="hwwu-sub fade-up fd2">Traditional agencies spend weeks on tasks AI handles in hours. Here's what that actually looks like — step by step.</p>
   </div>
 
   <div class="hwwu-steps" role="list">
@@ -476,20 +491,20 @@
         <div class="hwwu-badge-label">Step</div>
       </div>
       <div class="hwwu-content">
-        <span class="hwwu-tag">Discovery</span>
-        <h3 class="hwwu-heading">Initial Consultation</h3>
-        <p class="hwwu-desc">We start with a focused 30-minute call to understand your goals, audience, and timeline. Before we meet, our AI pre-analyses your existing digital presence so we arrive with insight — not just questions.</p>
-        <span class="hwwu-ai">AI pre-analyses your site &amp; competitors</span>
+        <span class="hwwu-tag">Discovery · Day 0</span>
+        <h3 class="hwwu-heading">AI-Powered Briefing</h3>
+        <p class="hwwu-desc">Before we even meet, Claude analyses your current site, three competitors, and your market positioning. By the time we hop on a 30-minute call, we already have a draft competitive teardown — so we skip the "tell us about your business" phase entirely.</p>
+        <span class="hwwu-ai">Traditional: 1–2 discovery sessions · Us: 1 call, pre-loaded</span>
       </div>
     </div>
 
     <!-- Step 02 — Tailored Proposal -->
     <div class="hwwu-step fade-up fd1" role="listitem">
       <div class="hwwu-content">
-        <span class="hwwu-tag">Planning</span>
-        <h3 class="hwwu-heading">Tailored Proposal</h3>
-        <p class="hwwu-desc">Within 48 hours you receive a clear, itemised proposal — scope, timeline, and cost. AI handles research and estimation in minutes; humans craft the strategy and ensure every line reflects your brief.</p>
-        <span class="hwwu-ai">AI-powered scope estimation</span>
+        <span class="hwwu-tag">Planning · Day 1–2</span>
+        <h3 class="hwwu-heading">Scope &amp; Strategy</h3>
+        <p class="hwwu-desc">Claude generates a detailed scope document with page-by-page estimates in under an hour. Our team reviews, adjusts for complexity, and sends you a clear, itemised proposal within 48 hours — not the usual 1–2 weeks.</p>
+        <span class="hwwu-ai">Traditional: 1–2 week proposal cycle · Us: 48 hours</span>
       </div>
       <div class="hwwu-center">
         <div class="hwwu-badge" aria-hidden="true">02</div>
@@ -595,20 +610,20 @@
         <div class="hwwu-badge-label">Step</div>
       </div>
       <div class="hwwu-content">
-        <span class="hwwu-tag">Agreement</span>
+        <span class="hwwu-tag">Agreement · Day 3</span>
         <h3 class="hwwu-heading">Contract &amp; Kickoff</h3>
-        <p class="hwwu-desc">Simple, plain-English agreements signed digitally. Once confirmed, your project is assigned, your shared workspace is live, and your dedicated channel is open. No delays — momentum starts immediately.</p>
-        <span class="hwwu-ai">AI-drafted agreement reviewed by humans</span>
+        <p class="hwwu-desc">Plain-English contract, signed digitally. The same day, your project repo is live, your shared workspace is set up, and Claude has already generated the initial site scaffold and folder structure. Most agencies are still scheduling kickoff meetings at this point.</p>
+        <span class="hwwu-ai">Traditional: week-long onboarding · Us: same-day start</span>
       </div>
     </div>
 
     <!-- Step 04 — Project Execution -->
     <div class="hwwu-step fade-up fd3" role="listitem">
       <div class="hwwu-content">
-        <span class="hwwu-tag">Build</span>
-        <h3 class="hwwu-heading">Project Execution</h3>
-        <p class="hwwu-desc">Our AI-native workflow runs at 3× the speed of a traditional agency. Claude generates and tests code; our team designs, reviews, and refines every output. You get weekly check-ins and real-time access to your project board.</p>
-        <span class="hwwu-ai">Claude generates · humans review every commit</span>
+        <span class="hwwu-tag">Build · Day 4–14</span>
+        <h3 class="hwwu-heading">AI Builds, Humans Refine</h3>
+        <p class="hwwu-desc">Claude writes the first pass of every page — HTML, CSS, interactions. Our team reviews each commit, refines the design, and runs QA. You see real progress daily on a shared board, not a "big reveal" after weeks of silence.</p>
+        <span class="hwwu-ai">Traditional: 6–10 week build · Us: 1–2 weeks</span>
       </div>
       <div class="hwwu-center">
         <div class="hwwu-badge" aria-hidden="true">04</div>
@@ -752,10 +767,10 @@
         <div class="hwwu-badge-label">Step</div>
       </div>
       <div class="hwwu-content">
-        <span class="hwwu-tag">Ongoing</span>
-        <h3 class="hwwu-heading">Maintenance &amp; Growth</h3>
-        <p class="hwwu-desc">Post-launch isn't goodbye. Every project includes 30 days of bug fixes, and most clients move to a monthly retainer for performance monitoring, analytics reviews, and AI-assisted iteration cycles.</p>
-        <span class="hwwu-ai">AI monitors performance · flags opportunities</span>
+        <span class="hwwu-tag">Ongoing · Day 15+</span>
+        <h3 class="hwwu-heading">Launch &amp; Iterate</h3>
+        <p class="hwwu-desc">Your site goes live with 30 days of bug fixes included. From there, Claude monitors Core Web Vitals and flags regressions automatically. Most clients stay on a retainer where we ship 2–4 improvements per month based on real analytics — not guesswork.</p>
+        <span class="hwwu-ai">Traditional: "call us if something breaks" · Us: proactive monitoring</span>
       </div>
     </div>
 
@@ -763,7 +778,7 @@
 
   <div class="hwwu-cta fade-up">
     <p>Ready to start? We'll respond within 24 hours.</p>
-    <a href="#contact" class="mag-btn">
+    <a href="#contact" class="glow-btn">
       <span>Start a Project</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
@@ -777,6 +792,10 @@
     <div class="about-visual-wrap fade-up">
       <canvas id="aboutVisual" class="about-canvas" aria-hidden="true"></canvas>
       <div class="about-visual-grid" aria-hidden="true"></div>
+      <!-- Evervault spotlight overlay -->
+      <div class="ev-overlay" id="evOverlay" aria-hidden="true">
+        <div class="ev-gradient" id="evGradient"></div>
+      </div>
       <div class="about-badge">
         <div class="about-badge-dot" aria-hidden="true"></div>
         <span>AI-Native Studio</span>
@@ -785,8 +804,8 @@
     <div class="about-text">
       <div class="section-num fade-up"><span class="ln" aria-hidden="true"></span> The Studio</div>
       <h2 class="fade-up fd1" id="about-heading">Built by a founder, for <em>founders.</em></h2>
-      <p class="fade-up fd2">I started RYC because I watched too many businesses — from early startups to growing brands and e-commerce companies — burn months and budget on agencies that moved too slow and charged too much. You deserve a team that ships like you think: fast, focused, and without the bloat.</p>
-      <p class="fade-up fd3">Our workflow is AI-native from day one. Claude handles code generation, competitive research, and QA. Humans handle strategy, design decisions, and every final review. The result: studio-quality output at three times the speed, with zero corners cut.</p>
+      <p class="fade-up fd2">I spent two years freelancing before RYC — watching founders pay $15K+ for sites that took three months and still shipped with broken mobile layouts. One client waited 11 weeks for a landing page that scored 34 on Lighthouse. That was the moment I knew there had to be a better model.</p>
+      <p class="fade-up fd3">So I built one. Claude handles code generation, competitive research, and QA iterations. I handle strategy, design decisions, and every final review. No account managers. No hand-offs. No 47-slide decks before a single line of code gets written. Just fast, focused execution — with a human eye on every pixel and every commit.</p>
       <p class="about-founder-byline fade-up fd3">— <span>Rasyad Gericko</span>, Founder</p>
       <div class="process-steps fade-up fd4" role="list" aria-label="Our process">
         <div class="process-step" role="listitem">
@@ -910,7 +929,7 @@
         <li>Mobile-first, 90+ Lighthouse</li>
         <li>30-day post-launch support</li>
       </ul>
-      <a href="#contact" class="pricing-cta mag-btn mag-btn-outline">
+      <a href="#contact" class="pricing-cta gradient-btn-secondary">
         <span>Start a Project</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -932,7 +951,7 @@
         <li>SEO-optimised from day one</li>
         <li>30-day post-launch support</li>
       </ul>
-      <a href="#contact" class="pricing-cta mag-btn">
+      <a href="#contact" class="pricing-cta gradient-btn-secondary">
         <span>Start a Project</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -954,7 +973,7 @@
         <li>Performance &amp; security hardened</li>
         <li>30-day post-launch support</li>
       </ul>
-      <a href="#contact" class="pricing-cta mag-btn mag-btn-outline">
+      <a href="#contact" class="pricing-cta gradient-btn-secondary">
         <span>Start a Project</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -967,7 +986,7 @@
     <div class="pricing-ent-left">
       <span class="pricing-tag">Enterprise</span>
       <h3 class="pricing-ent-heading">Complex scope? <em>Custom quote.</em></h3>
-      <p class="pricing-ent-desc">Large B2B builds, multi-phase platforms, white-label projects, and ongoing team augmentation. Tell us what you're building and we'll scope it honestly within 24 hours.</p>
+      <p class="pricing-ent-desc">Multi-phase platforms, white-label products, and ongoing team augmentation. Previous enterprise projects have ranged from $20K–$60K depending on scope. Examples: multi-tenant SaaS with role-based access, marketplace with payment integration, and headless CMS-powered content platforms. We'll scope yours honestly within 24 hours.</p>
     </div>
     <div class="pricing-ent-right">
       <div class="pricing-ent-features" role="list" aria-label="Enterprise features">
@@ -976,7 +995,7 @@
         <span role="listitem">SLA-backed timelines</span>
         <span role="listitem">Custom contract terms</span>
       </div>
-      <a href="#contact" class="mag-btn">
+      <a href="#contact" class="glow-btn">
         <span>Let's Talk</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -1049,6 +1068,46 @@
   </div>
 </section>
 
+<!-- Insights -->
+<section id="insights" aria-labelledby="insights-heading">
+  <div class="section-header">
+    <div>
+      <div class="section-num fade-up"><span class="ln" aria-hidden="true"></span> Insights</div>
+      <h2 class="section-h2 fade-up fd1" id="insights-heading">From the <em>build log.</em></h2>
+    </div>
+    <p class="section-sub fade-up fd2">How we think about AI-native development, design, and shipping fast.</p>
+  </div>
+  <div class="insights-grid">
+    <article class="insight-card fade-up" tabindex="0">
+      <div class="insight-meta">
+        <span class="insight-tag">Process</span>
+        <time class="insight-date" datetime="2026-03">Mar 2026</time>
+      </div>
+      <h3 class="insight-title">Why we ship in 2 weeks (and what we cut to get there)</h3>
+      <p class="insight-excerpt">Most agency timelines are padded with meetings, revisions, and wait states. Here's the exact workflow we use to compress a 6-week project into 10 business days — without cutting corners on quality.</p>
+      <span class="insight-read">Read more <span aria-hidden="true">&rarr;</span></span>
+    </article>
+    <article class="insight-card fade-up fd1" tabindex="0">
+      <div class="insight-meta">
+        <span class="insight-tag">Engineering</span>
+        <time class="insight-date" datetime="2026-02">Feb 2026</time>
+      </div>
+      <h3 class="insight-title">Claude writes the first draft. Here's what happens next.</h3>
+      <p class="insight-excerpt">AI-generated code isn't production-ready code. We walk through our review pipeline — from automated Lighthouse checks to manual accessibility audits — and show what changes between first draft and final commit.</p>
+      <span class="insight-read">Read more <span aria-hidden="true">&rarr;</span></span>
+    </article>
+    <article class="insight-card fade-up fd2" tabindex="0">
+      <div class="insight-meta">
+        <span class="insight-tag">Design</span>
+        <time class="insight-date" datetime="2026-01">Jan 2026</time>
+      </div>
+      <h3 class="insight-title">10 layouts per screen: how AI expands the design space</h3>
+      <p class="insight-excerpt">Traditional design means 2–3 options and a committee vote. We generate 10–15 layout variants per screen, test them against real content, and converge on the strongest direction — all before the first dev sprint.</p>
+      <span class="insight-read">Read more <span aria-hidden="true">&rarr;</span></span>
+    </article>
+  </div>
+</section>
+
 <!-- CTA -->
 <div class="cta" role="region" aria-label="Call to action">
   <div class="cta-bg" aria-hidden="true"></div>
@@ -1063,7 +1122,7 @@
     <div class="reveal-text"><span class="word">something</span> <span class="word"><em>bold?</em></span></div>
   </h2>
   <p class="fade-up">Your startup deserves a site that ships fast, performs flawlessly, and scales with you.</p>
-  <a href="#contact" class="mag-btn fade-up fd1">
+  <a href="#contact" class="glow-btn fade-up fd1">
     <span>Let's Talk</span>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
   </a>
@@ -1095,6 +1154,7 @@
         </div>
       </address>
     </div>
+    <div class="contact-form-wrap">
     <form class="contact-form fade-up fd2" id="contactForm" novalidate>
       <div class="form-row">
         <div class="form-field">
@@ -1106,65 +1166,79 @@
           <input type="email" id="contact-email" name="email" placeholder="your@email.com" required autocomplete="email">
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-field">
-          <label for="contact-company">Company</label>
-          <input type="text" id="contact-company" name="company" placeholder="Your company or startup name" required autocomplete="organization">
-        </div>
-        <div class="form-field">
-          <label for="contact-phone">Phone <span class="form-optional">(optional)</span></label>
-          <input type="tel" id="contact-phone" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
-        </div>
+      <div class="form-field">
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" placeholder="Tell us about your project — what you're building, your goals, and rough timeline..." required></textarea>
       </div>
-      <div class="form-row">
+      <button type="button" class="form-details-toggle" id="formDetailsToggle" aria-expanded="false">
+        <span>Add project details</span>
+        <span class="form-details-icon" aria-hidden="true"></span>
+      </button>
+      <div class="form-details" id="formDetails">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="contact-company">Company <span class="form-optional">(optional)</span></label>
+            <input type="text" id="contact-company" name="company" placeholder="Your company or startup name" autocomplete="organization">
+          </div>
+          <div class="form-field">
+            <label for="contact-phone">Phone <span class="form-optional">(optional)</span></label>
+            <input type="tel" id="contact-phone" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="contact-type">Project Type</label>
+            <select id="contact-type" name="project_type">
+              <option value="" disabled selected>Select a type</option>
+              <option value="website">Website / Landing Page</option>
+              <option value="saas">SaaS / Web App</option>
+              <option value="ecommerce">E-Commerce</option>
+              <option value="branding">Branding &amp; Identity</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="contact-timeline">Timeline</label>
+            <select id="contact-timeline" name="timeline">
+              <option value="" disabled selected>When do you need it?</option>
+              <option value="asap">ASAP</option>
+              <option value="1month">Within 1 month</option>
+              <option value="3months">1–3 months</option>
+              <option value="flexible">Flexible</option>
+            </select>
+          </div>
+        </div>
         <div class="form-field">
-          <label for="contact-type">Project Type</label>
-          <select id="contact-type" name="project_type" required>
-            <option value="" disabled selected>Select a type</option>
-            <option value="website">Website / Landing Page</option>
-            <option value="saas">SaaS / Web App</option>
-            <option value="ecommerce">E-Commerce</option>
-            <option value="branding">Branding &amp; Identity</option>
+          <label for="contact-budget">Budget &mdash; <span id="budget-display">$5,000</span></label>
+          <input type="range" id="contact-budget" name="budget" min="2500" max="50000" step="2500" value="5000" class="budget-range" aria-label="Project budget">
+          <div class="budget-range-labels">
+            <span>$2,500</span>
+            <span>$50,000+</span>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="contact-referral">How did you hear about us?</label>
+          <select id="contact-referral" name="referral">
+            <option value="" disabled selected>Select a source</option>
+            <option value="google">Google Search</option>
+            <option value="social">Social Media</option>
+            <option value="referral">Friend / Referral</option>
+            <option value="portfolio">Saw your work</option>
             <option value="other">Other</option>
           </select>
         </div>
-        <div class="form-field">
-          <label for="contact-timeline">Timeline</label>
-          <select id="contact-timeline" name="timeline" required>
-            <option value="" disabled selected>When do you need it?</option>
-            <option value="asap">ASAP</option>
-            <option value="1month">Within 1 month</option>
-            <option value="3months">1–3 months</option>
-            <option value="flexible">Flexible</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-field">
-        <label for="contact-budget">Budget &mdash; <span id="budget-display">$5,000</span></label>
-        <input type="range" id="contact-budget" name="budget" min="2500" max="50000" step="2500" value="5000" class="budget-range" aria-label="Project budget">
-        <div class="budget-range-labels">
-          <span>$2,500</span>
-          <span>$50,000+</span>
-        </div>
-      </div>
-      <div class="form-field">
-        <label for="contact-referral">How did you hear about us?</label>
-        <select id="contact-referral" name="referral">
-          <option value="" disabled selected>Select a source</option>
-          <option value="google">Google Search</option>
-          <option value="social">Social Media</option>
-          <option value="referral">Friend / Referral</option>
-          <option value="portfolio">Saw your work</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="form-field">
-        <label for="contact-message">Message</label>
-        <textarea id="contact-message" name="message" placeholder="Tell us about your project goals and timeline..." required></textarea>
       </div>
       <button type="submit" class="submit-btn" id="submitBtn">Send Message &#8594;</button>
       <div id="formStatus" aria-live="polite" style="font-size:0.82rem; margin-top:0.5rem; color:var(--fg-muted);"></div>
     </form>
+    <div class="form-success" id="formSuccess" role="status" aria-live="polite" aria-atomic="true">
+      <div class="form-success-inner">
+        <span class="form-success-icon" aria-hidden="true">✓</span>
+        <p class="form-success-heading">Message sent!</p>
+        <p class="form-success-sub">We'll be in touch within 24 hours.</p>
+      </div>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -1176,17 +1250,16 @@
       <p>We help businesses turn their goals into scalable digital growth — through high-quality websites and products, built fast with AI-native workflows and human craft.</p>
     </div>
     <div class="footer-cols">
-      <div class="footer-col"><h3>Company</h3><a href="#about">About</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></div>
-      <div class="footer-col"><h3>Connect</h3><a href="#">Twitter / X</a><a href="#">LinkedIn</a><a href="#">Instagram</a><a href="#">Dribbble</a></div>
+      <div class="footer-col"><h3>Company</h3><a href="#about">About</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="/blog.html">Blog</a><a href="#contact">Contact</a></div>
+      <div class="footer-col"><h3>Connect</h3><a href="https://x.com/rycworks" target="_blank" rel="noopener noreferrer">Twitter / X</a><a href="https://www.linkedin.com/company/rycworks" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://instagram.com/rycworks" target="_blank" rel="noopener noreferrer">Instagram</a></div>
     </div>
   </div>
   <div class="footer-bottom">
     <p>&copy; 2026 RYC. All rights reserved.</p>
     <div class="footer-socials" aria-label="Social media links">
-      <a href="#" aria-label="Twitter / X">X</a>
-      <a href="#" aria-label="LinkedIn">in</a>
-      <a href="#" aria-label="Instagram">ig</a>
-      <a href="#" aria-label="Dribbble">Dr</a>
+      <a href="https://x.com/rycworks" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">X</a>
+      <a href="https://www.linkedin.com/company/rycworks" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+      <a href="https://instagram.com/rycworks" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
     </div>
   </div>
 </footer>
