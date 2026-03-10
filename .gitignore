@@ -6,3 +6,6 @@ backups/
 previews/
 screenshots/
 documents/
+assets/screenshot/
+.mcp.json
+skills/
