@@ -30,12 +30,23 @@ Rules and guidelines for Claude when working on the RYC website (`rycworks.com`)
 
 ```
 /
-├── index.html          ← Single page (all sections live here)
-├── style.css           ← All styles (~2,264 lines, organized by section)
-├── script.js           ← All JS (~1,180 lines)
+├── index.html          ← Home page (all main sections)
+├── style.css           ← Home page styles (organized by section)
+├── script.js           ← Home page JS
+├── pricing.html        ← Standalone pricing page
+├── pricing/pricing.css ← Pricing page styles
+├── pricing/pricing.js  ← Pricing page JS
+├── contact.html        ← Standalone contact page
+├── contact/contact.css ← Contact page styles
+├── contact/contact.js  ← Contact page JS
+├── blog.html           ← Blog listing page
+├── blog/blog.css       ← Blog styles
+├── blog/blog.js        ← Blog JS
+├── blog/*.html         ← Individual blog post pages
 ├── assets/
-│   ├── fonts/          ← Self-hosted WOFF2 (Cabinet Grotesk + Inter)
+│   ├── fonts/          ← Self-hosted WOFF2 (Space Grotesk + Permanent Marker)
 │   ├── icons/          ← SVG brand logos for the marquee strip
+│   ├── ryc-logo.svg    ← SVG logo (used in nav and footer)
 │   └── works/          ← Project screenshots (WebP)
 ├── favicon.ico
 ├── webclip.png         ← Apple touch icon (180×180)
@@ -65,21 +76,25 @@ All colors use CSS custom properties. Never hardcode a hex value — always use 
 
 ### Typography
 
-**Two fonts, no others.** Do not introduce new fonts.
+**Three fonts, no others.** Do not introduce new fonts.
 
 | Font | Weights | Use |
 |---|---|---|
-| Cabinet Grotesk | 900 (Black), 700 (Bold) | All headings (h1–h3), logo, nav brand |
-| Inter | 400, 500, 600 | Body copy, labels, buttons, form fields |
+| Space Grotesk | 900 (Black), 700 (Bold), 300 (Light) | All headings, body copy, buttons, labels |
+| Permanent Marker | 400 | Accent text inside `<em>` tags in headings — brush-style with rotation and underline animation |
 
 **Heading rules:**
 - Always `font-weight: 900`, `text-transform: uppercase`, `letter-spacing: -0.04em` to `-0.05em`
-- Line height: `0.92`–`1.05` (tight)
+- Line height: `0.82`–`1.05` (tight)
 - Size: use `clamp()` for responsive scaling, never fixed `px` on headings
+- `<em>` inside headings uses Permanent Marker with `transform: rotate(-2deg)`, brush stroke underline via `::after`, and clip-path reveal animation
 
-**Eyebrow/label rules:**
-- `font-size: 0.68rem`–`0.72rem`, `font-weight: 700`, `letter-spacing: 0.1em`–`0.25em`, `text-transform: uppercase`
-- Color: `var(--fg-dim)` or `var(--fg-muted)`
+**Eyebrow/badge rules (hero-badge style):**
+- `display: inline-flex`, `padding: 0.55rem 1.2rem`
+- `border: 2px solid rgba(241,241,241,0.1)`, `border-radius: var(--radius)`
+- `background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent)`
+- `font-size: 0.72rem`, `font-weight: 600`, `letter-spacing: 0.12em`, `text-transform: uppercase`, `color: #aaa`
+- Use this same pill badge style for all eyebrows/labels across all pages (hero, pricing, contact, CTA pills)
 
 ### Visual Style
 
@@ -88,6 +103,39 @@ All colors use CSS custom properties. Never hardcode a hex value — always use 
 - Subtle noise texture on body (do not remove the `::before` pseudo-element)
 - Pill-shaped (`border-radius: var(--radius)`) buttons and tags
 - No drop shadows on static elements — shadows only appear on hover
+
+### Unified Card Style (Brand Standard)
+
+All card elements across the site (services, testimonials, insights, pricing, enterprise, CTA blocks) use the same always-dark gradient style:
+
+```css
+/* Base dark card */
+background: linear-gradient(110deg, #1a1a1a 0.6%, #141414);
+border: 1px solid rgba(255,255,255,0.08);
+border-radius: 1rem;
+color: #f1f1f1;
+
+/* Light theme override (same dark card, slightly lighter) */
+[data-theme="light"] .card {
+  background: linear-gradient(110deg, #333 0.6%, #222);
+  border-color: rgba(255,255,255,0.06);
+}
+
+/* Hover */
+border-color: rgba(255,255,255,0.2);
+transform: translateY(-6px);
+```
+
+**Text colors inside cards** (not using CSS custom properties since cards are always dark):
+- Primary text: `#eaeaea`
+- Secondary text: `rgba(255,255,255,0.55)`
+- Tertiary/dim text: `rgba(255,255,255,0.35)`
+- Tag borders: `rgba(255,255,255,0.12)`
+- Dashed separators: `rgba(255,255,255,0.1)`
+
+**Inverted featured card** (for highlighted pricing): white gradient (`#f1f1f1` → `#e8e8e8`) with dark text (`#161616`).
+
+When creating any new card component, always use this pattern. Do not use `var(--bg)` or `var(--border)` inside card elements — those are for page-level backgrounds only.
 
 ---
 
@@ -103,9 +151,8 @@ All colors use CSS custom properties. Never hardcode a hex value — always use 
 | About | `#about` | Split layout; left = animated canvas grid |
 | Work / Portfolio | `#work` | Left sidebar + right tilt card stage |
 | Stats | `.stats-strip` | Dark background, 4 metrics; uses inverted border tokens |
-| Testimonials | `#testimonials` | 1 featured + 2 sub-testimonials |
-| CTA | `.cta` | Floating pills + globe canvas |
-| Contact | `#contact` | Split layout; form posts to Formspree |
+| Testimonials | `#testimonials` | Full-width 5-column vertical marquee with always-dark cards |
+| CTA | `.cta` | Hero-badge-style floating pills + globe canvas |
 | Footer | `<footer>` | 3-col nav + social links |
 
 ---
@@ -191,6 +238,59 @@ When updating page content (headline, description, services), also update:
 
 ---
 
+## Creating & Applying Shared Components
+
+When extracting something into a shared/reusable component (a JS utility, a CSS class, a shared file), follow this process every time — not just for the page you're currently working on.
+
+### Step 1 — Audit before you build
+
+Before creating a component, answer these questions:
+- Which pages currently implement this pattern (even partially or inconsistently)?
+- Which pages will need to use this component going forward?
+- Is the pattern already duplicated somewhere? (If yes — that's a bug to fix, not a feature to add alongside.)
+
+### Step 2 — Build the component cleanly
+
+- Put shared CSS in `utility/` (e.g. `utility/glow-btn.css`, `utility/nav.css`)
+- Put shared JS in `utility/` (e.g. `utility/components.js`, `utility/glow-btn.js`)
+- Give the component a single, clear initialization path — never let two scripts both initialize the same thing (causes double-wrapping, duplication, broken state)
+- Guard against double-init in JS: add a sentinel class (e.g. `.gb-init`) and check for it before running
+
+### Step 3 — Apply to ALL pages, not just the one you're working on
+
+This is the most common failure point. When a component is made shared, immediately audit every page:
+
+```
+Pages to check: index.html, pricing.html, contact.html, blog.html, blog/*.html (all posts)
+```
+
+For each page, verify:
+- [ ] The CSS file is linked in `<head>` (with the correct relative path — `utility/` from root, `../utility/` from `/blog/`)
+- [ ] The JS file is loaded in `<body>` in the correct order
+- [ ] No page-level duplicate of the component logic exists (remove it if found)
+- [ ] The HTML uses the correct class names (e.g. `glow-btn`, `btn-secondary`)
+- [ ] CSS selectors are scoped correctly — bare tag selectors like `nav { }` affect ALL matching elements on the page, not just the intended one. Always scope to `nav[role="navigation"]` or a unique class
+
+### Step 4 — Visual QA on every affected page
+
+After applying: run `/webapp-testing` to screenshot nav, footer, and buttons on all pages — desktop and mobile. Do not assume it works just because the code looks right. Specifically check:
+- Nav renders horizontally (logo left, links right, CTA button far right)
+- Footer renders with correct layout and columns
+- Buttons display correctly (not double-wrapped, not unstyled)
+- No `<nav>` or other semantic elements are accidentally styled by shared rules
+
+### Common mistakes to avoid
+
+| Mistake | Consequence | Fix |
+|---|---|---|
+| Initializing a component in both page JS and shared JS | Double-wrapping, broken visual | Remove the duplicate; only shared JS initializes it |
+| Loading a shared CSS file only on the page you're editing | Other pages stay broken | Audit all pages every time |
+| Using a bare tag selector (`nav`, `footer`) in shared CSS | Unrelated elements (TOC `<nav>`, etc.) get wrong styles | Scope to role/class: `nav[role="navigation"]` |
+| Forgetting that blog posts have inline `<style>` not a separate CSS file | nav/footer injected by JS has no styles | Blog posts must load `utility/nav.css` explicitly |
+| Moving a file to `utility/` but only updating one page's HTML path | All other pages 404 on the asset | Use grep to find every reference, update all at once |
+
+---
+
 ## Adding a New Section
 
 Follow this checklist every time:
@@ -203,6 +303,77 @@ Follow this checklist every time:
 6. **Images** — Include `width`, `height`, `alt`, and `loading` attributes.
 7. **Dark mode** — Test both themes. Add `[data-theme="dark"]` overrides if needed.
 8. **Backup** — After the section is working, ask to create a new `backup/YYYY-MM-DD` branch.
+
+---
+
+## Adding a New Standalone Page
+
+Every new standalone page (like `pricing.html`, `contact.html`, or a blog post) **must** load the full shared utility stack. Missing any of these will break the nav, footer, or buttons.
+
+### Required `<head>` links (root-level pages)
+
+```html
+<!-- Fonts — preload all four -->
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Black.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/PermanentMarker-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Page CSS (your page-specific stylesheet) -->
+<link rel="stylesheet" href="yourpage/yourpage.css">
+
+<!-- Shared utilities -->
+<link rel="stylesheet" href="utility/glow-btn.css">
+<link rel="stylesheet" href="utility/page-transition.css">
+```
+
+For **blog post pages** (`/blog/*.html`) use `../` prefix and also add `utility/nav.css` (blog posts have inline article CSS, no nav/footer CSS of their own):
+
+```html
+<link rel="stylesheet" href="../utility/nav.css">
+<link rel="stylesheet" href="../utility/glow-btn.css">
+<link rel="stylesheet" href="../utility/page-transition.css">
+```
+
+### Required `<body>` structure
+
+```html
+<!-- Page transition overlay — must be first inside <body> -->
+<div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+
+<!-- Skip link — must be present for accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Nav injection point -->
+<div id="site-nav"></div>
+
+<!-- ... page content ... -->
+
+<!-- Footer injection point -->
+<div id="site-footer"></div>
+```
+
+### Required scripts (bottom of `<body>`, in this order)
+
+```html
+<script src="yourpage/yourpage.js"></script>   <!-- page-specific JS first -->
+<script src="utility/components.js"></script>  <!-- injects nav + footer -->
+<script src="utility/glow-btn.js"></script>    <!-- initialises all .glow-btn elements -->
+<script src="utility/page-transition.js"></script>
+```
+
+**Critical ordering rule:** `utility/glow-btn.js` must run **after** `utility/components.js` (nav CTA is injected by components.js, glow-btn.js must find it). Never initialise glow buttons in page-specific JS — `glow-btn.js` handles all of them globally using a `.gb-init` guard to prevent double-wrapping.
+
+### Nav CSS scoping note
+
+`utility/nav.css` scopes the fixed-position rule to `nav[role="navigation"]` specifically. Do **not** use a bare `nav { position: fixed }` rule in page CSS — it will break any `<nav>` element used for other purposes (e.g. table of contents, breadcrumbs).
+
+### Buttons
+
+- **Primary (glow):** `<a href="..." class="glow-btn"><span>Label</span><svg .../></a>` — JS auto-initialises
+- **Secondary (solid B&W):** `<a href="..." class="btn-secondary"><span>Label</span><svg .../></a>`
+- Generate via JS: `window.RYC.glowBtn(href, label)` / `window.RYC.secondaryBtn(href, label)`
+- Do **not** duplicate the glow-btn init code in page-specific JS — it causes double-wrapping
 
 ---
 
@@ -248,6 +419,13 @@ Update in all of these locations:
 - Create a new backup branch before any significant refactor or brand update
 - Never force-push to `main`
 - Commit messages should be short and descriptive (e.g., `add pricing section`, `fix mobile nav overflow`, `update hero headline`)
+
+### ⚠️ Push & Deploy Rules
+
+- **NEVER push to `main` unless explicitly instructed.** Wait for a direct instruction like "push to main", "deploy", or "push to prod".
+- **NEVER run `git push` of any kind without explicit approval** — not even to a feature branch, unless the user has clearly asked for it.
+- `git add` and `git commit` are safe to run when asked to save/commit work. `git push` is not.
+- If unsure whether a push was requested, ask before running it.
 
 ---
 
@@ -343,7 +521,6 @@ Invoke this skill when:
 
 - Do not install npm packages into the root site directory
 - Do not introduce a JavaScript framework (React, Vue, etc.) to the main site
-- Do not use `!important` in CSS
 - Do not add inline styles to HTML
 - Do not skip accessibility requirements (alt text, ARIA labels, keyboard support)
 - Do not hardcode hex colors — use CSS custom properties

@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://www.rycworks.com/blog">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="RYC Works">
 <meta property="og:url" content="https://www.rycworks.com/blog">
 <meta property="og:title" content="Insights — RYC Works">
 <meta property="og:description" content="Thoughts on design, AI, and building digital products that actually work.">
@@ -31,41 +32,79 @@
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
 
 <link rel="stylesheet" href="blog/blog.css">
+<link rel="stylesheet" href="utility/glow-btn.css">
+<link rel="stylesheet" href="utility/page-transition.css">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "RYC Insights",
+  "description": "Thoughts on design, AI, and building digital products that actually work.",
+  "url": "https://www.rycworks.com/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "RYC Works",
+    "url": "https://www.rycworks.com/"
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Why AI Won't Replace Designers — It'll Replace Agencies",
+      "url": "https://www.rycworks.com/blog/why-ai-wont-replace-designers.html",
+      "datePublished": "2026-03-01",
+      "image": "https://www.rycworks.com/blog/asset/Why%20AI%20Won%27t%20Replace%20Designers.webp"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "The End of the 3-Month Website",
+      "url": "https://www.rycworks.com/blog/end-of-the-3-month-website.html",
+      "datePublished": "2026-02-01"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Designing for AI-Native Products",
+      "url": "https://www.rycworks.com/blog/designing-for-ai-native-products.html",
+      "datePublished": "2026-02-01"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Speed Is a Design Value",
+      "url": "https://www.rycworks.com/blog/speed-is-a-design-value.html",
+      "datePublished": "2026-01-01"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "How We Built a Wellness Platform in 3 Weeks",
+      "url": "https://www.rycworks.com/blog/how-we-built-a-wellness-platform-in-3-weeks.html",
+      "datePublished": "2026-01-01"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "The Real Cost of a Generic Website",
+      "url": "https://www.rycworks.com/blog/the-real-cost-of-a-generic-website.html",
+      "datePublished": "2025-12-01"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "What Vibe-Coding Gets Right (and Dangerously Wrong)",
+      "url": "https://www.rycworks.com/blog/what-vibe-coding-gets-right.html",
+      "datePublished": "2025-12-01"
+    }
+  ]
+}
+</script>
 
 </head>
 <body>
 
 <!-- Skip Link -->
+<div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- Nav -->
-<nav role="navigation" aria-label="Main navigation">
-  <a href="/" class="nav-logo">RYC</a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="/#work">Work</a></li>
-      <li><a href="/#services">Services</a></li>
-      <li><a href="/#pricing">Pricing</a></li>
-      <li><a href="/blog.html" class="active">Blog</a></li>
-      <li><a href="/#contact">Contact</a></li>
-    </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Switch to light theme">&#9680;</button>
-  </div>
-  <div class="nav-mobile-actions">
-    <button class="theme-toggle" id="themeToggleMobile" aria-label="Switch to light theme">&#9680;</button>
-    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
-  <a href="/#work">Work</a>
-  <a href="/#services">Services</a>
-  <a href="/#pricing">Pricing</a>
-  <a href="/blog.html">Blog</a>
-  <a href="/#contact">Contact</a>
-</div>
+<!-- Nav + Mobile Menu (injected by components.js) -->
+<div id="site-nav"></div>
 
 <!-- Blog Hero -->
 <section class="blog-hero" id="main-content" aria-labelledby="blog-heading">
@@ -280,41 +319,13 @@
 
 </main>
 
-<!-- Footer -->
-<footer role="contentinfo">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <a href="/" class="nav-logo">RYC</a>
-      <p>We help businesses turn their goals into scalable digital growth — through high-quality websites and products, built fast with AI-native workflows and human craft.</p>
-    </div>
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h3>Company</h3>
-        <a href="/#about">About</a>
-        <a href="/#work">Work</a>
-        <a href="/#pricing">Pricing</a>
-        <a href="/blog.html">Blog</a>
-        <a href="/#contact">Contact</a>
-      </div>
-      <div class="footer-col">
-        <h3>Connect</h3>
-        <a href="https://x.com/rycworks" target="_blank" rel="noopener noreferrer">Twitter / X</a>
-        <a href="https://www.linkedin.com/company/rycworks" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://instagram.com/rycworks" target="_blank" rel="noopener noreferrer">Instagram</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 RYC. All rights reserved.</p>
-    <div class="footer-socials" aria-label="Social media links">
-      <a href="https://x.com/rycworks" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">X</a>
-      <a href="https://www.linkedin.com/company/rycworks" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
-      <a href="https://instagram.com/rycworks" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
-    </div>
-  </div>
-</footer>
+<!-- Footer (injected by components.js) -->
+<div id="site-footer"></div>
 
 <script src="blog/blog.js"></script>
+<script src="utility/components.js"></script>
+<script src="utility/glow-btn.js"></script>
+<script src="utility/page-transition.js"></script>
 
 </body>
 </html>

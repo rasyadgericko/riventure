@@ -41,10 +41,14 @@
 <link rel="preload" href="assets/fonts/Inter_18pt-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/Inter_18pt-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
 
-<link rel="preload" href="assets/fonts/CabinetGrotesk-Black.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/CabinetGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Black.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/PermanentMarker-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
 <link href="style.css" rel="stylesheet">
+<link rel="stylesheet" href="utility/glow-btn.css">
+<link rel="stylesheet" href="utility/page-transition.css">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-X9RMQ6TRL2"></script>
@@ -118,55 +122,6 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How long does a typical project take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most projects ship in 1-3 weeks from kickoff. A focused marketing site or landing page is typically 1–2 weeks. A full SaaS dashboard or e-commerce build runs 3–4 weeks. We'll give you a precise, honest timeline on our first call — never a vague estimate."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does AI-native actually mean for my project?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It means AI (primarily Claude) handles code generation, competitive research, and QA iterations — cutting the time on repeatable tasks by 3×. Every output still gets a human review before anything touches your project. You get speed without sacrificing craft or correctness."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you only build websites, or can you handle full products?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We build everything from marketing sites and landing pages to full SaaS platforms, internal tools, and e-commerce storefronts. If it lives on the web and needs to be fast, accessible, and well-designed — we can build it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What happens after the project launches?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "We don't disappear after deploy. Most clients stay on a monthly retainer for ongoing iterations, analytics review, and performance optimisation. Every project also includes 30 days of post-launch bug fixes at no extra charge."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How much does a project cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Projects start from $2,500 for a Launch-tier landing page, from $6,000 for a full Studio build, and from $14,000 for a Platform-level SaaS or e-commerce project. Enterprise scopes get a custom quote. Every estimate is clear, itemised, and delivered within 24 hours."
-      }
-    }
-  ]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": "https://www.rycworks.com/#website",
   "url": "https://www.rycworks.com/",
@@ -231,57 +186,33 @@
 <!-- Skip Link -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- Loader -->
+<!-- Loader (homepage only) -->
 <div class="loader" id="loader" role="status" aria-label="Loading page">
-  <div class="loader-count" id="loaderCount" aria-hidden="true">0</div>
-  <div class="loader-bar" aria-hidden="true"></div>
+  <div class="loader-logo" aria-hidden="true">
+    <img src="assets/ryc-logo.svg" alt="" width="414" height="177">
+  </div>
+  <div class="loader-line" aria-hidden="true"></div>
+  <div class="loader-tagline" aria-hidden="true">Scalable Digital Growth</div>
 </div>
 
-<!-- Nav -->
-<nav role="navigation" aria-label="Main navigation">
-  <a href="#" class="nav-logo">RYC</a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="/blog.html">Blog</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark theme">&#9680;</button>
-  </div>
-  <div class="nav-mobile-actions">
-    <button class="theme-toggle" id="themeToggleMobile" aria-label="Switch to dark theme">&#9680;</button>
-    <button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
-  </div>
-</nav>
+<div class="page-transition" id="pageTransition" aria-hidden="true"></div>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
-  <a href="#work">Work</a>
-  <a href="#services">Services</a>
-  <a href="#pricing">Pricing</a>
-  <a href="/blog.html">Blog</a>
-  <a href="#contact">Contact</a>
-</div>
+<!-- Nav + Mobile Menu (injected by components.js) -->
+<div id="site-nav"></div>
 
 <!-- Hero -->
 <section class="hero" id="main-content">
-  <div class="hero-content">
-    <div class="hero-eyebrow fade-up">
-      <span class="line" aria-hidden="true"></span>
-      AI-Native Growth Partner
-    </div>
-    <h1>
-      <div class="reveal-text"><span class="word">Turn</span> <span class="word">Your</span> <span class="word">Business</span> <span class="word">Goals</span> <span class="word">Into</span> <span class="word">Scalable</span> <span class="word"><em>Digital Growth.</em></span></div>
-    </h1>
-    <p class="hero-sub fade-up fd2">Most agencies take months and charge like it. We use AI-native workflows to ship in weeks — with the craft, performance, and attention your brand actually deserves.</p>
-    <div class="hero-avail fade-up fd3" aria-label="Current availability">
+  <div class="hero-content hero-center">
+    <div class="hero-badge fade-up" aria-label="Current availability">
       <span class="avail-dot" aria-hidden="true"></span>
       <span>2 project slots open — March 2026</span>
     </div>
+    <h1>
+      <div class="reveal-text"><span class="word">Scalable</span> <span class="word">Digital</span> <span class="word"><em>Growth.</em></span></div>
+    </h1>
+    <p class="hero-sub fade-up fd2">AI-native workflows. Weeks, not months. The craft your brand actually deserves.</p>
     <div class="hero-cta-row fade-up fd4">
-      <a href="#contact" class="glow-btn">
+      <a href="/contact.html" class="glow-btn">
         <span>Start a Project</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
@@ -289,17 +220,11 @@
     </div>
   </div>
 
-  <div id="heroWaves" class="hero-waves" aria-hidden="true"></div>
-
-  <div class="hero-bottom fade-up fd4">
-    <div class="hero-scroll" aria-hidden="true">
-      <div class="scroll-line"></div>
-      Scroll to explore
-    </div>
-  </div>
+  <!-- Hero Morph Cards -->
+  <div class="hero-morph" id="heroMorph" aria-label="Featured projects"></div>
 </section>
 
-<!-- Work / Case Studies -->
+<!-- Work / Case Studies (hidden — replaced by morph strip) -->
 <section id="work" aria-labelledby="work-heading">
   <div class="section-header">
     <div>
@@ -362,70 +287,86 @@
 </div>
 
 <!-- Services -->
-<section id="services" aria-labelledby="services-heading">
-  <div class="section-header">
-    <div>
-      <div class="section-num fade-up"><span class="ln" aria-hidden="true"></span> What We Do</div>
-      <h2 class="section-h2 fade-up fd1" id="services-heading">Everything your business needs to <em>launch.</em></h2>
-    </div>
-    <p class="section-sub fade-up fd2">One team. No hand-offs. From first pixel to production deploy — in weeks.</p>
-  </div>
-  <div class="services-grid" role="list" aria-label="Our services">
-
-    <div class="service-card fade-up" role="listitem" tabindex="0">
-      <div class="service-card-top">
-        <span class="service-tag">Core</span>
-        <span class="service-num" aria-hidden="true">01</span>
+<section id="services" class="svc-runway" aria-labelledby="services-heading">
+  <div class="svc-sticky">
+    <div class="section-header">
+      <div>
+        <div class="section-num fade-up"><span class="ln" aria-hidden="true"></span> What We Do</div>
+        <h2 class="section-h2 fade-up fd1" id="services-heading">Everything your business needs to <em>launch.</em></h2>
       </div>
-      <div class="service-name">Web Development</div>
-      <p class="service-desc">Claude writes the first draft. Our engineers refine every line. The result: production code with 90+ Lighthouse scores, semantic HTML, and zero accessibility flags — shipped in weeks, not quarters.</p>
+      <p class="section-sub fade-up fd2">One team. No hand-offs. From first pixel to production deploy — in weeks.</p>
     </div>
+    <div class="svc-scroll-track">
+      <div class="svc-scroll-strip" role="list" aria-label="Our services">
 
-    <div class="service-card fade-up fd1" role="listitem" tabindex="0">
-      <div class="service-card-top">
-        <span class="service-tag">Design</span>
-        <span class="service-num" aria-hidden="true">02</span>
+      <div class="svc-card svc-tilt-1 fade-up" role="listitem" tabindex="0">
+        <div class="svc-icon-area" aria-hidden="true">
+          <svg class="svc-icon-stroke" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="svc-card-content">
+          <span class="service-tag service-tag--gradient">Core</span>
+          <div class="service-name">Web Development</div>
+          <p class="service-desc">Production code with 90+ Lighthouse scores, semantic HTML, and zero accessibility flags — shipped in weeks, not quarters.</p>
+        </div>
       </div>
-      <div class="service-name">UI/UX Design</div>
-      <p class="service-desc">We prototype 10–15 layout variants per screen where most agencies do 2–3. AI generates the options; our designers pick the winners and polish every detail until it clicks.</p>
-    </div>
 
-    <div class="service-card fade-up fd2" role="listitem" tabindex="0">
-      <div class="service-card-top">
-        <span class="service-tag">Branding</span>
-        <span class="service-num" aria-hidden="true">03</span>
+      <div class="svc-card svc-tilt-2 fade-up fd1" role="listitem" tabindex="0">
+        <div class="svc-icon-area" aria-hidden="true">
+          <img src="assets/icons/uiux.svg" width="48" height="48" alt="" class="svc-icon-img">
+        </div>
+        <div class="svc-card-content">
+          <span class="service-tag service-tag--gradient">Design</span>
+          <div class="service-name">UI/UX Design</div>
+          <p class="service-desc">We prototype 10–15 layout variants per screen where most agencies do 2–3. AI generates the options; our designers pick the winners.</p>
+        </div>
       </div>
-      <div class="service-name">Brand Identity</div>
-      <p class="service-desc">Logo, type system, color palette, and a living style guide — delivered as a single package. Your brand looks like it's been around for years, even if you launched last month.</p>
-    </div>
 
-    <div class="service-card fade-up fd3" role="listitem" tabindex="0">
-      <div class="service-card-top">
-        <span class="service-tag">Growth</span>
-        <span class="service-num" aria-hidden="true">04</span>
+      <div class="svc-card svc-tilt-3 fade-up fd2" role="listitem" tabindex="0">
+        <div class="svc-icon-area" aria-hidden="true">
+          <img src="assets/icons/brand-identity.svg" width="48" height="48" alt="" class="svc-icon-img">
+        </div>
+        <div class="svc-card-content">
+          <span class="service-tag service-tag--gradient">Branding</span>
+          <div class="service-name">Brand Identity</div>
+          <p class="service-desc">Logo, type system, color palette, and a living style guide — delivered as a single package.</p>
+        </div>
       </div>
-      <div class="service-name">SEO & Performance</div>
-      <p class="service-desc">Structured data, semantic markup, sub-second LCP, and clean URL architecture — built into the codebase from commit one. Not an afterthought. Not an add-on.</p>
-    </div>
 
-    <div class="service-card fade-up fd4" role="listitem" tabindex="0">
-      <div class="service-card-top">
-        <span class="service-tag">Engineering</span>
-        <span class="service-num" aria-hidden="true">05</span>
+      <div class="svc-card svc-tilt-4 fade-up fd3" role="listitem" tabindex="0">
+        <div class="svc-icon-area" aria-hidden="true">
+          <img src="assets/icons/seo.svg" width="48" height="48" alt="" class="svc-icon-img">
+        </div>
+        <div class="svc-card-content">
+          <span class="service-tag service-tag--gradient">Growth</span>
+          <div class="service-name">SEO & Performance</div>
+          <p class="service-desc">Structured data, semantic markup, sub-second LCP, and clean URL architecture — built in from commit one.</p>
+        </div>
       </div>
-      <div class="service-name">Custom Development</div>
-      <p class="service-desc">SaaS dashboards, admin panels, and third-party integrations with documented, test-covered code. Built so your next developer can onboard in a day, not a month.</p>
-    </div>
 
-    <div class="service-card fade-up fd5" role="listitem" tabindex="0">
-      <div class="service-card-top">
-        <span class="service-tag">Strategy</span>
-        <span class="service-num" aria-hidden="true">06</span>
+      <div class="svc-card svc-tilt-5 fade-up fd4" role="listitem" tabindex="0">
+        <div class="svc-icon-area" aria-hidden="true">
+          <svg class="svc-icon-stroke" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="svc-card-content">
+          <span class="service-tag service-tag--gradient">Engineering</span>
+          <div class="service-name">Custom Development</div>
+          <p class="service-desc">SaaS dashboards, admin panels, and third-party integrations — built so your next developer can onboard in a day, not a month.</p>
+        </div>
       </div>
-      <div class="service-name">Growth & Analytics</div>
-      <p class="service-desc">Heatmaps, funnel tracking, and monthly performance reports with actionable recommendations. We review real user data every 30 days and ship improvements that move the numbers.</p>
-    </div>
 
+      <div class="svc-card svc-tilt-6 fade-up fd5" role="listitem" tabindex="0">
+        <div class="svc-icon-area" aria-hidden="true">
+          <svg class="svc-icon-stroke" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="7" y1="17" x2="7" y2="12"/><line x1="12" y1="17" x2="12" y2="9"/><line x1="17" y1="17" x2="17" y2="6"/></svg>
+        </div>
+        <div class="svc-card-content">
+          <span class="service-tag service-tag--gradient">Strategy</span>
+          <div class="service-name">Growth & Analytics</div>
+          <p class="service-desc">Heatmaps, funnel tracking, and monthly performance reports. We ship improvements that move the numbers.</p>
+        </div>
+      </div>
+
+      </div>
+    </div>
   </div>
 </section>
 
@@ -778,7 +719,7 @@
 
   <div class="hwwu-cta fade-up">
     <p>Ready to start? We'll respond within 24 hours.</p>
-    <a href="#contact" class="glow-btn">
+    <a href="/contact.html" class="glow-btn">
       <span>Start a Project</span>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
@@ -826,243 +767,241 @@
 </section>
 
 <!-- Testimonials -->
-<section id="testimonials" aria-labelledby="testimonials-heading">
-  <div class="section-header">
-    <div>
-      <div class="section-num fade-up"><span class="ln" aria-hidden="true"></span> Client Stories</div>
-      <h2 class="section-h2 fade-up fd1" id="testimonials-heading">Founders who shipped <em>with us.</em></h2>
-    </div>
-    <p class="section-sub fade-up fd2">Three projects. Three industries. Each one on time, on budget, and on brief.</p>
+<section id="testimonials" class="tmc-section" aria-labelledby="testimonials-heading">
+  <div class="tmc-header">
+    <div class="section-num fade-up" style="justify-content:center;"><span class="ln" aria-hidden="true"></span> Client Stories</div>
+    <h2 class="section-h2 fade-up fd1" id="testimonials-heading">Founders who shipped <em>with us.</em></h2>
+    <p class="section-sub fade-up fd2" style="max-width:none;">See what our clients have to say about working with RYC.</p>
   </div>
-  <div class="test-wrap">
 
-    <!-- Featured testimonial -->
-    <blockquote class="test-featured fade-up">
-      <p class="test-featured-text">"I'd worked with two agencies before who took months and delivered templates. RYC rebuilt our entire storefront in three weeks — and our conversion rate jumped 40% the first month. Night and day."</p>
-      <footer class="test-featured-author">
-        <div class="test-avatar" aria-hidden="true">SL</div>
-        <div class="test-author-info">
-          <p class="test-author-name">Sarah Laurent</p>
-          <span>Founder, Maison Luxe</span>
-        </div>
-        <div class="test-stars" role="img" aria-label="5 out of 5 stars">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-      </footer>
-    </blockquote>
-
-    <!-- Two supporting testimonials -->
-    <div class="test-sub-grid">
-      <article class="test-sub-card fade-up fd1">
-        <div class="test-sub-top">
-          <div class="test-stars" role="img" aria-label="5 out of 5 stars">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+  <div class="tmc-columns">
+    <!-- Column 1 -->
+    <div class="tmc-col" data-speed="15">
+      <div class="tmc-track">
+        <article class="tmc-card">
+          <p>"Honestly didn't think we'd launch on time. These guys had the whole site done in like 2.5 weeks and it actually looked better than the mockups. Our sales went up 40% that first month which was wild."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">SL</div>
+            <div>
+              <div class="tmc-name">Sarah Laurent</div>
+              <div class="tmc-role">Founder, Maison Luxe</div>
+            </div>
           </div>
-          <span class="test-quote-icon" aria-hidden="true">"</span>
-        </div>
-        <p>We gave them four weeks and honestly expected to push the deadline. They delivered in three. The dashboard handles 50K concurrent users and we haven't touched the codebase since — it just works.</p>
-        <div class="test-author">
-          <div class="test-avatar" aria-hidden="true">JK</div>
-          <div class="test-author-info">
-            <p class="test-author-name">James Kim</p>
-            <span>CTO, Nexus Analytics</span>
+        </article>
+        <article class="tmc-card">
+          <p>"We threw every edge case we could think of at them during the build. The thing handles 50K users at once and we literally haven't had to touch it since launch. That never happens."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">JK</div>
+            <div>
+              <div class="tmc-name">James Kim</div>
+              <div class="tmc-role">CTO, Nexus Analytics</div>
+            </div>
           </div>
-        </div>
-      </article>
-      <article class="test-sub-card fade-up fd2">
-        <div class="test-sub-top">
-          <div class="test-stars" role="img" aria-label="5 out of 5 stars">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </article>
+        <article class="tmc-card">
+          <p>"I've been burned by devs who say they understand healthcare compliance and then clearly don't. RYC actually knew what they were doing — we passed our security audit with zero findings."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">RT</div>
+            <div>
+              <div class="tmc-name">Dr. Rachel Torres</div>
+              <div class="tmc-role">CEO, MedSync Pro</div>
+            </div>
           </div>
-          <span class="test-quote-icon" aria-hidden="true">"</span>
-        </div>
-        <p>HIPAA compliance isn't optional in our space and most devs treat it like an afterthought. RYC had it baked into the architecture from the first commit. We passed our security audit with zero findings.</p>
-        <div class="test-author">
-          <div class="test-avatar" aria-hidden="true">RT</div>
-          <div class="test-author-info">
-            <p class="test-author-name">Dr. Rachel Torres</p>
-            <span>CEO, MedSync Pro</span>
+        </article>
+        <article class="tmc-card">
+          <p>"The ROI was insane. We spent less than what our previous agency quoted for discovery alone and got a full site that actually converts. Our CPL dropped 35% in the first quarter."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">NP</div>
+            <div>
+              <div class="tmc-name">Nadia Petrova</div>
+              <div class="tmc-role">CMO, Vanta Health</div>
+            </div>
           </div>
-        </div>
-      </article>
-    </div>
-
-  </div>
-</section>
-
-<!-- Pricing -->
-<section id="pricing" aria-labelledby="pricing-heading">
-  <div class="section-header">
-    <div>
-      <div class="section-num fade-up"><span class="ln" aria-hidden="true"></span> Investment</div>
-      <h2 class="section-h2 fade-up fd1" id="pricing-heading">Transparent pricing. <em>Zero surprises.</em></h2>
-    </div>
-    <p class="section-sub fade-up fd2">Project-based pricing with clear deliverables. Every scope comes with a precise quote — no vague estimates, no hidden fees.</p>
-  </div>
-
-  <div class="pricing-grid">
-
-    <!-- Launch -->
-    <div class="pricing-card fade-up">
-      <div class="pricing-card-top">
-        <span class="pricing-tag">Launch</span>
-        <span class="pricing-delivery">5–7 days</span>
-      </div>
-      <div class="pricing-from">from</div>
-      <div class="pricing-price">$2,500</div>
-      <p class="pricing-desc">For landing pages, personal brands, and solo founders who need a polished digital presence — fast.</p>
-      <ul class="pricing-list" role="list">
-        <li>Single-page or 3–5 page site</li>
-        <li>Custom design, no templates</li>
-        <li>Mobile-first, 90+ Lighthouse</li>
-        <li>30-day post-launch support</li>
-      </ul>
-      <a href="#contact" class="pricing-cta gradient-btn-secondary">
-        <span>Start a Project</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-
-    <!-- Studio -->
-    <div class="pricing-card pricing-featured fade-up fd1">
-      <div class="pricing-card-top">
-        <span class="pricing-tag pricing-tag-featured">Most Popular</span>
-        <span class="pricing-delivery">2–3 weeks</span>
-      </div>
-      <div class="pricing-from">from</div>
-      <div class="pricing-price">$6,000</div>
-      <p class="pricing-desc">Full marketing sites and brand builds for startups, SMBs, and e-commerce brands ready to compete at the top level.</p>
-      <ul class="pricing-list" role="list">
-        <li>5–12 pages, full design system</li>
-        <li>UI/UX design + brand identity</li>
-        <li>CMS integration if needed</li>
-        <li>SEO-optimised from day one</li>
-        <li>30-day post-launch support</li>
-      </ul>
-      <a href="#contact" class="pricing-cta gradient-btn-secondary">
-        <span>Start a Project</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-
-    <!-- Platform -->
-    <div class="pricing-card fade-up fd2">
-      <div class="pricing-card-top">
-        <span class="pricing-tag">Platform</span>
-        <span class="pricing-delivery">3–5 weeks</span>
-      </div>
-      <div class="pricing-from">from</div>
-      <div class="pricing-price">$14,000</div>
-      <p class="pricing-desc">SaaS dashboards, e-commerce platforms, and complex custom builds for businesses ready to scale to the next level.</p>
-      <ul class="pricing-list" role="list">
-        <li>SaaS, e-commerce, or custom build</li>
-        <li>Full-stack architecture</li>
-        <li>API &amp; third-party integrations</li>
-        <li>Performance &amp; security hardened</li>
-        <li>30-day post-launch support</li>
-      </ul>
-      <a href="#contact" class="pricing-cta gradient-btn-secondary">
-        <span>Start a Project</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-
-  </div>
-
-  <!-- Enterprise -->
-  <div class="pricing-enterprise fade-up fd3">
-    <div class="pricing-ent-left">
-      <span class="pricing-tag">Enterprise</span>
-      <h3 class="pricing-ent-heading">Complex scope? <em>Custom quote.</em></h3>
-      <p class="pricing-ent-desc">Multi-phase platforms, white-label products, and ongoing team augmentation. Previous enterprise projects have ranged from $20K–$60K depending on scope. Examples: multi-tenant SaaS with role-based access, marketplace with payment integration, and headless CMS-powered content platforms. We'll scope yours honestly within 24 hours.</p>
-    </div>
-    <div class="pricing-ent-right">
-      <div class="pricing-ent-features" role="list" aria-label="Enterprise features">
-        <span role="listitem">Dedicated project lead</span>
-        <span role="listitem">Phased delivery milestones</span>
-        <span role="listitem">SLA-backed timelines</span>
-        <span role="listitem">Custom contract terms</span>
-      </div>
-      <a href="#contact" class="glow-btn">
-        <span>Let's Talk</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-  </div>
-
-  <!-- Retainer -->
-  <div class="pricing-retainer fade-up fd4">
-    <div class="pricing-ret-label">Ongoing</div>
-    <p>Most clients move to a <strong>monthly retainer from $1,200/mo</strong> after launch — covering performance monitoring, analytics reviews, AI-assisted iteration, and priority support.</p>
-  </div>
-
-</section>
-
-<!-- FAQ -->
-<section id="faq" aria-labelledby="faq-heading">
-  <div class="section-header faq-header">
-    <div>
-      <div class="section-num fade-up"><span class="ln" aria-hidden="true"></span> Questions</div>
-      <h2 class="section-h2 fade-up fd1" id="faq-heading">Common questions. <em>Straight answers.</em></h2>
-      <p class="section-sub fade-up fd2">Everything you want to know before we talk.</p>
-    </div>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item fade-up">
-      <button class="faq-q" aria-expanded="false">
-        <span>How long does a typical project take?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-a">
-        <p>Most projects ship in 1-3 weeks from kickoff. A focused marketing site or landing page is typically 1–2 weeks. A full SaaS dashboard or e-commerce build runs 3–4. We'll give you a precise, honest timeline on our first call — never a vague estimate.</p>
+        </article>
       </div>
     </div>
-    <div class="faq-item fade-up fd1">
-      <button class="faq-q" aria-expanded="false">
-        <span>What does AI-native actually mean for my project?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-a">
-        <p>It means AI (primarily Claude) handles code generation, competitive research, and QA iterations — cutting the time on repeatable tasks by 3×. Every output still gets a human review before anything touches your project. You get speed without sacrificing craft or correctness.</p>
+
+    <!-- Column 2 -->
+    <div class="tmc-col tmc-col-md" data-speed="19">
+      <div class="tmc-track">
+        <article class="tmc-card">
+          <p>"Our last agency gave us a Figma file and ghosted. RYC actually shipped working code. Got a 96 on Lighthouse without us even asking. I wish I'd found them a year ago."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">OR</div>
+            <div>
+              <div class="tmc-name">Omar Raza</div>
+              <div class="tmc-role">CEO, Raza Ventures</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"We needed a full brand identity and I was expecting it to take months. They came back in two weeks with the logo, colors, type system, everything. And it was exactly the vibe we were going for."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">ZH</div>
+            <div>
+              <div class="tmc-name">Zainab Hussain</div>
+              <div class="tmc-role">Founder, Bloom Studio</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"What surprised me most is how little hand-holding they needed. I sent over the brief on Monday and by Friday they had a working prototype that was better than what I described."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">AK</div>
+            <div>
+              <div class="tmc-name">Aliza Khan</div>
+              <div class="tmc-role">Product Lead, TechCo</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"They rebuilt our entire checkout flow in under 3 weeks. Conversion went from 2.1% to 4.8%. The numbers speak for themselves. Best money we've ever spent on development."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">DM</div>
+            <div>
+              <div class="tmc-name">Daniel Moreno</div>
+              <div class="tmc-role">Founder, CartStack</div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
-    <div class="faq-item fade-up fd2">
-      <button class="faq-q" aria-expanded="false">
-        <span>Do you only build websites, or can you handle full products?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-a">
-        <p>Both. We build everything from marketing sites and landing pages to full SaaS platforms, internal tools, and e-commerce storefronts. If it lives on the web and needs to be fast, accessible, and well-designed — we can build it.</p>
+
+    <!-- Column 3 -->
+    <div class="tmc-col tmc-col-lg" data-speed="17">
+      <div class="tmc-track">
+        <article class="tmc-card">
+          <p>"Not gonna lie, I was skeptical about the timeline they quoted. But they delivered early and the site is stupid fast. Our bounce rate dropped by half. Half. I keep telling other founders about them."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">FS</div>
+            <div>
+              <div class="tmc-name">Farhan Siddiqui</div>
+              <div class="tmc-role">Marketing Director</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"They just got it. Like from the first call I could tell they actually understood the problem and weren't just going to build whatever and call it done. The end result was way beyond what I expected."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">SS</div>
+            <div>
+              <div class="tmc-name">Sana Sheikh</div>
+              <div class="tmc-role">Sales Manager, CloudSync</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"Most dev shops disappear after handoff. These guys are still pinging us with ideas two months later. 'Hey we noticed this page could load faster, mind if we fix it?' That kind of thing."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">HA</div>
+            <div>
+              <div class="tmc-name">Hassan Ali</div>
+              <div class="tmc-role">E-commerce Manager</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"We've worked with 4 agencies over the years. RYC is the only one that delivered on time, on budget, and didn't nickel-and-dime us for every revision. Refreshingly straightforward."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">LW</div>
+            <div>
+              <div class="tmc-name">Lisa Wong</div>
+              <div class="tmc-role">COO, Meridian Group</div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
-    <div class="faq-item fade-up fd3">
-      <button class="faq-q" aria-expanded="false">
-        <span>What happens after the project launches?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-a">
-        <p>We don't disappear after deploy. Most clients stay on a monthly retainer for ongoing iterations, analytics review, and performance optimisation. Every project also includes 30 days of post-launch bug fixes — no extra charge.</p>
+
+    <!-- Column 4 -->
+    <div class="tmc-col tmc-col-xl" data-speed="16">
+      <div class="tmc-track">
+        <article class="tmc-card">
+          <p>"I showed the prototype to my investors and they thought we'd been working on it for months. Nope, two weeks. RYC made us look way more established than we actually were at that stage."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">TP</div>
+            <div>
+              <div class="tmc-name">Tomas Petrov</div>
+              <div class="tmc-role">Founder, LaunchPad AI</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"Their design instincts are on another level. I gave them a rough brief and they came back with something that perfectly captured our brand voice. No endless revision cycles, just nailed it."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">MJ</div>
+            <div>
+              <div class="tmc-name">Maya Jensen</div>
+              <div class="tmc-role">Brand Director, Aura Co</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"We had a hard deadline for our product launch and zero room for delays. RYC shipped 3 days early and the site scored 98 on PageSpeed. That level of quality at that speed is genuinely rare."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">RB</div>
+            <div>
+              <div class="tmc-name">Raj Bhatt</div>
+              <div class="tmc-role">VP Product, Finova</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"We migrated from WordPress to a custom build and the difference is night and day. Site loads in under a second now. Our SEO rankings jumped 15 positions in 6 weeks."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">EC</div>
+            <div>
+              <div class="tmc-name">Elena Cruz</div>
+              <div class="tmc-role">Founder, Solstice Skincare</div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
-    <div class="faq-item fade-up fd4">
-      <button class="faq-q" aria-expanded="false">
-        <span>How much does a project cost?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-a">
-        <p>Projects start from $2,500 for a Launch-tier landing page, from $6,000 for a full Studio build, and from $14,000 for a Platform-level SaaS or e-commerce project. Enterprise scopes get a custom quote. Every estimate is clear, itemised, and delivered within 24 hours — no vague ballparks.</p>
+
+    <!-- Column 5 -->
+    <div class="tmc-col tmc-col-xl" data-speed="20">
+      <div class="tmc-track">
+        <article class="tmc-card">
+          <p>"I was paying $8K/month to an agency for maintenance on a site they built. RYC rebuilt the whole thing for less than one month of that retainer. And it actually works properly now."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">KN</div>
+            <div>
+              <div class="tmc-name">Kevin Ng</div>
+              <div class="tmc-role">CEO, Pacific Labs</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"The attention to micro-interactions blew me away. Hover states, scroll animations, loading transitions — everything feels intentional. Our users literally comment on how smooth the site feels."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">AF</div>
+            <div>
+              <div class="tmc-name">Amira Farouk</div>
+              <div class="tmc-role">Head of Design, Prism</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"They treated our $3K project with the same seriousness as their bigger clients. No shortcuts, no template slapping. Genuine craftsmanship at every price point. That's rare in this industry."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">JO</div>
+            <div>
+              <div class="tmc-name">Jake O'Brien</div>
+              <div class="tmc-role">Founder, TrailMark</div>
+            </div>
+          </div>
+        </article>
+        <article class="tmc-card">
+          <p>"Communication was flawless the entire time. Daily updates, zero surprises, and they actually listened when I pushed back on design decisions. Felt like a true partnership, not a vendor relationship."</p>
+          <div class="tmc-author">
+            <div class="tmc-avatar" aria-hidden="true">PL</div>
+            <div>
+              <div class="tmc-name">Priya Lakshmi</div>
+              <div class="tmc-role">Operations, NovaTech</div>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
@@ -1078,33 +1017,33 @@
     <p class="section-sub fade-up fd2">How we think about AI-native development, design, and shipping fast.</p>
   </div>
   <div class="insights-grid">
-    <article class="insight-card fade-up" tabindex="0">
+    <a href="/blog/why-ai-wont-replace-designers.html" class="insight-card fade-up" aria-label="Read: Why AI Won't Replace Designers — It'll Replace Agencies">
       <div class="insight-meta">
-        <span class="insight-tag">Process</span>
+        <span class="insight-tag">AI</span>
         <time class="insight-date" datetime="2026-03">Mar 2026</time>
       </div>
-      <h3 class="insight-title">Why we ship in 2 weeks (and what we cut to get there)</h3>
-      <p class="insight-excerpt">Most agency timelines are padded with meetings, revisions, and wait states. Here's the exact workflow we use to compress a 6-week project into 10 business days — without cutting corners on quality.</p>
-      <span class="insight-read">Read more <span aria-hidden="true">&rarr;</span></span>
-    </article>
-    <article class="insight-card fade-up fd1" tabindex="0">
+      <h3 class="insight-title">Why AI Won't Replace Designers — It'll Replace Agencies</h3>
+      <p class="insight-excerpt">The discourse around AI and design is focused on the wrong question. It's not whether AI can design — it clearly can. The real disruption is structural: AI compresses the labour costs that bloated agencies depend on to survive.</p>
+      <span class="insight-read" aria-hidden="true">Read article <span>&rarr;</span></span>
+    </a>
+    <a href="/blog/end-of-the-3-month-website.html" class="insight-card fade-up fd1" aria-label="Read: The End of the 3-Month Website">
       <div class="insight-meta">
-        <span class="insight-tag">Engineering</span>
+        <span class="insight-tag">Strategy</span>
         <time class="insight-date" datetime="2026-02">Feb 2026</time>
       </div>
-      <h3 class="insight-title">Claude writes the first draft. Here's what happens next.</h3>
-      <p class="insight-excerpt">AI-generated code isn't production-ready code. We walk through our review pipeline — from automated Lighthouse checks to manual accessibility audits — and show what changes between first draft and final commit.</p>
-      <span class="insight-read">Read more <span aria-hidden="true">&rarr;</span></span>
-    </article>
-    <article class="insight-card fade-up fd2" tabindex="0">
+      <h3 class="insight-title">The End of the 3-Month Website</h3>
+      <p class="insight-excerpt">The timelines agencies quote haven't changed in a decade. But the tools have. Here's why projects that used to take 12 weeks can now ship in two — and what your agency isn't telling you about why they're still billing for the full quarter.</p>
+      <span class="insight-read" aria-hidden="true">Read article <span>&rarr;</span></span>
+    </a>
+    <a href="/blog/designing-for-ai-native-products.html" class="insight-card fade-up fd2" aria-label="Read: Designing for AI-Native Products">
       <div class="insight-meta">
         <span class="insight-tag">Design</span>
-        <time class="insight-date" datetime="2026-01">Jan 2026</time>
+        <time class="insight-date" datetime="2026-02">Feb 2026</time>
       </div>
-      <h3 class="insight-title">10 layouts per screen: how AI expands the design space</h3>
-      <p class="insight-excerpt">Traditional design means 2–3 options and a committee vote. We generate 10–15 layout variants per screen, test them against real content, and converge on the strongest direction — all before the first dev sprint.</p>
-      <span class="insight-read">Read more <span aria-hidden="true">&rarr;</span></span>
-    </article>
+      <h3 class="insight-title">Designing for AI-Native Products</h3>
+      <p class="insight-excerpt">AI-powered products break the assumptions that most UX patterns are built on. Deterministic flows, predictable outputs, static states — none of these apply. Here's how we think about designing interfaces where the system itself is uncertain.</p>
+      <span class="insight-read" aria-hidden="true">Read article <span>&rarr;</span></span>
+    </a>
   </div>
 </section>
 
@@ -1122,7 +1061,7 @@
     <div class="reveal-text"><span class="word">something</span> <span class="word"><em>bold?</em></span></div>
   </h2>
   <p class="fade-up">Your startup deserves a site that ships fast, performs flawlessly, and scales with you.</p>
-  <a href="#contact" class="glow-btn fade-up fd1">
+  <a href="/contact.html" class="glow-btn fade-up fd1">
     <span>Let's Talk</span>
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
   </a>
@@ -1132,140 +1071,14 @@
   </div>
 </div>
 
-<!-- Contact -->
-<section id="contact" aria-labelledby="contact-heading">
-  <div class="contact-split">
-    <div class="contact-left">
-      <div class="section-num fade-up"><span class="ln" aria-hidden="true"></span> Get in Touch</div>
-      <h2 class="fade-up fd1" id="contact-heading">Let's build your next <em>thing.</em></h2>
-      <p class="fade-up fd2">Got a launch date and an ambitious roadmap? Tell us about it. Most projects kick off within a week of first contact.</p>
-      <address class="contact-info-list fade-up fd3" style="font-style: normal;">
-        <div class="contact-info-item">
-          <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div class="ci-text"><div class="cl">Email</div><div class="cv">hi@rycworks.com</div></div>
-        </div>
-        <div class="contact-info-item">
-          <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div class="ci-text"><div class="cl">Location</div><div class="cv">Remote — Worldwide</div></div>
-        </div>
-        <div class="contact-info-item">
-          <div class="ci-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div class="ci-text"><div class="cl">Response</div><div class="cv">Within 24 hours</div></div>
-        </div>
-      </address>
-    </div>
-    <div class="contact-form-wrap">
-    <form class="contact-form fade-up fd2" id="contactForm" novalidate>
-      <div class="form-row">
-        <div class="form-field">
-          <label for="contact-name">Name</label>
-          <input type="text" id="contact-name" name="name" placeholder="Your name" required autocomplete="name">
-        </div>
-        <div class="form-field">
-          <label for="contact-email">Email</label>
-          <input type="email" id="contact-email" name="email" placeholder="your@email.com" required autocomplete="email">
-        </div>
-      </div>
-      <div class="form-field">
-        <label for="contact-message">Message</label>
-        <textarea id="contact-message" name="message" placeholder="Tell us about your project — what you're building, your goals, and rough timeline..." required></textarea>
-      </div>
-      <button type="button" class="form-details-toggle" id="formDetailsToggle" aria-expanded="false">
-        <span>Add project details</span>
-        <span class="form-details-icon" aria-hidden="true"></span>
-      </button>
-      <div class="form-details" id="formDetails">
-        <div class="form-row">
-          <div class="form-field">
-            <label for="contact-company">Company <span class="form-optional">(optional)</span></label>
-            <input type="text" id="contact-company" name="company" placeholder="Your company or startup name" autocomplete="organization">
-          </div>
-          <div class="form-field">
-            <label for="contact-phone">Phone <span class="form-optional">(optional)</span></label>
-            <input type="tel" id="contact-phone" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-field">
-            <label for="contact-type">Project Type</label>
-            <select id="contact-type" name="project_type">
-              <option value="" disabled selected>Select a type</option>
-              <option value="website">Website / Landing Page</option>
-              <option value="saas">SaaS / Web App</option>
-              <option value="ecommerce">E-Commerce</option>
-              <option value="branding">Branding &amp; Identity</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label for="contact-timeline">Timeline</label>
-            <select id="contact-timeline" name="timeline">
-              <option value="" disabled selected>When do you need it?</option>
-              <option value="asap">ASAP</option>
-              <option value="1month">Within 1 month</option>
-              <option value="3months">1–3 months</option>
-              <option value="flexible">Flexible</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="contact-budget">Budget &mdash; <span id="budget-display">$5,000</span></label>
-          <input type="range" id="contact-budget" name="budget" min="2500" max="50000" step="2500" value="5000" class="budget-range" aria-label="Project budget">
-          <div class="budget-range-labels">
-            <span>$2,500</span>
-            <span>$50,000+</span>
-          </div>
-        </div>
-        <div class="form-field">
-          <label for="contact-referral">How did you hear about us?</label>
-          <select id="contact-referral" name="referral">
-            <option value="" disabled selected>Select a source</option>
-            <option value="google">Google Search</option>
-            <option value="social">Social Media</option>
-            <option value="referral">Friend / Referral</option>
-            <option value="portfolio">Saw your work</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-      </div>
-      <button type="submit" class="submit-btn" id="submitBtn">Send Message &#8594;</button>
-      <div id="formStatus" aria-live="polite" style="font-size:0.82rem; margin-top:0.5rem; color:var(--fg-muted);"></div>
-    </form>
-    <div class="form-success" id="formSuccess" role="status" aria-live="polite" aria-atomic="true">
-      <div class="form-success-inner">
-        <span class="form-success-icon" aria-hidden="true">✓</span>
-        <p class="form-success-heading">Message sent!</p>
-        <p class="form-success-sub">We'll be in touch within 24 hours.</p>
-      </div>
-    </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer role="contentinfo">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <a href="#" class="nav-logo">RYC</a>
-      <p>We help businesses turn their goals into scalable digital growth — through high-quality websites and products, built fast with AI-native workflows and human craft.</p>
-    </div>
-    <div class="footer-cols">
-      <div class="footer-col"><h3>Company</h3><a href="#about">About</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="/blog.html">Blog</a><a href="#contact">Contact</a></div>
-      <div class="footer-col"><h3>Connect</h3><a href="https://x.com/rycworks" target="_blank" rel="noopener noreferrer">Twitter / X</a><a href="https://www.linkedin.com/company/rycworks" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://instagram.com/rycworks" target="_blank" rel="noopener noreferrer">Instagram</a></div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 RYC. All rights reserved.</p>
-    <div class="footer-socials" aria-label="Social media links">
-      <a href="https://x.com/rycworks" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">X</a>
-      <a href="https://www.linkedin.com/company/rycworks" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
-      <a href="https://instagram.com/rycworks" target="_blank" rel="noopener noreferrer" aria-label="Instagram">ig</a>
-    </div>
-  </div>
-</footer>
+<!-- Footer (injected by components.js) -->
+<div id="site-footer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="utility/components.js"></script>
+<script src="utility/glow-btn.js"></script>
+<script src="utility/page-transition.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
