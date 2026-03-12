@@ -299,27 +299,6 @@ h1 em, h2 em, h3 em {
   grid-template-columns: 1fr 1fr;
   gap: 6rem;
 }
-.contact-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #aaa;
-  padding: 0.55rem 1.2rem;
-  border: 2px solid rgba(241,241,241,0.1);
-  border-radius: var(--radius);
-  background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
-  margin-bottom: 1.8rem;
-}
-[data-theme="light"] .contact-eyebrow {
-  border-color: rgba(22,22,22,0.12);
-  color: #555;
-  background: linear-gradient(135deg, rgba(0,0,0,0.03), transparent);
-}
-.contact-eyebrow .ln { display: none; }
 .contact-left h1 {
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   line-height: 0.92;

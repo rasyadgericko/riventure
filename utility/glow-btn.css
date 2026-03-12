@@ -133,6 +133,31 @@
   .glow-btn .gb-s { animation: none; }
 }
 
+/* ===== SECTION EYEBROW BADGE ===== */
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  gap: 0.4rem;
+  padding: 0.55rem 1.2rem;
+  border: 2px solid rgba(241,241,241,0.1);
+  border-radius: var(--radius, 100px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 1.5rem;
+}
+[data-theme="light"] .section-eyebrow {
+  border-color: rgba(22,22,22,0.12);
+  color: #555;
+  background: linear-gradient(135deg, rgba(0,0,0,0.03), transparent);
+}
+
 /* ===== FLOATING CTA PILLS ===== */
 
 .cta-pills {
@@ -140,6 +165,7 @@
   inset: 0;
   pointer-events: none;
   user-select: none;
+  overflow: hidden;
 }
 .cta-pill {
   position: absolute;

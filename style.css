@@ -823,17 +823,6 @@ section { padding: 8rem 4vw; position: relative; }
   margin-bottom: 4.5rem;
   gap: 2rem; flex-wrap: wrap;
 }
-.section-num {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--fg-dim);
-  margin-bottom: 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.section-num .ln { width: 30px; height: 1px; background: linear-gradient(90deg, #ff5500, #0055ff); }
 .section-h2 {
   font-size: clamp(1.8rem, 5vw, 4rem);
 }
@@ -1710,14 +1699,6 @@ section.svc-runway {
   margin: 0 auto 7rem;
   text-align: center;
 }
-.hwwu-eyebrow {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: 1.25rem;
-}
 .hwwu-title {
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(2.2rem, 4vw, 3.5rem);
@@ -2378,7 +2359,7 @@ section.svc-runway {
   text-align: center;
   padding: 0 4vw 3rem;
 }
-.tmc-header .section-num { justify-content: center; }
+.tmc-header .section-eyebrow { align-self: center; }
 .tmc-columns {
   display: flex;
   justify-content: center;
@@ -2573,7 +2554,6 @@ section.svc-runway {
   text-align: center;
   padding: 4rem 4vw;
   position: relative;
-  overflow: hidden;
 }
 .cta-bg {
   position: absolute; inset: 0;

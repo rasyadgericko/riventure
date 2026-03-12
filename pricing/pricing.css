@@ -320,27 +320,6 @@ h1 em, h2 em, h3 em {
   text-align: center;
   gap: 2rem;
 }
-.pricing-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #aaa;
-  padding: 0.55rem 1.2rem;
-  border: 2px solid rgba(241,241,241,0.1);
-  border-radius: var(--radius);
-  background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
-  margin-bottom: 1.8rem;
-}
-[data-theme="light"] .pricing-eyebrow {
-  border-color: rgba(22,22,22,0.12);
-  color: #555;
-  background: linear-gradient(135deg, rgba(0,0,0,0.03), transparent);
-}
-.pricing-eyebrow .ln { display: none; }
 .pricing-hero h1 {
   font-size: clamp(3rem, 7vw, 6rem);
   line-height: 0.92;
@@ -722,7 +701,6 @@ h1 em, h2 em, h3 em {
   align-items: center;
   gap: 2rem;
   position: relative;
-  overflow: hidden;
 }
 .pricing-cta-section h2 {
   font-size: clamp(2.5rem, 6vw, 5rem);
