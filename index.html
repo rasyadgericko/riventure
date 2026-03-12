@@ -37,15 +37,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <!-- Fonts -->
-<link rel="preload" href="assets/fonts/Inter_18pt-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/Inter_18pt-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/Inter_18pt-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
-
 <link rel="preload" href="assets/fonts/SpaceGrotesk-Black.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/SpaceGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/SpaceGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/PermanentMarker-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
+<!-- Stylesheets — base.css MUST come before page CSS -->
+<link rel="stylesheet" href="utility/base.css">
+<link rel="stylesheet" href="utility/nav.css">
 <link href="style.css" rel="stylesheet">
 <link rel="stylesheet" href="utility/loader.css">
 <link rel="stylesheet" href="utility/glow-btn.css">
@@ -209,7 +208,7 @@
 <!-- Hero -->
 <section class="hero" id="main-content">
   <div class="hero-content hero-center">
-    <div class="hero-badge fade-up" aria-label="Current availability">
+    <div class="section-eyebrow fade-up" aria-label="Current availability">
       <span class="avail-dot" aria-hidden="true"></span>
       <span>2 project slots open — March 2026</span>
     </div>
@@ -757,15 +756,15 @@
       <p class="about-founder-byline fade-up fd3">— <span>Rasyad Gericko</span>, Founder</p>
       <div class="process-steps fade-up fd4" role="list" aria-label="Our process">
         <div class="process-step" role="listitem">
-          <span class="step-num">01</span>
+          <span class="section-eyebrow step-eyebrow">01</span>
           <div class="step-content"><h3>Strategy & Direction</h3><p>AI-assisted competitive analysis and market research in hours. Human-led brand positioning and visual direction.</p></div>
         </div>
         <div class="process-step" role="listitem">
-          <span class="step-num">02</span>
+          <span class="section-eyebrow step-eyebrow">02</span>
           <div class="step-content"><h3>Design & Motion</h3><p>Rapid prototyping with AI — 3× more design iterations in the same timeline. Every pixel signed off by a human eye.</p></div>
         </div>
         <div class="process-step" role="listitem">
-          <span class="step-num">03</span>
+          <span class="section-eyebrow step-eyebrow">03</span>
           <div class="step-content"><h3>Development & Launch</h3><p>Claude-powered code generation with human review at every commit. Accessible, performant, and production-ready from day one.</p></div>
         </div>
       </div>

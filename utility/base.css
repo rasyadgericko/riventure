@@ -1,0 +1,154 @@
+/* ===== BASE.CSS — RYC Shared Foundation =====
+   Loaded by every page BEFORE any page-specific CSS.
+   Contains: fonts, tokens, reset, body, skip-link, noise, focus, animations.
+   Page CSS files should contain ONLY page-specific styles.
+   DO NOT add body > * selectors here — use main { position: relative } instead.
+   ============================================= */
+
+/* ── Fonts ─────────────────────────────────── */
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../assets/fonts/SpaceGrotesk-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../assets/fonts/SpaceGrotesk-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('../assets/fonts/SpaceGrotesk-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Permanent Marker';
+  src: url('../assets/fonts/PermanentMarker-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Tokens ────────────────────────────────── */
+
+:root {
+  --bg: #f1f1f1;
+  --fg: #0a0a0a;
+  --fg-muted: #3a3a3a;
+  --fg-dim: #5a5a5a;
+  --border: rgba(10,10,10,0.14);
+  --bg-sub: #e8e8e8;
+  --accent: #0a0a0a;
+  --accent-glow: rgba(10,10,10,0.06);
+  --stats-border: rgba(255,255,255,0.12);
+  --radius: 100px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-theme="dark"] {
+  --bg: #0f0f0f;
+  --fg: #f1f1f1;
+  --fg-muted: #aaa;
+  --fg-dim: #777;
+  --border: rgba(241,241,241,0.1);
+  --bg-sub: #151515;
+  --accent: #f1f1f1;
+  --accent-glow: rgba(241,241,241,0.04);
+  --stats-border: rgba(22,22,22,0.1);
+}
+
+/* ── Reset ─────────────────────────────────── */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ── Base ──────────────────────────────────── */
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300;
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+/* Noise texture — ::after so it never fights positioned children */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+}
+
+/* Main content — sits above noise pseudo-element without a broad body > * selector */
+main { position: relative; z-index: 1; }
+
+/* ── Skip Link ──────────────────────────────── */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 1rem;
+  z-index: 10001;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 0.8rem 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+.skip-link:focus { left: 2rem; }
+
+/* ── Focus ──────────────────────────────────── */
+
+a:focus-visible, button:focus-visible,
+input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+/* ── Animations ─────────────────────────────── */
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fd1 { transition-delay: 0.1s; }
+.fd2 { transition-delay: 0.2s; }
+.fd3 { transition-delay: 0.3s; }
+.fd4 { transition-delay: 0.4s; }
+
+.reveal-text { overflow: hidden; }
+.reveal-text .word {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.7s var(--ease);
+}
+.reveal-text.visible .word { transform: translateY(0); }
+.reveal-text.visible .word:nth-child(2) { transition-delay: 0.05s; }
+.reveal-text.visible .word:nth-child(3) { transition-delay: 0.1s; }
+.reveal-text.visible .word:nth-child(4) { transition-delay: 0.15s; }
+.reveal-text.visible .word:nth-child(5) { transition-delay: 0.2s; }
+.reveal-text.visible .word:nth-child(6) { transition-delay: 0.25s; }
+.reveal-text.visible .word:nth-child(7) { transition-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up, .reveal-text .word { transition: none; transform: none; opacity: 1; }
+}

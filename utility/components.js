@@ -33,15 +33,17 @@
   var path = window.location.pathname;
   var inBlog = path.indexOf('/blog/') !== -1;
   var prefix = inBlog ? '../' : '';
-  var rootPrefix = active === 'home' ? '' : '/';
 
-  // Determine active page
+  // Determine active page first — rootPrefix depends on this
   var active = '';
   if (path === '/' || path === '/index.html' || path.endsWith('/RYC/') || path.endsWith('/RYC/index.html')) active = 'home';
   else if (path.indexOf('about') !== -1) active = 'about';
+  else if (path.indexOf('work') !== -1 && path.indexOf('blog') === -1) active = 'work';
   else if (path.indexOf('pricing') !== -1) active = 'pricing';
   else if (path.indexOf('contact') !== -1) active = 'contact';
   else if (path.indexOf('blog') !== -1) active = 'blog';
+
+  var rootPrefix = active === 'home' ? '' : '/';
 
   // Work/Services links — hash anchors on homepage, absolute on sub-pages
   var workHref = active === 'home' ? '#work' : '/#work';
@@ -59,6 +61,7 @@
         '<div class="nav-right">' +
           '<ul class="nav-links">' +
             '<li><a href="/about.html"' + cls('about') + '>About</a></li>' +
+            '<li><a href="/work.html"' + cls('work') + '>Work</a></li>' +
             '<li><a href="/pricing.html"' + cls('pricing') + '>Pricing</a></li>' +
             '<li><a href="/blog.html"' + cls('blog') + '>Blog</a></li>' +
             '<li><a href="/contact.html"' + cls('contact') + '>Contact</a></li>' +
@@ -71,6 +74,7 @@
       '</nav>' +
       '<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">' +
         '<a href="/about.html">About</a>' +
+        '<a href="/work.html">Work</a>' +
         '<a href="/pricing.html">Pricing</a>' +
         '<a href="/blog.html">Blog</a>' +
         '<a href="/contact.html">Contact</a>' +
@@ -92,7 +96,7 @@
             '<div class="footer-col">' +
               '<h3>Company</h3>' +
               '<a href="' + aboutHref + '">About</a>' +
-              '<a href="' + workHref + '">Work</a>' +
+              '<a href="/work.html">Work</a>' +
               '<a href="/pricing.html">Pricing</a>' +
               '<a href="/blog.html">Blog</a>' +
               '<a href="/contact.html">Contact</a>' +

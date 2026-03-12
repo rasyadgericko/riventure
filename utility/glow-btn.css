@@ -133,11 +133,12 @@
   .glow-btn .gb-s { animation: none; }
 }
 
-/* Tighten glow on mobile to prevent clipping from ancestor overflow */
+/* Expand bounding box on mobile so glow isn't clipped by ancestor overflow */
 @media (max-width: 768px) {
-  .gb-l1 { filter: blur(4px) url(#glow-f1); }
-  .gb-l2 { inset: 0; filter: blur(2px) url(#glow-f2); }
-  .gb-l3 { inset: 0; filter: blur(1px) url(#glow-f3); }
+  .glow-btn { margin: 6px; }
+  .gb-l1 { inset: -4px; filter: blur(6px) url(#glow-f1); }
+  .gb-l2 { inset: -3px; filter: blur(3px) url(#glow-f2); }
+  .gb-l3 { inset: -2px; filter: blur(2px) url(#glow-f3); }
 }
 
 /* ===== SECTION EYEBROW BADGE ===== */
@@ -147,7 +148,7 @@
   align-items: center;
   width: fit-content;
   gap: 0.4rem;
-  padding: 0.55rem 1.2rem;
+  padding: 0.4rem 1.2rem;
   border: 2px solid rgba(241,241,241,0.1);
   border-radius: var(--radius, 100px);
   background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);

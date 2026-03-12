@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!-- =====================================================================
+  RYC PAGE TEMPLATE — copy this file to create any new root-level page.
+
+  HOW TO USE:
+  1. Copy this file to /pagename.html (root) or /pagename/pagename.html
+  2. Replace PAGE_TITLE, PAGE_DESCRIPTION, PAGE_SLUG, PAGE_PATH
+  3. Create pagename/pagename.css and pagename/pagename.js
+  4. Add page-specific sections between the nav and footer injection points
+  5. Add <link rel="stylesheet" href="pagename/pagename.css"> in head
+  6. Add <script src="pagename/pagename.js"></script> at bottom of body
+
+  RULES FOR PAGE CSS FILES:
+  - Do NOT add @font-face declarations (they're in utility/base.css)
+  - Do NOT add :root or [data-theme="dark"] tokens (they're in base.css)
+  - Do NOT add body, html, or reset rules (they're in base.css)
+  - Do NOT add .skip-link styles (they're in base.css)
+  - Do NOT add body::after or body::before noise texture (base.css)
+  - Do NOT add nav or footer styles (they're in utility/nav.css)
+  - Do NOT add body > * broad selectors — use main { position: relative; z-index: 1; } from base.css
+  - Only add styles specific to this page's unique sections
+
+  FOR BLOG-POST PAGES (in /blog/):
+  - Use ../ prefix on all utility links
+  - The inline <style> block should contain only article-specific prose styles
+  - No @font-face or :root needed — base.css provides both
+  ===================================================================== -->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAGE_TITLE — RYC Works</title>
+<meta name="description" content="PAGE_DESCRIPTION">
+<link rel="canonical" href="https://www.rycworks.com/PAGE_SLUG">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RYC Works">
+<meta property="og:url" content="https://www.rycworks.com/PAGE_SLUG">
+<meta property="og:title" content="PAGE_TITLE — RYC Works">
+<meta property="og:description" content="PAGE_DESCRIPTION">
+<meta property="og:image" content="https://www.rycworks.com/assets/ryc-opengraph.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="PAGE_TITLE — RYC Works">
+<meta property="twitter:description" content="PAGE_DESCRIPTION">
+<meta property="twitter:image" content="https://www.rycworks.com/assets/ryc-opengraph.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.ico">
+
+<!-- Font preloads (required for performance) -->
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Black.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/SpaceGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/PermanentMarker-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- Stylesheets — order matters: base.css MUST come before page CSS -->
+<link rel="stylesheet" href="utility/base.css">
+<link rel="stylesheet" href="utility/nav.css">
+<link rel="stylesheet" href="PAGE_PATH/PAGE_PATH.css">
+<link rel="stylesheet" href="utility/loader.css">
+<link rel="stylesheet" href="utility/glow-btn.css">
+<link rel="stylesheet" href="utility/page-transition.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "PAGE_TITLE — RYC Works",
+  "description": "PAGE_DESCRIPTION",
+  "url": "https://www.rycworks.com/PAGE_SLUG",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "RYC Works",
+    "url": "https://www.rycworks.com/"
+  }
+}
+</script>
+
+</head>
+<body>
+
+<!-- Page transition overlay — MUST be first child of body -->
+<div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+
+<!-- Loader — MUST use id="pageLoader" (utility/loader.js looks for this exact ID) -->
+<div class="loader" id="pageLoader" aria-hidden="true">
+  <div class="loader-cube-scene">
+    <div class="loader-cube">
+      <div class="cube-face cube-front"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-right"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-bottom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+    </div>
+  </div>
+</div>
+
+<!-- Skip link — required for accessibility, position: absolute keeps it out of flow -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Nav injection point — components.js replaces this with <nav> + .mobile-menu -->
+<div id="site-nav"></div>
+
+<!-- ====================== PAGE CONTENT ====================== -->
+<main id="main-content">
+
+  <!-- Add sections here -->
+
+</main>
+<!-- ========================================================= -->
+
+<!-- Footer injection point -->
+<div id="site-footer"></div>
+
+<!-- Scripts — order matters: page JS first, then shared utilities -->
+<script src="PAGE_PATH/PAGE_PATH.js"></script>
+<script src="utility/loader.js"></script>
+<script src="utility/components.js"></script>  <!-- injects nav + footer + mobile menu -->
+<script src="utility/glow-btn.js"></script>    <!-- initialises all .glow-btn elements (must run after components.js) -->
+<script src="utility/page-transition.js"></script>
+
+</body>
+</html>

@@ -192,6 +192,7 @@ Section padding pattern: `padding: 8rem 4vw` (desktop) → `6rem 5vw` (tablet) �
 - Do not use `!important`
 - Do not use inline styles in HTML (except JS-driven dynamic values like canvas dimensions)
 - Theme variants go in `[data-theme="dark"]` blocks, co-located with their base styles
+- **Never use `body > *` selectors in page CSS** — specificity 0,3,1 beats `nav[role="navigation"]` (0,1,1) and `.skip-link` (0,1,0), breaking fixed nav and skip-link positioning. Use `main { position: relative; z-index: 1; }` instead (provided by `utility/base.css`)
 
 ---
 
@@ -308,9 +309,13 @@ Follow this checklist every time:
 
 ## Adding a New Standalone Page
 
-Every new standalone page (like `pricing.html`, `contact.html`, or a blog post) **must** load the full shared utility stack. Missing any of these will break the nav, footer, or buttons.
+**Start by copying `utility/page-template.html`** — it has all required elements in the correct order. Rename it and replace the `PAGE_TITLE`, `PAGE_DESCRIPTION`, `PAGE_SLUG`, `PAGE_PATH` placeholders.
+
+Every new standalone page **must** load the full shared utility stack. Missing any of these will break the nav, footer, or buttons.
 
 ### Required `<head>` links (root-level pages)
+
+Stylesheet order matters — `utility/base.css` MUST come before page CSS:
 
 ```html
 <!-- Fonts — preload all four -->
@@ -319,27 +324,51 @@ Every new standalone page (like `pricing.html`, `contact.html`, or a blog post) 
 <link rel="preload" href="assets/fonts/SpaceGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/PermanentMarker-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
-<!-- Page CSS (your page-specific stylesheet) -->
+<!-- Stylesheets — order matters: base.css MUST come before page CSS -->
+<link rel="stylesheet" href="utility/base.css">
+<link rel="stylesheet" href="utility/nav.css">
 <link rel="stylesheet" href="yourpage/yourpage.css">
-
-<!-- Shared utilities -->
+<link rel="stylesheet" href="utility/loader.css">
 <link rel="stylesheet" href="utility/glow-btn.css">
 <link rel="stylesheet" href="utility/page-transition.css">
 ```
 
-For **blog post pages** (`/blog/*.html`) use `../` prefix and also add `utility/nav.css` (blog posts have inline article CSS, no nav/footer CSS of their own):
+For **blog post pages** (`/blog/*.html`) use `../` prefix:
 
 ```html
+<link rel="stylesheet" href="../utility/base.css">
 <link rel="stylesheet" href="../utility/nav.css">
+<link rel="stylesheet" href="../utility/loader.css">
 <link rel="stylesheet" href="../utility/glow-btn.css">
 <link rel="stylesheet" href="../utility/page-transition.css">
 ```
+
+### Page CSS files — what NOT to include
+
+Page CSS files (e.g. `pricing/pricing.css`) should contain **only page-specific styles**. Never add:
+- `@font-face` declarations — they're in `utility/base.css`
+- `:root` or `[data-theme="dark"]` tokens — they're in `utility/base.css`
+- `body`, `html`, or reset rules — they're in `utility/base.css`
+- `.skip-link` styles — they're in `utility/base.css`
+- `body::after` / `body::before` noise texture — it's in `utility/base.css`
+- Nav or footer styles — they're in `utility/nav.css`
+- **`body > *` selectors** — these fight shared utility CSS and break nav/skip-link positioning. Use `main { position: relative; z-index: 1; }` instead (already in base.css)
 
 ### Required `<body>` structure
 
 ```html
 <!-- Page transition overlay — must be first inside <body> -->
 <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+
+<!-- Loader — MUST use id="pageLoader" (loader.js looks for this exact ID) -->
+<div class="loader" id="pageLoader" aria-hidden="true">
+  <div class="loader-cube-scene">
+    <div class="loader-cube">
+      <div class="cube-face cube-front">...</div>
+      <!-- ... 5 more cube faces ... -->
+    </div>
+  </div>
+</div>
 
 <!-- Skip link — must be present for accessibility -->
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -357,6 +386,7 @@ For **blog post pages** (`/blog/*.html`) use `../` prefix and also add `utility/
 
 ```html
 <script src="yourpage/yourpage.js"></script>   <!-- page-specific JS first -->
+<script src="utility/loader.js"></script>
 <script src="utility/components.js"></script>  <!-- injects nav + footer -->
 <script src="utility/glow-btn.js"></script>    <!-- initialises all .glow-btn elements -->
 <script src="utility/page-transition.js"></script>
@@ -396,8 +426,8 @@ For **blog post pages** (`/blog/*.html`) use `../` prefix and also add `utility/
 
 ### Font Change
 1. Add new WOFF2 files to `assets/fonts/`
-2. Add `@font-face` declarations at the top of `style.css`
-3. Add `<link rel="preload">` for the new font files in `<head>` of `index.html`
+2. Add `@font-face` declarations in `utility/base.css` (single source of truth for all pages)
+3. Add `<link rel="preload">` for the new font files in `<head>` of every HTML page that uses them
 4. Update all `font-family` references
 5. Remove unused font files and their preload links
 
@@ -519,8 +549,6 @@ Invoke this skill when:
 
 ## What NOT to Do
 
-- Do not install npm packages into the root site directory
-- Do not introduce a JavaScript framework (React, Vue, etc.) to the main site
 - Do not add inline styles to HTML
 - Do not skip accessibility requirements (alt text, ARIA labels, keyboard support)
 - Do not hardcode hex colors — use CSS custom properties
