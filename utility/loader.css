@@ -1,0 +1,52 @@
+/* ===== GLOBAL CUBE LOADER ===== */
+
+.loader {
+  position: fixed; inset: 0;
+  background: #0f0f0f;
+  z-index: 9999;
+  display: flex;
+  align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+.loader-cube-scene {
+  width: 64px; height: 64px;
+  perspective: 240px;
+}
+
+.loader-cube {
+  width: 64px; height: 64px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cubeRotate 2.4s linear infinite;
+}
+
+.cube-face {
+  position: absolute;
+  width: 64px; height: 64px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(15,15,15,0.92);
+  display: flex; align-items: center; justify-content: center;
+}
+.cube-face svg { stroke: rgba(255,255,255,0.35); }
+.cube-front  { transform: translateZ(32px); }
+.cube-back   { transform: rotateY(180deg) translateZ(32px); }
+.cube-left   { transform: rotateY(-90deg) translateZ(32px); }
+.cube-right  { transform: rotateY(90deg) translateZ(32px); }
+.cube-top    { transform: rotateX(90deg) translateZ(32px); }
+.cube-bottom { transform: rotateX(-90deg) translateZ(32px); }
+
+@keyframes cubeRotate {
+  from { transform: rotateX(-22deg) rotateY(0deg); }
+  to   { transform: rotateX(-22deg) rotateY(360deg); }
+}
+
+.loader.done {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease 0.15s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader { display: none; }
+}

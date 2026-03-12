@@ -131,11 +131,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-of
 @media (max-width: 480px) { .article-outer { padding: 8rem 6vw 5rem; } }
 </style>
 <link rel="stylesheet" href="../utility/nav.css">
+<link rel="stylesheet" href="../utility/loader.css">
 <link rel="stylesheet" href="../utility/glow-btn.css">
 <link rel="stylesheet" href="../utility/page-transition.css">
 </head>
 <body>
 <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+<!-- Loader -->
+<div class="loader" id="pageLoader" aria-hidden="true">
+  <div class="loader-cube-scene">
+    <div class="loader-cube">
+      <div class="cube-face cube-front"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-right"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-top"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+      <div class="cube-face cube-bottom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/></svg></div>
+    </div>
+  </div>
+</div>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <div id="site-nav"></div>
 
@@ -313,6 +327,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--fg); outline-of
   });
 })();
 </script>
+<script src="../utility/loader.js"></script>
 <script src="../utility/components.js"></script>
 <script src="../utility/glow-btn.js"></script>
 <script src="../utility/page-transition.js"></script>

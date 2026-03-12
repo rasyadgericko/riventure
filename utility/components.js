@@ -38,6 +38,7 @@
   // Determine active page
   var active = '';
   if (path === '/' || path === '/index.html' || path.endsWith('/RYC/') || path.endsWith('/RYC/index.html')) active = 'home';
+  else if (path.indexOf('about') !== -1) active = 'about';
   else if (path.indexOf('pricing') !== -1) active = 'pricing';
   else if (path.indexOf('contact') !== -1) active = 'contact';
   else if (path.indexOf('blog') !== -1) active = 'blog';
@@ -45,7 +46,7 @@
   // Work/Services links — hash anchors on homepage, absolute on sub-pages
   var workHref = active === 'home' ? '#work' : '/#work';
   var servicesHref = active === 'home' ? '#services' : '/#services';
-  var aboutHref = active === 'home' ? '#about' : '/#about';
+  var aboutHref = '/about.html';
 
   function cls(page) { return active === page ? ' class="active"' : ''; }
 
@@ -57,25 +58,23 @@
         '<a href="' + rootPrefix + '" class="nav-logo"><img src="' + prefix + 'assets/ryc-logo.svg" alt="RYC" width="414" height="177"></a>' +
         '<div class="nav-right">' +
           '<ul class="nav-links">' +
-            '<li><a href="' + workHref + '">Work</a></li>' +
-            '<li><a href="' + servicesHref + '">Services</a></li>' +
+            '<li><a href="/about.html"' + cls('about') + '>About</a></li>' +
             '<li><a href="/pricing.html"' + cls('pricing') + '>Pricing</a></li>' +
             '<li><a href="/blog.html"' + cls('blog') + '>Blog</a></li>' +
             '<li><a href="/contact.html"' + cls('contact') + '>Contact</a></li>' +
           '</ul>' +
-          glowBtn('/contact.html', 'Let\u2019s Start', 'nav-cta', 'sm') +
+          glowBtn('/contact.html', 'Start a Project', 'nav-cta', 'sm') +
         '</div>' +
         '<div class="nav-mobile-actions">' +
           '<button class="nav-toggle" id="navToggle" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
         '</div>' +
       '</nav>' +
       '<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobile navigation">' +
-        '<a href="' + workHref + '">Work</a>' +
-        '<a href="' + servicesHref + '">Services</a>' +
+        '<a href="/about.html">About</a>' +
         '<a href="/pricing.html">Pricing</a>' +
         '<a href="/blog.html">Blog</a>' +
         '<a href="/contact.html">Contact</a>' +
-        glowBtn('/contact.html', 'Let\u2019s Start', 'mobile-menu-cta') +
+        glowBtn('/contact.html', 'Start a Project', 'mobile-menu-cta') +
       '</div>';
   }
 

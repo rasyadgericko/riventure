@@ -132,3 +132,49 @@
 @media (prefers-reduced-motion: reduce) {
   .glow-btn .gb-s { animation: none; }
 }
+
+/* ===== FLOATING CTA PILLS ===== */
+
+.cta-pills {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.cta-pill {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.2rem;
+  border: 2px solid rgba(241,241,241,0.1);
+  border-radius: var(--radius, 100px);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #aaa;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
+  white-space: nowrap;
+}
+.cta-pill:nth-child(1) { top: 16%; left: 7%; animation: pill-float-a 6s ease-in-out infinite; }
+.cta-pill:nth-child(2) { top: 20%; right: 8%; animation: pill-float-b 7s ease-in-out infinite 0.6s; }
+.cta-pill:nth-child(3) { bottom: 23%; left: 9%; animation: pill-float-c 5.5s ease-in-out infinite 1.2s; }
+.cta-pill:nth-child(4) { bottom: 18%; right: 7%; animation: pill-float-a 6.5s ease-in-out infinite 1.8s; }
+@keyframes pill-float-a {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-13px); }
+}
+@keyframes pill-float-b {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(10px); }
+}
+@keyframes pill-float-c {
+  0%, 100% { transform: translateY(-5px) rotate(-1.5deg); }
+  50%       { transform: translateY(8px) rotate(1.5deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-pill { animation: none; }
+}
+@media (max-width: 768px) {
+  .cta-pill { display: none; }
+}

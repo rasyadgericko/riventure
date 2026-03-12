@@ -2,23 +2,6 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-// ===== LOADER =====
-const loaderEl = document.getElementById('loader');
-
-if (prefersReducedMotion) {
-  if (loaderEl) loaderEl.style.display = 'none';
-} else if (loaderEl) {
-  document.body.classList.add('loading');
-  // Show loader for ~2s, then gracefully fade everything
-  setTimeout(() => loaderEl.classList.add('done'), 2000);
-  // Reveal page as loader bg starts fading
-  setTimeout(() => {
-    document.body.classList.remove('loading');
-    document.body.classList.add('loaded');
-  }, 2500);
-  setTimeout(() => { loaderEl.style.display = 'none'; }, 3500);
-}
-
 // ===== PAGE TRANSITIONS =====
 const ptEl = document.getElementById('pageTransition');
 
@@ -527,23 +510,40 @@ if (logosStrip) {
       { x: -hw + 100,  y:  hh - 120,  rot: -4,  s: 0.74, o: 0.52 }, // lower-left
     ];
 
+    // Mobile: 5 visible cards for 480-768px, 4 for <480px — rest hidden (o: 0)
     const mobileSlots = [
-      { x: -hw + 60,   y: -hh + 90,   rot: -4,  s: 0.65, o: 0.55 },
-      { x:  hw - 80,   y: -hh + 120,  rot:  5,  s: 0.70, o: 0.60 },
-      { x:  hw - 50,   y:  -20,       rot:  6,  s: 0.58, o: 0.45 },
-      { x:  hw - 70,   y:  hh - 220,  rot: -3,  s: 0.72, o: 0.65 },
-      { x:  20,        y:  hh - 120,  rot:  4,  s: 0.75, o: 0.70 },
-      { x: -hw + 50,   y:  hh - 180,  rot: -5,  s: 0.65, o: 0.55 },
-      { x: -hw + 30,   y:  10,        rot:  3,  s: 0.55, o: 0.40 },
-      { x:  40,        y: -hh + 70,   rot: -2,  s: 0.68, o: 0.55 },
-      // --- Extra slots for duplicates ---
-      { x: -hw + 90,   y: -hh + 180,  rot:  3,  s: 0.55, o: 0.40 },
-      { x:  hw - 40,   y: -hh + 200,  rot: -5,  s: 0.58, o: 0.42 },
-      { x:  hw - 90,   y:  hh - 130,  rot:  2,  s: 0.52, o: 0.38 },
-      { x: -hw + 70,   y:  hh - 100,  rot: -3,  s: 0.56, o: 0.40 },
+      { x: -hw + 60,   y: -hh + 90,   rot: -4,  s: 0.68, o: 0.60 }, // top-left
+      { x:  hw - 80,   y: -hh + 120,  rot:  5,  s: 0.72, o: 0.65 }, // top-right
+      { x:  hw - 60,   y:  hh - 200,  rot: -3,  s: 0.75, o: 0.70 }, // bottom-right
+      { x: -hw + 55,   y:  hh - 180,  rot: -5,  s: 0.68, o: 0.60 }, // bottom-left
+      { x:  20,        y:  hh - 100,  rot:  4,  s: 0.78, o: 0.72 }, // bottom-center
+      // Hidden extras
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
     ];
 
-    const slots = isMobile ? mobileSlots : desktopSlots;
+    const smallSlots = [
+      { x: -hw + 50,   y: -hh + 90,   rot: -4,  s: 0.72, o: 0.62 }, // top-left
+      { x:  hw - 60,   y: -hh + 110,  rot:  5,  s: 0.74, o: 0.67 }, // top-right
+      { x:  hw - 55,   y:  hh - 190,  rot: -3,  s: 0.76, o: 0.72 }, // bottom-right
+      { x: -hw + 55,   y:  hh - 170,  rot:  3,  s: 0.72, o: 0.65 }, // bottom-left
+      // Hidden extras
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+      { x:  0, y:  0, rot: 0, s: 0.5, o: 0 },
+    ];
+
+    const slots = isSmall ? smallSlots : isMobile ? mobileSlots : desktopSlots;
     const slot = slots[i % slots.length];
     return {
       x: slot.x,

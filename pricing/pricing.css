@@ -66,7 +66,7 @@ body {
   font-weight: 300;
   background: var(--bg);
   color: var(--fg);
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.6s ease, color 0.6s ease;
@@ -257,9 +257,9 @@ h1 em, h2 em, h3 em {
 h1 em::after, h2 em::after, h3 em::after {
   content: '';
   position: absolute;
-  left: 0;
+  left: -0.2em;
   bottom: 0;
-  width: 100%;
+  width: calc(100% + 0.4em);
   height: 0.15em;
   background: var(--fg);
   border-radius: 0.06em;
@@ -558,7 +558,7 @@ h1 em, h2 em, h3 em {
   margin: 0.75rem 0 0.9rem;
 }
 .pricing-ent-heading { color: #eaeaea; }
-.pricing-card em::after, .pricing-enterprise em::after, .pricing-cta-block em::after { background: #eaeaea; }
+.pricing-card em::after, .pricing-enterprise em::after { background: #eaeaea; }
 .pricing-featured em::after { background: #161616; }
 .pricing-ent-desc {
   font-size: 0.85rem;
@@ -711,30 +711,38 @@ h1 em, h2 em, h3 em {
   transition: opacity 0.35s ease 0.15s;
 }
 
-/* ===== CTA BLOCK ===== */
+/* ===== CTA SECTION ===== */
 
-.pricing-cta-block {
+.pricing-cta-section {
+  border-top: 1px solid var(--border);
+  padding: 8rem 4vw;
   text-align: center;
-  padding: 5rem 2rem;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 1rem;
-  background: linear-gradient(110deg, #1a1a1a 0.6%, #141414);
-  color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
 }
-[data-theme="light"] .pricing-cta-block {
-  background: linear-gradient(110deg, #333 0.6%, #222);
-  border-color: rgba(255,255,255,0.06);
+.pricing-cta-section h2 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  max-width: 14ch;
+  color: var(--fg);
 }
-.pricing-cta-block h2 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  margin-bottom: 1.5rem;
-  color: #eaeaea;
-}
-.pricing-cta-block p {
+.pricing-cta-desc {
   font-size: 1rem;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 2.5rem;
-  font-weight: 300;
+  color: var(--fg-muted);
+  max-width: 58ch;
+  line-height: 1.8;
+  font-weight: 400;
+}
+.pricing-cta-btns {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 /* ===== FOOTER ===== */
@@ -833,7 +841,7 @@ footer {
   .pricing-main { padding: 3rem 5vw 6rem; }
   .pricing-enterprise { padding: 2rem; }
   .pricing-retainer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.8rem; }
-  .pricing-cta-block { padding: 3rem 1.5rem; }
+  .pricing-cta-section { padding: 6rem 5vw; }
   .footer-grid { flex-direction: column; }
   .footer-cols { flex-direction: column; gap: 2rem; }
   .footer-bottom { flex-direction: column; text-align: center; }
@@ -843,5 +851,6 @@ footer {
   .pricing-hero { padding: 9rem 6vw 3rem; }
   .pricing-main { padding: 2.5rem 6vw 5rem; }
   .pricing-card { padding: 2rem 1.6rem; }
+  .pricing-cta-section { padding: 5rem 6vw; }
   .footer-cols { gap: 1.5rem; }
 }
