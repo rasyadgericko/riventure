@@ -1,0 +1,11 @@
+{
+  "name": "ryc-site",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/minify.js"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "terser": "^5.46.0"
+  }
+}

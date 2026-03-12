@@ -1,3 +1,5 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "buildCommand": "npm ci && node scripts/minify.js",
+  "outputDirectory": "."
 }
