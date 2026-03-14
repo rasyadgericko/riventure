@@ -9,7 +9,7 @@
   // Word-split .reveal-text elements
   function splitWords() {
     document.querySelectorAll('.reveal-text').forEach(function (el) {
-      if (el.dataset.rycSplit) return;
+      if (el.dataset.rycSplit || el.querySelector('.word')) return;
       el.dataset.rycSplit = '1';
       var text = el.textContent.trim();
       if (text) {
