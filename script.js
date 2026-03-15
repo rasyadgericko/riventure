@@ -609,14 +609,14 @@ if (logosStrip) {
       const isDupePh = dupePlaceholderIdx.has(i);
 
       if (phase === 'scatter') {
-        x = scatter.x; y = scatter.y; rot = scatter.rot;
-        scale = scatter.scale; opacity = 0;
+        x = circle.x; y = circle.y; rot = circle.rot;
+        scale = circle.scale; opacity = 0;
       } else if (phase === 'toCircle') {
         const t = easeOutCubic(phaseT);
-        x = lerp(scatter.x, circle.x, t) + floatX * t;
-        y = lerp(scatter.y, circle.y, t) + floatY * t;
-        rot = lerp(scatter.rot, circle.rot, t);
-        scale = lerp(scatter.scale, circle.scale, t);
+        x = circle.x + floatX * t;
+        y = circle.y + floatY * t;
+        rot = circle.rot;
+        scale = circle.scale;
         opacity = lerp(0, isDupePh ? 0 : circle.opacity, t);
       } else {
         // Circle ↔ Row morph

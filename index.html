@@ -1085,5 +1085,77 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="script.js"></script>
 <script src="utility/boot.js"></script>
+
+<!-- RYC AI Assistant (Flowise) -->
+<style>
+flowise-chatbot::part(button) {
+  background: #f1f1f1 !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 1px 4px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+}
+flowise-chatbot::part(button):hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.12);
+}
+flowise-chatbot {
+  --fb-right: 24px;
+  --fb-bottom: 24px;
+}
+flowise-chatbot textarea {
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  resize: none !important;
+  overflow-y: hidden !important;
+}
+</style>
+<script type="module">
+import Chatbot from 'https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js'
+Chatbot.init({
+  chatflowid: 'e3362f57-dd56-4caf-aa3e-bad8937f6ae0',
+  apiHost: 'http://localhost:3000',
+  theme: {
+    button: {
+      backgroundColor: '#f1f1f1',
+      right: 24,
+      bottom: 24,
+      size: 52,
+      iconColor: '#161616',
+      customIconSrc: 'assets/icons/bot-avatar.svg',
+    },
+    chatWindow: {
+      showTitle: true,
+      title: 'RYC Assistant',
+      titleAvatarSrc: 'assets/icons/bot-avatar.svg',
+      welcomeMessage: "Hey! I'm RYC's AI assistant. Ask me anything about our services, pricing, or process.",
+      backgroundColor: '#ffffff',
+      height: 450,
+      width: 350,
+      fontSize: 13,
+      poweredByTextColor: '#aaa',
+      userMessage: {
+        backgroundColor: '#161616',
+        textColor: '#f1f1f1',
+        showAvatar: false,
+      },
+      botMessage: {
+        backgroundColor: '#f4f4f5',
+        textColor: '#161616',
+        showAvatar: true,
+        avatarSrc: 'assets/icons/bot-avatar.svg',
+      },
+      textInput: {
+        backgroundColor: '#f4f4f5',
+        textColor: '#161616',
+        placeholder: 'Ask RYC anything...',
+        sendButtonColor: '#161616',
+      },
+    }
+  }
+})
+</script>
 </body>
 </html>
